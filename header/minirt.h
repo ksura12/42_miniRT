@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 09:09:05 by ksura             #+#    #+#             */
-/*   Updated: 2022/12/01 16:43:16 by ksura            ###   ########.fr       */
+/*   Updated: 2022/12/01 17:45:10 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 # define WIDTH			1400
 # define HEIGHT 		1400
+# define BUFFERSIZE 	1000
 
 typedef	struct s_data {
 	void	*mlx_ptr;

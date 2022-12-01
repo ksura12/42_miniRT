@@ -5,12 +5,17 @@
 int	check_input(int argc, char **argv)
 {
 	int len;
+	int	fd;
 
 	if(argc != 2)
 		return (0);
 	len = ft_strlen(argv[1]);
 	if (ft_strncmp(&argv[1][len - 3], ".rt", 3) != 0)
 		return (0);
+	fd = open(argv[1]);
+	//TODO -- get number of lines in file
+	//use get_next line to fill array with objects
+	close(fd);
 	return (1);
 }
 

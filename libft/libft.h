@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:21:39 by ksura             #+#    #+#             */
-/*   Updated: 2022/10/04 17:54:12 by ksura            ###   ########.fr       */
+/*   Updated: 2022/12/01 17:45:57 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+
+# define BUFFER_SIZE	1000
 
 typedef struct ms_list
 {
