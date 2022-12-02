@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
+/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 09:39:58 by ksura             #+#    #+#             */
-/*   Updated: 2022/07/05 12:29:54 by ksura@student.42 ###   ########.fr       */
+/*   Updated: 2022/12/02 10:49:03 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
+
+char	*save_rest(char	*rest);
+char	*read_saverest_gnl(int fd, char	*rest);
+char	*line_output_gnl(char	*rest);
+char	*strjoin_gnl(char *s1, char *s2);
+int		strlen_gnl(const char *str);
+char	*strchr_gnl(const char *line);
+char	*calloc_gnl(int count);
 
 char	*get_next_line(int fd)
 {

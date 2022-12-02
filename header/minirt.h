@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 09:09:05 by ksura             #+#    #+#             */
-/*   Updated: 2022/12/01 17:45:10 by ksura            ###   ########.fr       */
+/*   Updated: 2022/12/02 09:44:25 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
+#	include <fcntl.h> //open
 
 # ifdef __APPLE__ // should work in linux and mac headers
 #  include "../mlx/mlx.h"

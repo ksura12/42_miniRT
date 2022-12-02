@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:21:39 by ksura             #+#    #+#             */
-/*   Updated: 2022/12/01 17:45:57 by ksura            ###   ########.fr       */
+/*   Updated: 2022/12/02 10:49:09 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,10 @@ int			print_char(va_list	list);
 int			print_num(va_list	list);
 int			print_unum(va_list	list);
 int			write_char(char c);
+
+//GNL
+char		*get_next_line(int fd);
+
 
 //MINISHELL
 t_ms_list	*ft_tokennew(char *token, char *type);
