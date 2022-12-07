@@ -15,6 +15,7 @@ int	check_input(int argc, char **argv, t_data *data)
 	int		fd;
 	// int 	i;
 	char	*line;
+	char	**splitted;
 
 	if(argc != 2)
 		return (0);
@@ -33,8 +34,31 @@ int	check_input(int argc, char **argv, t_data *data)
 			close(fd);
 			return (0);//TODO- Error message for parsing
 		}
+		splitted = ft_split(line, ' ');
+		int	i = 0;
+		while (splitted[i])
+		{
+			printf("splitted line = %s\n", splitted[i]);
+			if (splitted[i][0] == '\n')
+				break ;
+			i++;
+		}
+		if (!ft_strncmp(splitted [0], "A\0", 2))
+			printf("AMBIENT LIGHT found\n");
+		else if (!ft_strncmp(splitted [0], "C\0", 2))
+			printf("CAMERA found\n");
+		else if (!ft_strncmp(splitted [0], "L\0", 2))
+			printf("LIGHT found\n");
+		else if (!ft_strncmp(splitted [0], "sp\0", 3))
+			printf("SPHERE found\n");
+		else if (!ft_strncmp(splitted [0], "cy\0", 3))
+			printf("CYLINDER found\n");
+		else if (!ft_strncmp(splitted [0], "pl\0", 3))
+			printf("PLANE found\n");
+		else
+			printf("ERROR\n");
 		free (line);
-		printf("line = %s\n", line);
+		free (splitted);
 		line = get_next_line(fd);
 	}
 	//TODO -- get number of lines in file
