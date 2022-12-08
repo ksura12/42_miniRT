@@ -1,15 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/08 13:33:43 by kaheinz           #+#    #+#             */
+/*   Updated: 2022/12/08 13:54:31 by kaheinz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
 int	parsing_line(char *line, t_data *data)
 {
-	(void) line;
 	(void) data;
 	char	**splitted;
+	int		i;
 
+	i = 0;
 	splitted = ft_split(line, ' ');
-	int	i = 0;
 	while (splitted[i])
 	{
 		printf("splitted line = %s\n", splitted[i]);
@@ -32,6 +43,17 @@ int	parsing_line(char *line, t_data *data)
 	else
 		printf("ERROR\n");
 	return (0);
+}
+
+void	ambient_light(t_data *data)
+{
+	t_elements 	element;
+	t_amb_light amb_light;
+
+	element = data->elements;
+	amb_light = element->amb_light;
+	element->ambient_light_count += 1;
+
 }
 
 int	check_input(int argc, char **argv, t_data *data)

@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 09:09:05 by ksura             #+#    #+#             */
-/*   Updated: 2022/12/02 09:44:25 by ksura            ###   ########.fr       */
+/*   Updated: 2022/12/08 13:50:21 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include "structs.h"
 #	include <fcntl.h> //open
 
 # ifdef __APPLE__ // should work in linux and mac headers
@@ -34,9 +35,10 @@
 # define BUFFERSIZE 	1000
 
 typedef	struct s_data {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img;
+	t_elements	elements;
 } t_data;
 
 #endif

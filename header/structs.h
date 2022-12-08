@@ -1,6 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/08 13:33:31 by kaheinz           #+#    #+#             */
+/*   Updated: 2022/12/08 13:47:14 by kaheinz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct s_elements
+{
+	int			ambient_light_count;
+	int			light_count;
+	int			camera_count;
+	int			sphere_count;
+	int			cylinder_count;
+	int			plane_count;
+	t_amb_light	amb_light;
+	t_light		light;
+	t_cam		camera;
+	t_obj		 *objects;
+}	t_elements;
 
 /**
  * @brief struct for vectors consisting out of three parameters
@@ -21,12 +46,12 @@ typedef struct s_vec
  * @param g [int] Value for the green-content (0-255)
  * @param b [int] Value for the blue-content (0-255)
  */
-typedef struct s_col
+typedef struct s_color
 {
 	int	r;
 	int	g;
 	int	b;
-}	t_col;
+}	t_color;
 
 /**
  * @brief struct for any object
@@ -41,10 +66,10 @@ typedef struct s_obj
 {
 	char	id;
 	t_vec	v_pos;
-	t_vec	v_or;
+	t_vec	v_orient;
 	double	rad;
-	double	h;
-	t_col	col;
+	double	height;
+	t_color	color;
 }	t_obj;
 
 /**
@@ -52,11 +77,11 @@ typedef struct s_obj
  * @param lr [double] lighting ratio  from (0,0 -1,0)
  * @param col [t_col] color of the light
  */
-typedef struct s_al
+typedef struct s_amb_light
 {
-	double	lr;
-	t_col	col;
-}	t_al;
+	double	lratio;
+	t_color	color;
+}	t_amb_light;
 
 /**
  * @brief struct for Light
@@ -64,12 +89,12 @@ typedef struct s_al
  * @param lr [double] lighting ratio  from (0,0 -1,0)
  * @param col [t_col] color of the light
  */
-typedef struct s_l
+typedef struct s_light
 {
 	t_vec	v_pos;
-	double	lr;
-	t_col	col;
-}	t_l;
+	double	lratio;
+	t_color	color;
+}	t_light;
 
 /**
  * @brief struct for a camera
@@ -80,7 +105,7 @@ typedef struct s_l
 typedef struct s_cam
 {
 	t_vec	v_pos;
-	t_vec	v_or;
+	t_vec	v_orient;
 	int		fov;
 }	t_cam;
 
