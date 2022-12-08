@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:33:43 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/08 13:54:31 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/08 15:42:08 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,30 @@ int	parsing_line(char *line, t_data *data)
 	return (0);
 }
 
-void	ambient_light(t_data *data)
+void	ambient_light(t_data *data, char **splitted)
 {
+	(void)splitted;
 	t_elements 	element;
-	t_amb_light amb_light;
+//	t_amb_light amb;
+	int	i;
 
-	element = data->elements;
-	amb_light = element->amb_light;
-	element->ambient_light_count += 1;
+	element = *data->elements;
+//	amb = element->amb_light;
+	i = 0;
+	element.ambient_light_count += 1;
+	if (element.ambient_light_count > 1)
+	{
+		printf("Error/n");
+		printf("Only one ambient light declaration allowed./n");
+		exit (1);
+	}
+//	amb->
+
+/*
+	identifier: A
+∗ ambient lighting ratio in range [0.0,1.0]: 0.2
+∗ R,G,B colors in range [0-255]: 255, 255, 255
+*/
 
 }
 
@@ -77,11 +93,11 @@ int	check_input(int argc, char **argv, t_data *data)
 		if (parsing_line(line, data))
 		{
 			free(line);
-			close(fd);
+			close(fd); 
 			return (0);//TODO- Error message for parsing
 		}
 		free (line);
-		free (splitted);
+//		free (splitted);
 		line = get_next_line(fd);
 	}
 	//TODO -- get number of lines in file
@@ -101,12 +117,19 @@ int	load_input(int argc, char **argv, t_data *data)
 
 }
 
+void	init()
+{
+
+}
+
 int	main(int argc, char **argv)
 {
-	t_data	*data;
+	t_data	data;
 
-	data = NULL;
-	return (load_input(argc, argv, data));
+//	data.img = 
+//	data = NULL;
+	init();
+	return (load_input(argc, argv, &data));
 	
 	// data = load_input(argc, argv);
 	// data->win_ptr =mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "miniRT");

@@ -6,12 +6,22 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:33:31 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/08 13:47:14 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/08 14:29:29 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# include "minirt.h"
+
+typedef struct s_elements	t_elements;
+typedef struct s_amb_light	t_amb_light;
+typedef struct s_light		t_light;
+typedef struct s_cam		t_cam;
+typedef struct s_obj		t_obj;
+typedef struct s_vec		t_vec;
+typedef struct s_color		t_color;
 
 typedef struct s_elements
 {
@@ -21,10 +31,10 @@ typedef struct s_elements
 	int			sphere_count;
 	int			cylinder_count;
 	int			plane_count;
-	t_amb_light	amb_light;
-	t_light		light;
-	t_cam		camera;
-	t_obj		 *objects;
+	t_amb_light	*amb_light;
+	t_light		*light;
+	t_cam		*camera;
+	t_obj		*objects;
 }	t_elements;
 
 /**
