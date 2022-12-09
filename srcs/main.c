@@ -44,7 +44,7 @@ double	char_to_double(char *value)
 
 int	init_A(t_data *data, char **splitted)
 {
-	// (void)splitted;
+	char	**colors;
 	t_amb_light	*amb;
 
 	amb = data->elements->amb_light;
@@ -57,11 +57,31 @@ int	init_A(t_data *data, char **splitted)
 			return (0);
 		}
 	}
-	printf("ratio:%f\n", amb->lratio);
+	if (splitted[2])
+	{
+		colors = ft_split(splitted[2], ',');
+		if(colors[0] && ft_atoi(colors[0]) <= 255 && ft_atoi(colors[0]) >= 0)
+			amb->color.r = ft_atoi(colors[0]);
+		else
+			amb->color.r = -1;
+		if(colors[1] && ft_atoi(colors[1]) <= 255 && ft_atoi(colors[1]) >= 0)
+			amb->color.b = ft_atoi(colors[1]);
+		else
+			amb->color.b = -1;
+		if(colors[2] && ft_atoi(colors[2]) <= 255 && ft_atoi(colors[2]) >= 0)
+			amb->color.g = ft_atoi(colors[2]);
+		else
+			amb->color.g = -1;
+		if (amb->color.r == -1 || amb->color.b == -1 || amb->color.g == -1)
+		{
+			printf("ERROR\nWrong ambient light color input.");
+			freeing_dpointer(colors);
+			return (0);
+		}
+		freeing_dpointer(colors);
+		printf("Succcesfull Ambient light creation\n");
+	}
 	return (1);
-	// amb->color->r = ;
-	// amb->color->g = ;
-	// amb->color->b = ;
 
 /*
 	identifier: A
@@ -110,6 +130,7 @@ int	main(int argc, char **argv)
 //	controls(data);
 //	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 //	mlx_loop(data->mlx);
+	allocating_elements(data);
 	load_input(argc, argv, data);
 	init_elements(argv, data);
 	return (0);
