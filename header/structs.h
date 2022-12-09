@@ -24,9 +24,9 @@ typedef struct s_counter
 
 typedef struct s_elements
 {
-	t_amb_light	amb_light;
-	t_light		light;
-	t_cam		camera;
+	t_amb_light	*amb_light;
+	t_light		*light;
+	t_cam		*camera;
 	t_obj		*objects;
 }	t_elements;
 
