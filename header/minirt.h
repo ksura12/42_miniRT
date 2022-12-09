@@ -40,7 +40,8 @@ void	freeing_dpointer(char **paths);
 int open_file(char **argv);
 
 //init.c
-void init_elements(t_data *data);
+int		init_elements(char **argv, t_data *data);
+void	init(t_data *data);
 
 
 #endif
