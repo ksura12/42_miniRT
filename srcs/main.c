@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:33:43 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/09 14:43:49 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/09 15:06:15 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	check_count(t_data *data)
 	return (1);
 }
 
+
+
 int	count_elements(char *line, t_data *data)
 {
 	char	**splitted;
@@ -54,12 +56,14 @@ int	count_elements(char *line, t_data *data)
 	else if (!ft_strncmp(splitted[0], "pl\0", 3))
 		data->counter->plane_count += 1;
 	else if (splitted[0][0] == '\n')
-		return (1);
+		data->counter->newline_count += 1;
 	else
 	{
 		printf("ERROR, unidentified element.\n");
+		freeing_dpointer(splitted);
 		return (0);
 	}
+	freeing_dpointer(splitted);
 	return (1);
 }
 
@@ -90,14 +94,22 @@ int	count_elements(char *line, t_data *data)
 
 // }
 
-int	check_input(char **argv, t_data *data)
+int	open_file(char **argv)
 {
 	int		fd;
-	char	*line;
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (0); //TODO- Error messaga for file opening
+	return (fd);
+}
+
+int	check_input(char **argv, t_data *data)
+{
+	char	*line;
+	int		fd;
+
+	fd = open_file(argv);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -148,6 +160,7 @@ void init(t_data *data)
 	counter->sphere_count = 0;
 	counter->cylinder_count = 0;
 	counter->plane_count = 0;
+	counter->newline_count = 0;
 }
 
 int	main(int argc, char **argv)

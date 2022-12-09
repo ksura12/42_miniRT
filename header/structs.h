@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:33:31 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/09 13:39:52 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/09 14:56:04 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_counter
 	int			sphere_count;
 	int			cylinder_count;
 	int			plane_count;
+	int			newline_count;
 }	t_counter;
 
 typedef struct s_elements
