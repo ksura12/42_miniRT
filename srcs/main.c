@@ -6,47 +6,61 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:33:43 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/09 14:15:12 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/09 14:43:49 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
-int	parsing_line(char *line, t_data *data)
+int	check_count(t_data *data)
+{
+	t_counter	*counter;
+
+	counter = data->counter;
+	if (counter->ambient_light_count != 1)
+	{
+		printf("ERROR, declare ambient light once.\n");
+		return (0);
+	}
+	if (counter->light_count != 1)
+	{
+		printf("ERROR, declare light once.\n");
+		return (0);
+	}
+	if (counter->camera_count != 1)
+	{
+		printf("ERROR, declare camera once.\n");
+		return (0);
+	}
+	return (1);
+}
+
+int	count_elements(char *line, t_data *data)
 {
 	char	**splitted;
-	t_counter *counter;
-	int		i;
 
-	i = 0;
-	counter = data->counter;
 	splitted = ft_split(line, ' ');
-	while (splitted[i])
-	{
-		printf("splitted line = %s\n", splitted[i]);
-		if (splitted[i][0] == '\n')
-			break ;
-		i++;
-	}
-	if (!ft_strncmp(splitted [0], "A\0", 2))
-		counter->ambient_light_count += 1;
-	else if (!ft_strncmp(splitted [0], "C\0", 2))
-		counter->camera_count += 1;
-	else if (!ft_strncmp(splitted [0], "L\0", 2))
-		counter->light_count += 1;
-	else if (!ft_strncmp(splitted [0], "sp\0", 3))
-		counter->sphere_count += 1;
-	else if (!ft_strncmp(splitted [0], "cy\0", 3))
-		counter->cylinder_count += 1;
-	else if (!ft_strncmp(splitted [0], "pl\0", 3))
-		counter->plane_count += 1;
+	if (!ft_strncmp(splitted[0], "A\0", 2))
+		data->counter->ambient_light_count += 1;
+	else if (!ft_strncmp(splitted[0], "C\0", 2))
+		data->counter->camera_count += 1;
+	else if (!ft_strncmp(splitted[0], "L\0", 2))
+		data->counter->light_count += 1;
+	else if (!ft_strncmp(splitted[0], "sp\0", 3))
+		data->counter->sphere_count += 1;
+	else if (!ft_strncmp(splitted[0], "cy\0", 3))
+		data->counter->cylinder_count += 1;
+	else if (!ft_strncmp(splitted[0], "pl\0", 3))
+		data->counter->plane_count += 1;
+	else if (splitted[0][0] == '\n')
+		return (1);
 	else
 	{
 		printf("ERROR, unidentified element.\n");
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }
 
 // void	ambient_light(t_data *data, char **splitted)
@@ -87,7 +101,7 @@ int	check_input(char **argv, t_data *data)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (parsing_line(line, data))
+		if (!count_elements(line, data))
 		{
 			free(line);
 			close(fd); 
@@ -96,12 +110,12 @@ int	check_input(char **argv, t_data *data)
 		free (line);
 		line = get_next_line(fd);
 	}
-	printf("Number of A %i\n", data->counter->ambient_light_count);
-	printf("Number of C %i\n", data->counter->camera_count);
-	printf("Number of cy %i\n", data->counter->cylinder_count);
-	//use get_next line to fill array with objects
 	close(fd);
-	return (1);
+	if (check_count(data))
+		return (1);
+	else
+		return (0);
+	//use get_next line to fill array with objects
 }
 
 int	load_input(int argc, char **argv, t_data *data)
