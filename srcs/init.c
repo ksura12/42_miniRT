@@ -55,5 +55,6 @@ void allocating_elements(t_data *data)
 	+ data->counter->sphere_count;
 	data->elements = malloc(sizeof(t_elements));
 	data->elements->amb_light = malloc(sizeof(t_amb_light));
+	data->elements->camera = malloc(sizeof(t_cam));
 	data->elements->objects = malloc(sizeof(t_elements) * obj_cont);
 }

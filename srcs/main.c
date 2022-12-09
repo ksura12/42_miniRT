@@ -12,11 +12,11 @@ int	parse_line(char *line, t_data *data, char **splitted)
 		if(!init_A(data, splitted))
 			stop = 1;
 	}
-	// else if (!ft_strncmp(splitted[0], "C\0", 2))
-	// {
-	// 	if(!init_C(data, splitted))
-	// 		return(0);
-	// }
+	else if (!ft_strncmp(splitted[0], "C\0", 2))
+	{
+		if(!init_C(data, splitted))
+			return(0);
+	}
 	// else if (!ft_strncmp(splitted[0], "L\0", 2))
 	// 	init_L(splitted);
 	// else if (!ft_strncmp(splitted[0], "sp\0", 3))
@@ -42,6 +42,7 @@ double	char_to_double(char *value)
 
 	splitted = ft_split(value, '.');
 	result = -1;
+	
 	if (splitted[0] && splitted[1])
 		result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
 	freeing_dpointer(splitted);
