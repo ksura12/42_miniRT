@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:33:31 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/09 11:58:54 by ksura            ###   ########.fr       */
+/*   Updated: 2022/12/09 13:08:14 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_cam		t_cam;
 typedef struct s_obj		t_obj;
 typedef struct s_vec		t_vec;
 typedef struct s_color		t_color;
-
+/*)
 typedef struct s_counter
 {
 	int			ambient_light_count;
@@ -32,7 +32,7 @@ typedef struct s_counter
 	int			cylinder_count;
 	int			plane_count;
 }	t_counter;
-
+*/
 typedef struct s_elements
 {
 	t_amb_light	*amb_light;
