@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:21:39 by ksura             #+#    #+#             */
-/*   Updated: 2022/12/02 10:49:09 by ksura            ###   ########.fr       */
+/*   Updated: 2022/12/09 18:32:05 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,16 @@ int			print_unum(va_list	list);
 int			write_char(char c);
 
 //GNL
-char		*get_next_line(int fd);
+//char		*get_next_line(int fd);
+
+char    *get_next_line(int fd);
+char    *reading_from_fd(char *buffer, char *line, int fd);
+void    substr_after_newline(char *line, char *buffer);
+char    *substr_before_newline(char *line);
+char    *stringjoin(char *s1, char *s2);
+void    *ftt_memcpy(void *dst, void *src, size_t n);
+size_t  ftt_strlen(char *str);
+int     finding_newline(const char *s);
 
 
 //MINISHELL

@@ -70,7 +70,6 @@ int	counting_elements(char **argv, t_data *data)
 
 	fd = open_file(argv);
 	line = get_next_line(fd);
-	printf("first: %s\n", line);
 	while (line)
 	{
 		printf("%s\n", line);

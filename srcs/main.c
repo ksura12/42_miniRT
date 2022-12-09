@@ -52,7 +52,10 @@ int	init_A(t_data *data, char **splitted)
 	{
 		amb->lratio = char_to_double(splitted[1]);
 		if (amb->lratio > 1 || amb->lratio < 0)
+		{
+			printf("ERROR\nWrong light ratio.");
 			return (0);
+		}
 	}
 	printf("ratio:%f\n", amb->lratio);
 	return (1);
@@ -107,8 +110,9 @@ int	main(int argc, char **argv)
 //	controls(data);
 //	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 //	mlx_loop(data->mlx);
+	load_input(argc, argv, data);
 	init_elements(argv, data);
-	return (load_input(argc, argv, data));
+	return (0);
 
 	// data = load_input(argc, argv);
 	// data->win_ptr =mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "miniRT");

@@ -3,113 +3,103 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/15 09:39:58 by ksura             #+#    #+#             */
-/*   Updated: 2022/12/02 10:49:03 by ksura            ###   ########.fr       */
+/*   Created: 2022/05/19 10:23:53 by kaheinz           #+#    #+#             */
+/*   Updated: 2022/05/29 02:02:29 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-
-char	*save_rest(char	*rest);
-char	*read_saverest_gnl(int fd, char	*rest);
-char	*line_output_gnl(char	*rest);
-char	*strjoin_gnl(char *s1, char *s2);
-int		strlen_gnl(const char *str);
-char	*strchr_gnl(const char *line);
-char	*calloc_gnl(int count);
 
 char	*get_next_line(int fd)
 {
-	char		*line_out;
-	static char	*rest;
+	static char	buffer[BUFFER_SIZE + 1];
+	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 1024 || read(fd, NULL, 0) || BUFFER_SIZE <= 0)
 		return (NULL);
-	rest = read_saverest_gnl(fd, rest);
-	if (!rest)
+	line = malloc(1);
+	if (!line)
 		return (NULL);
-	line_out = line_output_gnl(rest);
-	rest = save_rest(rest);
-	return (line_out);
+	line[0] = '\0';
+	if (buffer[0] != '\0')
+		line = stringjoin(line, buffer);
+	line = reading_from_fd(buffer, line, fd);
+	if (!line)
+		return (NULL);
+	substr_after_newline(line, &buffer[0]);
+	line = substr_before_newline(line);
+	return (line);
 }
 
-char	*read_saverest_gnl(int fd, char	*rest)
+char	*reading_from_fd(char *buffer, char *line, int fd)
 {
-	char	*buffer;
-	int		byte_count;
+	int		reading;
 
-	buffer = calloc_gnl((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
-	byte_count = 1;
-	while (!strchr_gnl(rest) && byte_count != 0)
+	reading = BUFFER_SIZE;
+	while (!finding_newline(buffer) && reading == BUFFER_SIZE)
 	{
-		byte_count = read(fd, buffer, BUFFER_SIZE);
-		if (byte_count == -1)
+		reading = read(fd, buffer, BUFFER_SIZE);
+		if (reading == -1 || (reading == 0 && buffer[0] == '\0'))
 		{
-			free (buffer);
+			free(line);
 			return (NULL);
-		}
-		buffer[byte_count] = '\0';
-		rest = strjoin_gnl(rest, buffer);
+		}	
+		buffer[reading] = '\0';
+		line = stringjoin(line, buffer);
 	}
-	free(buffer);
-	return (rest);
+	return (line);
 }
 
-char	*line_output_gnl(char	*rest)
+char	*substr_before_newline(char *line)
 {
-	int		index;
-	char	*rest_str;
+	char	*substring;
+	size_t	i;
+	size_t	newline;
 
-	index = 0;
-	if (!rest[index])
-		return (NULL);
-	while (rest[index] && rest[index] != '\n')
-		index++;
-	rest_str = (char *)calloc_gnl(sizeof(char) * (index + 2));
-	if (!rest_str)
-		return (NULL);
-	index = 0;
-	while (rest[index] && rest[index] != '\n')
+	i = 0;
+	newline = 0;
+	while (line[newline] != '\0' && line[newline] != '\n')
+		newline++;
+	substring = malloc(newline + 2);
+	if (!line || !substring)
 	{
-		rest_str[index] = rest[index];
-		index++;
+		free(substring);
+		return (NULL);
 	}
-	if (rest[index] == '\n')
+	while (i <= newline)
 	{
-		rest_str[index] = rest[index];
-		index++;
+		substring[i] = line[i];
+		i++;
 	}
-	rest_str[index] = '\0';
-	return (rest_str);
+	substring[i] = '\0';
+	free(line);
+	return (substring);
 }
 
-char	*save_rest(char	*rest)
+void	substr_after_newline(char *line, char *buffer)
 {
-	int		i1;
-	int		i2;
-	char	*ret_str;
+	size_t	i;
+	size_t	newline;
+	size_t	len;
+	size_t	buflen;
 
-	i1 = 0;
-	while (rest[i1] && rest[i1] != '\n')
-		i1++;
-	if (!rest[i1])
+	i = 0;
+	buflen = ftt_strlen(buffer);
+	newline = 0;
+	len = ftt_strlen(line);
+	while (line[newline] != '\0' && line[newline] != '\n')
+		newline++;
+	newline++;
+	if (!line || !buffer)
+		return (free(buffer));
+	while (newline <= len)
 	{
-		free (rest);
-		return (NULL);
+		buffer[i] = line[newline];
+		newline++;
+		i++;
 	}
-	ret_str = (char *)calloc_gnl(sizeof(char) * (strlen_gnl(rest) - i1 + 2));
-	if (!ret_str)
-		return (NULL);
-	i1++;
-	i2 = 0;
-	while (rest[i1])
-		ret_str[i2++] = rest[i1++];
-	ret_str[i2] = '\0';
-	free(rest);
-	return (ret_str);
+	while (i <= buflen)
+		buffer[i++] = '\0';
 }

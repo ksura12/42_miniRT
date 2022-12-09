@@ -3,81 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
+/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 19:03:05 by ksura             #+#    #+#             */
-/*   Updated: 2022/07/05 12:30:21 by ksura@student.42 ###   ########.fr       */
+/*   Created: 2022/05/19 10:23:53 by kaheinz           #+#    #+#             */
+/*   Updated: 2022/05/29 02:02:47 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*calloc_gnl(int count)
-{
-	char	*ptr;
-	int		index;
-
-	if (count == 0)
-		count = 1;
-	index = 0;
-	ptr = malloc(count * sizeof(char));
-	if (!ptr)
-		return (NULL);
-	while (index > 0)
-		ptr[index--] = '\0';
-	return (ptr);
-}
-
-char	*strchr_gnl(const char *line)
-{
-	if (!line)
-		return (0);
-	while (*line != '\0')
-	{
-		if (*line == '\n')
-			return ((char *)line);
-		line++;
-	}
-	return (0);
-}
-
-int	strlen_gnl(const char *str)
+int	finding_newline(const char *s)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
-		return (0);
-	while (*(str + i) != '\0')
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			return (1);
 		i++;
+	}
+	return (0);
+}
+
+char	*stringjoin(char *s1, char *s2)
+{
+	char	*concatenated;
+	int		lens1;
+	int		lens2;
+
+	lens1 = ftt_strlen(s1);
+	lens2 = ftt_strlen(s2);
+	concatenated = malloc(lens1 + lens2 + 1);
+	if (!concatenated)
+	{
+		free(concatenated);
+		return (NULL);
+	}
+	if (concatenated)
+	{
+		ftt_memcpy(concatenated, s1, lens1);
+		ftt_memcpy(concatenated + lens1, s2, lens2 + 1);
+	}
+	free(s1);
+	return (concatenated);
+}
+
+size_t	ftt_strlen(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	if (str == NULL)
+		return (0);
+	while (str[i] != '\0')
+	{
+		i++;
+	}
 	return (i);
 }
 
-char	*strjoin_gnl(char *s1, char *s2)
+void	*ftt_memcpy(void *dst, void *src, size_t n)
 {
-	size_t	index1;
-	size_t	index2;
-	char	*str;
+	size_t	i;
 
-	if (!s1)
-	{
-		s1 = (char *)calloc_gnl(1 * sizeof(char));
-		s1[0] = '\0';
-	}
-	if (!s1 || !s2)
+	i = 0;
+	if (dst == NULL && src == NULL)
 		return (NULL);
-	str = calloc_gnl((strlen_gnl(s1) + strlen_gnl(s2) + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	index1 = -1;
-	index2 = 0;
-	if (s1)
-		while (s1[++index1] != '\0')
-			str[index1] = s1[index1];
-	while (s2[index2] != '\0')
-		str[index1++] = s2[index2++];
-	str[strlen_gnl(s1) + strlen_gnl(s2)] = '\0';
-	free(s1);
-	return (str);
+	while (i < n)
+		*(unsigned char *)(dst + i++) = *(unsigned char *)(src++);
+	return (dst);
 }
