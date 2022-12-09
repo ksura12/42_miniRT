@@ -109,12 +109,14 @@ int	init_C(t_data *data, char **splitted)
 	{
 		//TODO --check if splitted is al digits
 		// ch(ecking if the fow is between 0-180
-		if (splitted[3][i] == '+' || splitted[3][i] == '-')
-			i++;
-		while(splitted[3][i])
+		// if (splitted[3][i] == '+' || splitted[3][i] == '-')
+		// 	i++;
+		while(splitted[3][i] != '\n')
 		{
 			if(ft_isdigit(splitted[3][i]))
+			{
 				i++;
+			}
 			else
 			{
 				printf("ERROR\nWrong Camera-Orientation Vector declaration.");
