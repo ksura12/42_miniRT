@@ -6,7 +6,7 @@
 #    By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/09 08:30:23 by kaheinz           #+#    #+#              #
-#    Updated: 2022/12/01 16:48:49 by ksura            ###   ########.fr        #
+#    Updated: 2022/12/08 15:17:10 by ksura            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ OS = $(shell uname)
 # FLAGS_OS = -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
 # endif
 ifeq ($(OS), Linux)
-	LIBS += -Lmlx -lmlx -L/usr/lib -Imlx -lX11 -lXext -lz 
+	LIBS += -Lmlx -lmlx -L/usr/lib -lX11 -lXext -lz 
+#	-Imlx 
 	OBLI += -I/usr/inlcude -Imlx
 	SRCS += destroy_linux.c
 endif

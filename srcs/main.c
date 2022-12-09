@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:33:43 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/08 15:42:08 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/09 12:19:25 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,16 @@ int	parsing_line(char *line, t_data *data)
 		i++;
 	}
 	if (!ft_strncmp(splitted [0], "A\0", 2))
+	{
 		printf("AMBIENT LIGHT found\n");
+		data->counter->ambient_light_count += 1;
+	}
+		
 	else if (!ft_strncmp(splitted [0], "C\0", 2))
+	{
 		printf("CAMERA found\n");
+		data->counter->camera_count += 1;
+	}
 	else if (!ft_strncmp(splitted [0], "L\0", 2))
 		printf("LIGHT found\n");
 	else if (!ft_strncmp(splitted [0], "sp\0", 3))
@@ -45,23 +52,23 @@ int	parsing_line(char *line, t_data *data)
 	return (0);
 }
 
-void	ambient_light(t_data *data, char **splitted)
-{
-	(void)splitted;
-	t_elements 	element;
-//	t_amb_light amb;
-	int	i;
+// void	ambient_light(t_data *data, char **splitted)
+// {
+// 	(void)splitted;
+// 	t_elements 	element;
+// //	t_amb_light amb;
+// 	int	i;
 
-	element = *data->elements;
-//	amb = element->amb_light;
-	i = 0;
-	element.ambient_light_count += 1;
-	if (element.ambient_light_count > 1)
-	{
-		printf("Error/n");
-		printf("Only one ambient light declaration allowed./n");
-		exit (1);
-	}
+// 	element = *data->elements;
+// //	amb = element->amb_light;
+// 	i = 0;
+// 	element.ambient_light_count += 1;
+// 	if (element.ambient_light_count > 1)
+// 	{
+// 		printf("Error/n");
+// 		printf("Only one ambient light declaration allowed./n");
+// 		exit (1);
+// 	}
 //	amb->
 
 /*
@@ -70,7 +77,7 @@ void	ambient_light(t_data *data, char **splitted)
 ∗ R,G,B colors in range [0-255]: 255, 255, 255
 */
 
-}
+// }
 
 int	check_input(int argc, char **argv, t_data *data)
 {
@@ -117,9 +124,14 @@ int	load_input(int argc, char **argv, t_data *data)
 
 }
 
-void	init()
+void init(t_counter counter)
 {
-
+	counter.ambient_light_count  = 0;
+	counter.ambient_light_count = 0;
+	counter.camera_count = 0;
+	counter.sphere_count = 0;
+	counter.cylinder_count = 0;
+	counter.plane_count = 0;
 }
 
 int	main(int argc, char **argv)
@@ -128,9 +140,9 @@ int	main(int argc, char **argv)
 
 //	data.img = 
 //	data = NULL;
-	init();
+	init(*data.counter);
 	return (load_input(argc, argv, &data));
-	
+
 	// data = load_input(argc, argv);
 	// data->win_ptr =mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "miniRT");
 

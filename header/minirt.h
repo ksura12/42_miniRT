@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 09:09:05 by ksura             #+#    #+#             */
-/*   Updated: 2022/12/08 15:34:48 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/09 12:16:39 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@
 # define HEIGHT 		1400
 # define BUFFERSIZE 	1000
 
-typedef struct s_elements   t_elements;
+typedef struct s_elements	t_elements;
+typedef struct s_counter	t_counter;
 
 typedef	struct s_data {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img;
 	t_elements	*elements;
+	t_counter	*counter;
 } t_data;
 
 #endif

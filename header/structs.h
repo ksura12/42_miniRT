@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:33:31 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/08 14:29:29 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/09 11:58:54 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_obj		t_obj;
 typedef struct s_vec		t_vec;
 typedef struct s_color		t_color;
 
-typedef struct s_elements
+typedef struct s_counter
 {
 	int			ambient_light_count;
 	int			light_count;
@@ -31,11 +31,17 @@ typedef struct s_elements
 	int			sphere_count;
 	int			cylinder_count;
 	int			plane_count;
+}	t_counter;
+
+typedef struct s_elements
+{
 	t_amb_light	*amb_light;
 	t_light		*light;
 	t_cam		*camera;
 	t_obj		*objects;
 }	t_elements;
+
+
 
 /**
  * @brief struct for vectors consisting out of three parameters
