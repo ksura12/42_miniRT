@@ -37,6 +37,7 @@ typedef	struct s_data {
 void	freeing_dpointer(char **paths);
 
 //main.c
+int open_file(char **argv);
 
 //init.c
 void init_elements(t_data *data);

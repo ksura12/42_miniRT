@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/09/09 08:30:23 by kaheinz           #+#    #+#              #
-#    Updated: 2022/12/09 14:59:23 by ksura            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = miniRT
 CC = gcc
 CFLAGS := -Wall -Werror -Wextra -g
@@ -25,7 +13,7 @@ FT_INC	= -I ./libft/ -I ./mlx/
 GREEN = \033[0;32m
 RED = \033[0;31m
 
-SRCS = main.c free.c
+SRCS = main.c free.c init.c count_input.c
 
 OS = $(shell uname)
 # ifeq ($(OS), Linux)
