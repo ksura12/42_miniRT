@@ -3,12 +3,14 @@
 
 int	parse_line(char *line, t_data *data, char **splitted)
 {
+	int stop;
 
+	stop = 0;
 	splitted = ft_split(line, ' ');
-	if (!ft_strncmp(splitted[0], "A\0", 2))
+	if (!ft_strncmp(splitted[0], "A\0", 2) && !stop)
 	{
 		if(!init_A(data, splitted))
-			return(0);
+			stop = 1;
 	}
 	// else if (!ft_strncmp(splitted[0], "C\0", 2))
 	// {
@@ -28,6 +30,8 @@ int	parse_line(char *line, t_data *data, char **splitted)
 	// 	return (0);
 	// }
 	freeing_dpointer(splitted);
+	if (stop)
+		return (0);
 	return (1);
 }
 
