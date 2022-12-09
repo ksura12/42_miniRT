@@ -99,9 +99,14 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
-//	data.img = 
-//	data = NULL;
+//	data->mlx = mlx_init();
+//	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "miniRT");
+//	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+//	data->addr = mlx_get_data_addr(data->img, &data->bit_per_pix, &data->line_len, &f->endian);
 	init_counter(data);
+//	controls(data);
+//	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+//	mlx_loop(data->mlx);
 	return (load_input(argc, argv, data));
 
 	// data = load_input(argc, argv);

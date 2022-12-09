@@ -22,13 +22,23 @@
 # define HEIGHT 		1400
 # define BUFFERSIZE 	1000
 
+//events
+# define RED_CROSS		17
+# define KEY_PRESS		2
+# define ESC			53
+
 typedef struct s_elements	t_elements;
 typedef struct s_counter	t_counter;
 
-typedef	struct s_data {
-	void		*mlx_ptr;
-	void		*win_ptr;
+typedef	struct s_data 
+{
+	int			bit_per_pix;
+	int			line_len;
+	int			endian;
+	void		*mlx;
+	void		*mlx_win;
 	void		*img;
+	char		*addr;
 	t_counter	*counter;
 	t_elements	*elements;
 } t_data;
