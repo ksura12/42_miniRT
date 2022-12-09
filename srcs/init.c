@@ -15,3 +15,13 @@ void init(t_data *data)
 	counter->plane_count = 0;
 	counter->newline_count = 0;
 }
+
+void init_elements(t_data *data)
+{
+	int obj_cont;
+
+	obj_cont = data->counter->cylinder_count + data->counter->plane_count 
+	+ data->counter->sphere_count;
+	data->elements = malloc(sizeof(t_elements));
+	data->elements->objects = malloc(sizeof(t_elements) * obj_cont);
+}

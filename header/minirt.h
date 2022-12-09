@@ -38,5 +38,8 @@ void	freeing_dpointer(char **paths);
 
 //main.c
 
+//init.c
+void init_elements(t_data *data);
+
 
 #endif
