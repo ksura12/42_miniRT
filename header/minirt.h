@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 09:09:05 by ksura             #+#    #+#             */
-/*   Updated: 2022/12/09 13:40:00 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/09 15:07:45 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,11 @@ typedef	struct s_data {
 	t_counter	*counter;
 //	t_elements	*elements;
 } t_data;
+
+//free.c
+void	freeing_dpointer(char **paths);
+
+//main.c
+
 
 #endif

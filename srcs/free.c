@@ -3,7 +3,7 @@
 
 
 
-void	freeing_dpointer(void **paths)
+void	freeing_dpointer(char **paths)
 {
 	int	i;
 
