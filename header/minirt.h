@@ -48,11 +48,14 @@ void	freeing_dpointer(char **paths);
 
 //main.c
 int open_file(char **argv);
+int	init_A(t_data *data, char **splitted);
+int	parse_line(char *line, t_data *data, char **splitted);
 
 //init.c
+void	allocating_elements(t_data *data);
 int		init_elements(char **argv, t_data *data);
 void	init_counter(t_data *data);
 
-static int  counting_elements(char **argv, t_data *data);
+int	counting_elements(char **argv, t_data *data);
 
 #endif

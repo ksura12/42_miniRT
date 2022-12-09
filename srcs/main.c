@@ -1,13 +1,16 @@
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
-int	parse_line(char *line, t_data *data)
+int	parse_line(char *line, t_data *data, char **splitted)
 {
-	char	**splitted;
 
 	splitted = ft_split(line, ' ');
 	if (!ft_strncmp(splitted[0], "A\0", 2))
-		init_A(data, splitted);
+	{
+		if(!init_A(data, splitted))
+			return(0);
+	}
+		
 /*	else if (!ft_strncmp(splitted[0], "C\0", 2))
 		init_C(splitted);
 	else if (!ft_strncmp(splitted[0], "L\0", 2))
@@ -25,18 +28,37 @@ int	parse_line(char *line, t_data *data)
 	freeing_dpointer(splitted);
 	return (1);
 }
-
-void	init_A(t_data *data, char **splitted)
+double	char_to_double(char *value)
 {
-	(void)splitted;
-	t_amb_light amb;
+	double	result;
+	char	**splitted;
+
+	splitted = ft_split(value, '.');
+	result = -1;
+	if (splitted[0] && splitted[1])
+		result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
+	freeing_dpointer(splitted);
+	return (result);
+
+}
+
+int	init_A(t_data *data, char **splitted)
+{
+	// (void)splitted;
+	t_amb_light	*amb;
 
 	amb = data->elements->amb_light;
 	if (splitted[1])
-	amb->lratio = ;
-	amb->color->r = ;
-	amb->color->g = ;
-	amb->color->b = ;
+	{
+		amb->lratio = char_to_double(splitted[1]);
+		if (amb->lratio > 1 || amb->lratio < 0)
+			return (0);
+	}
+	printf("ratio:%f\n", amb->lratio);
+	return (1);
+	// amb->color->r = ;
+	// amb->color->g = ;
+	// amb->color->b = ;
 
 /*
 	identifier: A
@@ -53,28 +75,6 @@ int	open_file(char **argv)
 	if (fd < 0)
 		return (0); //TODO- Error messaga for file opening
 	return (fd);
-}
-
-int	init_elements(char **argv, t_data *data)
-{
-	char	*line;
-	int		fd;
-
-	fd = open_file(argv);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (!parse_line(line, data))
-		{
-			free(line);
-			close(fd); 
-			return (0);//TODO- Error message for parsing
-		}
-		free (line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (1);
 }
 
 int	load_input(int argc, char **argv, t_data *data)
@@ -107,6 +107,7 @@ int	main(int argc, char **argv)
 //	controls(data);
 //	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 //	mlx_loop(data->mlx);
+	init_elements(argv, data);
 	return (load_input(argc, argv, data));
 
 	// data = load_input(argc, argv);

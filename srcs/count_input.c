@@ -1,11 +1,11 @@
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
-static int	counting_elements(char **argv, t_data *data);
-static int	count_elements(char *line, t_data *data);
-static int	check_count(t_data *data);
+int	counting_elements(char **argv, t_data *data);
+int	count_elements(char *line, t_data *data);
+int	check_count(t_data *data);
 
-static int	check_count(t_data *data)
+int	check_count(t_data *data)
 {
 	t_counter	*counter;
 
@@ -13,6 +13,9 @@ static int	check_count(t_data *data)
 	if (counter->ambient_light_count != 1)
 	{
 		printf("ERROR, declare ambient light once.\n");
+		// printf("%i\n", counter->ambient_light_count);
+		// printf("%i\n", counter->camera_count);
+		// printf("%i\n", counter->plane_count);
 		return (0);
 	}
 	if (counter->light_count != 1)
@@ -28,13 +31,16 @@ static int	check_count(t_data *data)
 	return (1);
 }
 
-static int	count_elements(char *line, t_data *data)
+int	count_elements(char *line, t_data *data)
 {
 	char	**splitted;
 
 	splitted = ft_split(line, ' ');
 	if (!ft_strncmp(splitted[0], "A\0", 2))
+	{
 		data->counter->ambient_light_count += 1;
+		printf("counter: %i\n", data->counter->ambient_light_count);
+	}
 	else if (!ft_strncmp(splitted[0], "C\0", 2))
 		data->counter->camera_count += 1;
 	else if (!ft_strncmp(splitted[0], "L\0", 2))
@@ -57,15 +63,17 @@ static int	count_elements(char *line, t_data *data)
 	return (1);
 }
 
-static int	counting_elements(char **argv, t_data *data)
+int	counting_elements(char **argv, t_data *data)
 {
 	char	*line;
 	int		fd;
 
 	fd = open_file(argv);
 	line = get_next_line(fd);
+	printf("first: %s\n", line);
 	while (line)
 	{
+		printf("%s\n", line);
 		if (!count_elements(line, data))
 		{
 			free(line);
@@ -76,8 +84,8 @@ static int	counting_elements(char **argv, t_data *data)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	if (check_count(data))
-		return (1);
-	else
+	if (!check_count(data))
 		return (0);
+	else
+		return (1);
 }
