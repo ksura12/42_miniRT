@@ -123,24 +123,17 @@ int	main(int argc, char **argv)
 
 	data = malloc(sizeof(t_data));
 	data->mlx = mlx_init();
-/*	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "miniRT");
+	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "miniRT");
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bit_per_pix, &data->line_len, &data->endian);
-*/	init_counter(data);
-//	data->mlx = mlx_init();
-//	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "miniRT");
-//	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-//	data->addr = mlx_get_data_addr(data->img, &data->bit_per_pix, &data->line_len, &f->endian);
-//	controls(data);
-//	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-//	mlx_loop(data->mlx);
+	init_counter(data);
 	allocating_elements(data);
 	load_input(argc, argv, data);
 	init_elements(argv, data);
 	controls(data);
-/*	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_loop(data->mlx);
-*/	return (0);
+	return (0);
 
 	// data = load_input(argc, argv);
 	// data->win_ptr =mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "miniRT");

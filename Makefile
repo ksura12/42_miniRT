@@ -29,7 +29,7 @@ ifeq ($(OS), Linux)
 	SRCS += destroy_linux.c
 endif
 ifeq ($(OS), Darwin)
-	LIBS += -Lmlx -lmlx -framework OpenGL -framework AppKit
+	LIBS += -L /usr/X11/lib -lXext -lx11 -Lmlx -lmlx -framework OpenGL -framework AppKit
 	SRCs += destroy_mac.c
 endif
 
