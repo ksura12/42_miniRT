@@ -26,32 +26,24 @@ int	parse_line(char *line, t_data *data)
 	return (1);
 }
 
-// void	init_A(t_data *data, char **splitted)
-// {
-// 	(void)splitted;
-// 	t_elements 	element;
-// //	t_amb_light amb;
-// 	int	i;
+void	init_A(t_data *data, char **splitted)
+{
+	(void)splitted;
+	t_amb_light amb;
 
-// 	element = *data->elements;
-// //	amb = element->amb_light;
-// 	i = 0;
-// 	element.ambient_light_count += 1;
-// 	if (element.ambient_light_count > 1)
-// 	{
-// 		printf("Error/n");
-// 		printf("Only one ambient light declaration allowed./n");
-// 		exit (1);
-// 	}
-//	amb->
+	amb = data->elements->amb_light;
+	if (splitted[1])
+	amb->lratio = ;
+	amb->color->r = ;
+	amb->color->g = ;
+	amb->color->b = ;
 
 /*
 	identifier: A
 ∗ ambient lighting ratio in range [0.0,1.0]: 0.2
 ∗ R,G,B colors in range [0-255]: 255, 255, 255
 */
-
-// }
+}
 
 int	open_file(char **argv)
 {
@@ -109,7 +101,7 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 //	data.img = 
 //	data = NULL;
-	init(data);
+	init_counter(data);
 	return (load_input(argc, argv, data));
 
 	// data = load_input(argc, argv);

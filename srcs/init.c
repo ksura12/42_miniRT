@@ -1,7 +1,7 @@
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
-void init(t_data *data)
+void init_counter(t_data *data)
 {
 	t_counter *counter;
 

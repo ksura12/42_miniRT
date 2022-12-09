@@ -41,7 +41,8 @@ int open_file(char **argv);
 
 //init.c
 int		init_elements(char **argv, t_data *data);
-void	init(t_data *data);
+void	init_counter(t_data *data);
 
+static int  counting_elements(char **argv, t_data *data);
 
 #endif
