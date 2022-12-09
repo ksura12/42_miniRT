@@ -17,7 +17,10 @@ int	key_press(int keycode, void *param)
 //	data = (t_data *)param;
 	(void)param;
 	if (keycode == ESC)
+	{
+		printf("YOOOO");
 		exit(EXIT_SUCCESS);
+	}
 	return (0);
 }
 
