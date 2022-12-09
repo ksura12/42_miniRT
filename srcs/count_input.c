@@ -39,7 +39,6 @@ int	count_elements(char *line, t_data *data)
 	if (!ft_strncmp(splitted[0], "A\0", 2))
 	{
 		data->counter->ambient_light_count += 1;
-		printf("counter: %i\n", data->counter->ambient_light_count);
 	}
 	else if (!ft_strncmp(splitted[0], "C\0", 2))
 		data->counter->camera_count += 1;
@@ -72,7 +71,6 @@ int	counting_elements(char **argv, t_data *data)
 	line = get_next_line(fd);
 	while (line)
 	{
-		printf("%s\n", line);
 		if (!count_elements(line, data))
 		{
 			free(line);
