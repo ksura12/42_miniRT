@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 09:09:05 by ksura             #+#    #+#             */
-/*   Updated: 2022/12/09 13:20:13 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/09 13:40:00 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,5 @@ typedef	struct s_data {
 	t_counter	*counter;
 //	t_elements	*elements;
 } t_data;
-
-typedef struct s_counter
-{
-    int         ambient_light_count;
-    int         light_count;
-    int         camera_count;
-    int         sphere_count;
-    int         cylinder_count;
-    int         plane_count;
-}   t_counter;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:33:43 by kaheinz           #+#    #+#             */
-/*   Updated: 2022/12/09 13:21:39 by kaheinz          ###   ########.fr       */
+/*   Updated: 2022/12/09 14:15:12 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int	parsing_line(char *line, t_data *data)
 {
-//	(void)data;
 	char	**splitted;
 	t_counter *counter;
 	int		i;
@@ -31,25 +30,22 @@ int	parsing_line(char *line, t_data *data)
 		i++;
 	}
 	if (!ft_strncmp(splitted [0], "A\0", 2))
-	{
-		printf("AMBIENT LIGHT found\n");
 		counter->ambient_light_count += 1;
-	}
 	else if (!ft_strncmp(splitted [0], "C\0", 2))
-	{
-		printf("CAMERA found\n");
-//		data->counter->camera_count += 1;
-	}
+		counter->camera_count += 1;
 	else if (!ft_strncmp(splitted [0], "L\0", 2))
-		printf("LIGHT found\n");
+		counter->light_count += 1;
 	else if (!ft_strncmp(splitted [0], "sp\0", 3))
-		printf("SPHERE found\n");
+		counter->sphere_count += 1;
 	else if (!ft_strncmp(splitted [0], "cy\0", 3))
-		printf("CYLINDER found\n");
+		counter->cylinder_count += 1;
 	else if (!ft_strncmp(splitted [0], "pl\0", 3))
-		printf("PLANE found\n");
+		counter->plane_count += 1;
 	else
-		printf("ERROR\n");
+	{
+		printf("ERROR, unidentified element.\n");
+		return (1);
+	}
 	return (0);
 }
 
@@ -80,18 +76,11 @@ int	parsing_line(char *line, t_data *data)
 
 // }
 
-int	check_input(int argc, char **argv, t_data *data)
+int	check_input(char **argv, t_data *data)
 {
-	int 	len;
 	int		fd;
-	// int 	i;
 	char	*line;
 
-	if(argc != 2)
-		return (0);
-	len = ft_strlen(argv[1]);
-	if (ft_strncmp(&argv[1][len - 3], ".rt", 3) != 0)
-		return (0);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (0); //TODO- Error messaga for file opening
@@ -105,11 +94,11 @@ int	check_input(int argc, char **argv, t_data *data)
 			return (0);//TODO- Error message for parsing
 		}
 		free (line);
-//		free (splitted);
 		line = get_next_line(fd);
 	}
-//	printf("Number of A %i\n", data->counter->ambient_light_count);
-	//TODO -- get number of lines in file
+	printf("Number of A %i\n", data->counter->ambient_light_count);
+	printf("Number of C %i\n", data->counter->camera_count);
+	printf("Number of cy %i\n", data->counter->cylinder_count);
 	//use get_next line to fill array with objects
 	close(fd);
 	return (1);
@@ -117,7 +106,14 @@ int	check_input(int argc, char **argv, t_data *data)
 
 int	load_input(int argc, char **argv, t_data *data)
 {
-	if (!check_input(argc, argv, data))
+	int 	len;
+
+	if (argc != 2)
+		return (0);
+	len = ft_strlen(argv[1]);
+	if (ft_strncmp(&argv[1][len - 3], ".rt", 3) != 0)
+		return (0);
+	if (!check_input(argv, data))
 	{
 		printf("check your input\n");
 		exit(0);
@@ -130,8 +126,8 @@ void init(t_data *data)
 {
 	t_counter *counter;
 
+	data->counter = malloc(sizeof(t_counter));
 	counter = data->counter;
-	counter = malloc(sizeof(data->counter));
 	counter->ambient_light_count = 0;
 	counter->light_count = 0;
 	counter->camera_count = 0;
