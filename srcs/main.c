@@ -25,18 +25,35 @@ int	parse_line(char *line, t_data *data)
 	freeing_dpointer(splitted);
 	return (1);
 }
-
-void	init_A(t_data *data, char **splitted)
+double	atodouble(char *value)
 {
-	(void)splitted;
-	t_amb_light amb;
+	double	result;
+	char	**splitted;
+
+	splitted = ft_split(value, '.');
+	result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
+	return (result);
+
+}
+
+int	init_A(t_data *data, char **splitted)
+{
+	// (void)splitted;
+	t_amb_light	*amb;
 
 	amb = data->elements->amb_light;
 	if (splitted[1])
-	amb->lratio = ;
-	amb->color->r = ;
-	amb->color->g = ;
-	amb->color->b = ;
+	{
+		amb->lratio = atodouble(splitted[1]);
+		if (amb->lratio > 1 || amb->lratio < 0)
+		{printf("here:%f\n", amb->lratio);
+			return (0);}
+	}
+	printf("ratio:%f\n", amb->lratio);
+	return (1);
+	// amb->color->r = ;
+	// amb->color->g = ;
+	// amb->color->b = ;
 
 /*
 	identifier: A
@@ -53,28 +70,6 @@ int	open_file(char **argv)
 	if (fd < 0)
 		return (0); //TODO- Error messaga for file opening
 	return (fd);
-}
-
-int	init_elements(char **argv, t_data *data)
-{
-	char	*line;
-	int		fd;
-
-	fd = open_file(argv);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (!parse_line(line, data))
-		{
-			free(line);
-			close(fd); 
-			return (0);//TODO- Error message for parsing
-		}
-		free (line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (1);
 }
 
 int	load_input(int argc, char **argv, t_data *data)
@@ -102,6 +97,7 @@ int	main(int argc, char **argv)
 //	data.img = 
 //	data = NULL;
 	init_counter(data);
+	init_elements(argv, data);
 	return (load_input(argc, argv, data));
 
 	// data = load_input(argc, argv);

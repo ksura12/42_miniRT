@@ -1,7 +1,7 @@
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
-static int	counting_elements(char **argv, t_data *data);
+int	counting_elements(char **argv, t_data *data);
 static int	count_elements(char *line, t_data *data);
 static int	check_count(t_data *data);
 
@@ -57,7 +57,7 @@ static int	count_elements(char *line, t_data *data)
 	return (1);
 }
 
-static int	counting_elements(char **argv, t_data *data)
+int	counting_elements(char **argv, t_data *data)
 {
 	char	*line;
 	int		fd;

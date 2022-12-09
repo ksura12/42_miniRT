@@ -16,7 +16,30 @@ void init_counter(t_data *data)
 	counter->newline_count = 0;
 }
 
-void init_elements(t_data *data)
+int	init_elements(char **argv, t_data *data)
+{
+	char	*line;
+	int		fd;
+
+	fd = open_file(argv);
+	allocating_elements(data);
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (!parse_line(line, data))
+		{
+			free(line);
+			close(fd); 
+			return (0);//TODO- Error message for parsing
+		}
+		free (line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (1);
+}
+
+void allocating_elements(t_data *data)
 {
 	int obj_cont;
 
