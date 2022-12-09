@@ -5,7 +5,6 @@ void init_counter(t_data *data)
 {
 	t_counter *counter;
 
-	data->counter = malloc(sizeof(t_counter));
 	counter = data->counter;
 	counter->ambient_light_count = 0;
 	counter->light_count = 0;
