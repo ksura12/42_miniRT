@@ -25,7 +25,7 @@
 //events
 # define RED_CROSS		17
 # define KEY_PRESS		2
-# define ESC			53
+# define ESC			65307
 
 typedef struct s_elements	t_elements;
 typedef struct s_counter	t_counter;

@@ -126,11 +126,11 @@ int	main(int argc, char **argv)
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "miniRT");
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bit_per_pix, &data->line_len, &data->endian);
+	controls(data);
 	init_counter(data);
 	allocating_elements(data);
 	load_input(argc, argv, data);
 	init_elements(argv, data);
-	controls(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_loop(data->mlx);
 	return (0);
