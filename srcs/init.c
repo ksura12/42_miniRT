@@ -20,22 +20,30 @@ int	init_elements(char **argv, t_data *data)
 {
 	char	*line;
 	int		fd;
+	char	**splitted;
 
 	fd = open_file(argv);
 	allocating_elements(data);
 	line = get_next_line(fd);
+	splitted = NULL;
 	while (line)
 	{
-		if (!parse_line(line, data))
+		if (!parse_line(line, data, splitted))
 		{
 			free(line);
-			close(fd); 
+			close(fd);
+			if(splitted)
+				freeing_dpointer(splitted);
 			return (0);//TODO- Error message for parsing
 		}
 		free (line);
+		if(splitted)
+			freeing_dpointer(splitted);
 		line = get_next_line(fd);
 	}
 	close(fd);
+	if(splitted)
+		freeing_dpointer(splitted);
 	return (1);
 }
 
@@ -46,5 +54,6 @@ void allocating_elements(t_data *data)
 	obj_cont = data->counter->cylinder_count + data->counter->plane_count 
 	+ data->counter->sphere_count;
 	data->elements = malloc(sizeof(t_elements));
+	data->elements->amb_light = malloc(sizeof(t_amb_light));
 	data->elements->objects = malloc(sizeof(t_elements) * obj_cont);
 }

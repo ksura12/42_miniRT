@@ -1,13 +1,16 @@
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
-int	parse_line(char *line, t_data *data)
+int	parse_line(char *line, t_data *data, char **splitted)
 {
-	char	**splitted;
 
 	splitted = ft_split(line, ' ');
 	if (!ft_strncmp(splitted[0], "A\0", 2))
-		init_A(data, splitted);
+	{
+		if(!init_A(data, splitted))
+			return(0);
+	}
+		
 /*	else if (!ft_strncmp(splitted[0], "C\0", 2))
 		init_C(splitted);
 	else if (!ft_strncmp(splitted[0], "L\0", 2))
@@ -25,13 +28,16 @@ int	parse_line(char *line, t_data *data)
 	freeing_dpointer(splitted);
 	return (1);
 }
-double	atodouble(char *value)
+double	char_to_double(char *value)
 {
 	double	result;
 	char	**splitted;
 
 	splitted = ft_split(value, '.');
-	result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
+	result = -1;
+	if (splitted[0] && splitted[1])
+		result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
+	freeing_dpointer(splitted);
 	return (result);
 
 }
@@ -44,10 +50,9 @@ int	init_A(t_data *data, char **splitted)
 	amb = data->elements->amb_light;
 	if (splitted[1])
 	{
-		amb->lratio = atodouble(splitted[1]);
+		amb->lratio = char_to_double(splitted[1]);
 		if (amb->lratio > 1 || amb->lratio < 0)
-		{printf("here:%f\n", amb->lratio);
-			return (0);}
+			return (0);
 	}
 	printf("ratio:%f\n", amb->lratio);
 	return (1);

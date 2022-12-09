@@ -13,6 +13,7 @@ static int	check_count(t_data *data)
 	if (counter->ambient_light_count != 1)
 	{
 		printf("ERROR, declare ambient light once.\n");
+		printf("%i\n", counter->ambient_light_count);
 		return (0);
 	}
 	if (counter->light_count != 1)
