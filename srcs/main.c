@@ -182,21 +182,6 @@ int	load_input(int argc, char **argv, t_data *data)
 
 }
 
-void init(t_data *data)
-{
-	t_counter *counter;
-
-	data->counter = malloc(sizeof(t_counter));
-	counter = data->counter;
-	counter->ambient_light_count = 0;
-	counter->light_count = 0;
-	counter->camera_count = 0;
-	counter->sphere_count = 0;
-	counter->cylinder_count = 0;
-	counter->plane_count = 0;
-	counter->newline_count = 0;
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	*data;
