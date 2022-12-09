@@ -58,4 +58,6 @@ void	init_counter(t_data *data);
 
 int	counting_elements(char **argv, t_data *data);
 
+void	controls(t_data *data);
+
 #endif
