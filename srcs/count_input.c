@@ -13,9 +13,6 @@ int	check_count(t_data *data)
 	if (counter->ambient_light_count != 1)
 	{
 		printf("ERROR, declare ambient light once.\n");
-		// printf("%i\n", counter->ambient_light_count);
-		// printf("%i\n", counter->camera_count);
-		// printf("%i\n", counter->plane_count);
 		return (0);
 	}
 	if (counter->light_count != 1)
@@ -31,15 +28,19 @@ int	check_count(t_data *data)
 	return (1);
 }
 
+int	analyze_line(void *structure, )
+{
+
+	data->counter-> += 1;
+}
+
 int	count_elements(char *line, t_data *data)
 {
 	char	**splitted;
 
 	splitted = ft_split(line, ' ');
 	if (!ft_strncmp(splitted[0], "A\0", 2))
-	{
 		data->counter->ambient_light_count += 1;
-	}
 	else if (!ft_strncmp(splitted[0], "C\0", 2))
 		data->counter->camera_count += 1;
 	else if (!ft_strncmp(splitted[0], "L\0", 2))
@@ -85,4 +86,18 @@ int	counting_elements(char **argv, t_data *data)
 		return (0);
 	else
 		return (1);
+}
+
+int	expected_words(t_data *data, int expected, char **words)
+{
+	(void)data;
+	int	i;
+
+	i = 0;
+	while(words[i] && words[i][0] != '\n')
+		i++;
+	if (i == expected)
+		return (1);
+	else
+		return (0);
 }

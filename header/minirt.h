@@ -21,6 +21,12 @@
 # define WIDTH			1400
 # define HEIGHT 		1400
 # define BUFFERSIZE 	1000
+# define INFO_AL		3
+# define INFO_C			4
+# define INFO_L			4
+# define INFO_PL		4
+# define INFO_SP		4
+# define INFO_CY		6
 
 //events
 # define RED_CROSS		17
@@ -50,7 +56,7 @@ void	freeing_dpointer(char **paths);
 int open_file(char **argv);
 int	init_A(t_data *data, char **splitted);
 int	parse_line(char *line, t_data *data, char **splitted);
-double	char_to_double(char *value);
+int	char_to_double(char *value, double *dst);
 
 //init.c
 void	allocating_elements(t_data *data);
@@ -58,6 +64,7 @@ int		init_elements(char **argv, t_data *data);
 void	init_counter(t_data *data);
 
 int	counting_elements(char **argv, t_data *data);
+int	expected_words(t_data *data, int expected, char **words);
 
 void	controls(t_data *data);
 
