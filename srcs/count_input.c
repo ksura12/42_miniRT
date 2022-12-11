@@ -29,7 +29,7 @@ int	check_count(t_data *data)
 	return (1);
 }
 
-int	increase_count(t_data *data, char **splitted)
+int	increase_count(char *line, t_data *data)
 {
 	if (!ft_strncmp(splitted[0], "A\0", 2))
 		data->counter->ambient_light_count += 1;
