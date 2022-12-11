@@ -5,7 +5,6 @@ void init_counter(t_data *data)
 {
 	t_counter *counter;
 
-	data->counter = malloc(sizeof(t_counter));
 	counter = data->counter;
 	counter->ambient_light_count = 0;
 	counter->light_count = 0;
@@ -23,7 +22,6 @@ int	init_elements(char **argv, t_data *data)
 	char	**splitted;
 
 	fd = open_file(argv);
-	// allocating_elements(data);
 	line = get_next_line(fd);
 	splitted = NULL;
 	while (line)
