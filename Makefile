@@ -13,7 +13,8 @@ FT_INC	= -I ./libft/ -I ./mlx/
 GREEN = \033[0;32m
 RED = \033[0;31m
 
-SRCS = main.c free.c init.c count_input.c controls.c elements.c utils.c alloc.c parsing.c
+SRCS = main.c free.c init.c count_input.c controls.c elements.c \
+	utils.c alloc.c parsing.c objects.c
 
 OS = $(shell uname)
 # ifeq ($(OS), Linux)

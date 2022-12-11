@@ -69,6 +69,9 @@ void	object_allocation(t_data *data);
 //utils.c
 int		expected_words(int expected, char **words);
 int		open_file(char **argv);
+int		isaldigit(char **value);
+int		check_colors(char *rgb, t_color *location);
+int		char_to_double(char *value, double *dst);
 
 //main.c
 
@@ -92,18 +95,17 @@ int		check_count(t_data *data);
 //controls.c
 void	controls(t_data *data);
 
-//elements.c
+//elements_single.c
 int		init_a(t_data *data, char **splitted);
-int		init_camera(t_data *data, char **splitted);
 int		init_l(t_data *data, char **splitted);
+int		init_camera(t_data *data, char **splitted);
+int		init_camera_fov(t_cam *cam, char **splitted);
+
+//objects.c
 int		init_s(t_data *data, char **splitted);
 int		init_cylinder(t_data *data, char **splitted);
 int		init_plane(t_data *data, char **splitted);
-int		init_camera_fov(t_cam *cam, char **splitted);
-int		check_boundries_vector(t_vec *vector, int min, int max);
 t_vec	init_vector(char *xyz);
-int		isaldigit(char **value);
-int		check_colors(char *rgb, t_color *location);
-int		char_to_double(char *value, double *dst);
+int		check_boundries_vector(t_vec *vector, int min, int max);
 
 #endif

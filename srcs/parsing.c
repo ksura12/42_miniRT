@@ -9,17 +9,17 @@ int	parse_line(char *line, t_data *data, char **splitted)
 	splitted = ft_split(line, ' ');
 	if (!ft_strncmp(splitted[0], "A\0", 2) && !stop)
 	{
-		if (!init_A(data, splitted))
+		if (!init_a(data, splitted))
 			stop = 1;
 	}
 	else if (!ft_strncmp(splitted[0], "C\0", 2))
 	{
-		if (!init_Camera(data, splitted))
+		if (!init_camera(data, splitted))
 			return (0);
 	}
 	else if (!ft_strncmp(splitted[0], "L\0", 2))
 	{
-		if (!init_L(data, splitted))
+		if (!init_l(data, splitted))
 			return (0);
 	}
 	else if (!ft_strncmp(splitted[0], "sp\0", 3))
