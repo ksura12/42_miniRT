@@ -6,7 +6,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include "structs.h"
-#	include <fcntl.h> //open
+# include <fcntl.h> //open
 
 # ifdef __APPLE__ // should work in linux and mac headers
 #  include "../mlx/mlx.h"
@@ -27,6 +27,8 @@
 # define INFO_PL		4
 # define INFO_SP		4
 # define INFO_CY		6
+# define INFO_COLOR		3
+# define INFO_V			3
 
 //events
 # define RED_CROSS		17
@@ -43,7 +45,7 @@ typedef struct s_obj		t_obj;
 typedef struct s_vec		t_vec;
 typedef struct s_color		t_color;
 
-typedef	struct s_data 
+typedef struct s_data
 {
 	int			bit_per_pix;
 	int			line_len;
@@ -54,25 +56,40 @@ typedef	struct s_data
 	char		*addr;
 	t_counter	*counter;
 	t_elements	*elements;
-} t_data;
+}	t_data;
 
 //free.c
 void	freeing_dpointer(char **paths);
+void	free_allocation(t_data *data);
+
+//alloc.c
+int		struct_allocation(t_data *data);
+void	object_allocation(t_data *data);
+
+//utils.c
+int		expected_words(int expected, char **words);
+int		open_file(char **argv);
 
 //main.c
-int open_file(char **argv);
-int	init_A(t_data *data, char **splitted);
-int	parse_line(char *line, t_data *data, char **splitted);
+
+//parsing.c
+int		parse_line(char *line, t_data *data, char **splitted);
+int		check_arguments(int argc, char **argv);
+int		check_counter(t_data *data, char **argv);
+void	parsing(int argc, char **argv, t_data *data);
 
 //init.c
-void	allocating_elements(t_data *data);
 int		init_elements(char **argv, t_data *data);
 void	init_counter(t_data *data);
 
-int	counting_elements(char **argv, t_data *data);
-int	expected_words(int expected, char **words);
-int assign_info(char **splitted);
+//count_input.c
+int		counting_elements(char **argv, t_data *data);
+int		increase_count(t_data *data, char **splitted);
+int		count_elements(char *line, t_data *data);
+int		assign_info(char **splitted);
+int		check_count(t_data *data);
 
+//controls.c
 void	controls(t_data *data);
 
 //elements.c
