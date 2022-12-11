@@ -86,12 +86,12 @@ int	init_L(t_data *data, char **splitted)
 	return (1);
 }
 
-int	init_S(t_data *data, char **splitted)
+int	init_s(t_data *data, char **splitted)
 {
-	//counter for maount of already created objects
 	t_obj	*obj;
 
 	obj = data->elements->objects[data->counter->create_count];
+	obj->id = 's';
 	obj->v_pos = init_vector(splitted[1]);
 	if (obj->v_pos.f == 0 || !char_to_double(splitted[2], &obj->dia)
 	|| !check_colors(splitted[3], &obj->color))
@@ -101,6 +101,31 @@ int	init_S(t_data *data, char **splitted)
 	}
 	printf("Succcesfull sphere creation\n");
 	printf("sphere diameter:%f\n", obj->dia);
+	data->counter->create_count += 1;
+	return (1);
+}
+
+int	init_cylinder(t_data *data, char **splitted)
+{
+	t_obj	*obj;
+
+	obj = data->elements->objects[data->counter->create_count];
+	obj->id = 'c';
+	obj->v_pos = init_vector(splitted[1]);
+	obj->v_orient = init_vector(splitted[2]);
+
+	if (obj->v_pos.f == 0 || !check_boundries_vector(&obj->v_orient, -1, 1)
+	|| obj->v_orient.f == 0
+	|| !char_to_double(splitted[3], &obj->dia)
+	|| !char_to_double(splitted[4], &obj->height)
+	|| !check_colors(splitted[5], &obj->color))
+	{
+		printf("ERROR\nWrong cylinder declaration.");
+		return (0);
+	}
+	printf("Succcesfull cylinder creation\n");
+	printf("cy dia:%f\n", obj->dia);
+	printf("cy height:%f\n", obj->height);
 	data->counter->create_count += 1;
 	return (1);
 }
@@ -147,6 +172,7 @@ int	char_to_double(char *value, double *dst)
 {
 	double	result;
 	char	**splitted;
+	int		i;
 
 	splitted = ft_split(value, '.');
 	if (expected_words(1, splitted) && isaldigit(splitted))
@@ -158,7 +184,12 @@ int	char_to_double(char *value, double *dst)
 	}
 	else if (expected_words(2, splitted) && isaldigit(splitted))
 	{
-		result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
+		i = 0;
+		while (splitted[1][i])
+		{
+			i++;
+		}
+		result = 1 * ft_atoi(splitted[0]) + pow(0.1, i) * ft_atoi(splitted[1]);
 		freeing_dpointer(splitted);
 		*dst = result;
 		return (1);
@@ -228,7 +259,7 @@ int	check_boundries_vector(t_vec *vector, int min, int max)
  * @param splitted splitted camera input parameters
  * @return int 0 for wrong input, 1 for valid input
  */
-int	init_C_fov(t_cam *cam, char **splitted)
+int	init_Camera_fov(t_cam *cam, char **splitted)
 {
 	int i;
 
@@ -259,7 +290,7 @@ int	init_C_fov(t_cam *cam, char **splitted)
  * @param splitted array of input parameters from .rt file for the camera
  * @return int 0 for wrong input, 1 for successfull camera creation
  */
-int	init_C(t_data *data, char **splitted)
+int	init_Camera(t_data *data, char **splitted)
 {
 	t_cam	*cam;
 
@@ -281,7 +312,7 @@ int	init_C(t_data *data, char **splitted)
 		printf("ERROR\nWrong Camera-Orientation Vector declaration.");
 		return(0);
 	}
-	if(!init_C_fov(cam, splitted))
+	if(!init_Camera_fov(cam, splitted))
 		return (0);
 	printf("Succcesfull Camera creation\n");
 	// printf("init_c x-coordinate:%f\n", cam->v_pos.x);

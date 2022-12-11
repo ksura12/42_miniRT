@@ -14,7 +14,7 @@ int	parse_line(char *line, t_data *data, char **splitted)
 	}
 	else if (!ft_strncmp(splitted[0], "C\0", 2))
 	{
-		if(!init_C(data, splitted))
+		if(!init_Camera(data, splitted))
 			return(0);
 	}
 	else if (!ft_strncmp(splitted[0], "L\0", 2))
@@ -24,7 +24,12 @@ int	parse_line(char *line, t_data *data, char **splitted)
 	}
 	else if (!ft_strncmp(splitted[0], "sp\0", 3))
 	{
-		if(!init_S(data, splitted))
+		if(!init_s(data, splitted))
+			return(0);
+	}
+	else if (!ft_strncmp(splitted[0], "cy\0", 3))
+	{
+		if(!init_cylinder(data, splitted))
 			return(0);
 	}
 	// || !ft_strncmp(splitted[0], "cy\0", 3)
