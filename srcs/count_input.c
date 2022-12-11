@@ -1,10 +1,6 @@
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
-int	counting_elements(char **argv, t_data *data);
-int	count_elements(char *line, t_data *data);
-int	check_count(t_data *data);
-
 int	check_count(t_data *data)
 {
 	t_counter	*counter;

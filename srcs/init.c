@@ -1,9 +1,9 @@
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
-void init_counter(t_data *data)
+void	init_counter(t_data *data)
 {
-	t_counter *counter;
+	t_counter	*counter;
 
 	counter = data->counter;
 	counter->ambient_light_count = 0;
@@ -31,17 +31,17 @@ int	init_elements(char **argv, t_data *data)
 		{
 			free(line);
 			close(fd);
-			if(splitted)
+			if (splitted)
 				freeing_dpointer(splitted);
 			return (0);//TODO- Error message for parsing
 		}
 		free (line);
-		if(splitted)
+		if (splitted)
 			freeing_dpointer(splitted);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	if(splitted)
+	if (splitted)
 		freeing_dpointer(splitted);
 	return (1);
 }

@@ -31,8 +31,6 @@ typedef struct s_elements
 	t_obj		**objects;
 }	t_elements;
 
-
-
 /**
  * @brief struct for vectors consisting out of three parameters
  * @param x [double] Value for the X-Component of the vector
@@ -116,6 +114,5 @@ typedef struct s_cam
 	t_vec	v_orient;
 	int		fov;
 }	t_cam;
-
 
 #endif
