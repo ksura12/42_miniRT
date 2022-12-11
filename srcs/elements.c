@@ -84,22 +84,45 @@ int	init_A(t_data *data, char **splitted)
 // 	return (1);
 // }
 
+int	char_to_double(char *value, double *dst)
+{
+	double	result;
+	char	**splitted;
+
+	splitted = ft_split(value, '.');
+	result = -1;
+	
+	if (splitted[0] && splitted[1])
+		result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
+	else
+	{
+		freeing_dpointer(splitted);
+		return (0);
+	}
+	freeing_dpointer(splitted);
+	return (1);
+}
+
 t_vec	init_vector(char *xyz)
 {
 	t_vec	vector;
 	int		i;
 	char	**coordinates;
 
+	vector.f = 0;
+	vector.x = 0;
+	vector.y = 0;
+	vector.z = 0;
 	coordinates = ft_split(xyz, ',');
 	i = 0;
 	while(coordinates[i])
 		i++;
 	if (i != 2)
 	{
-		vector.f = 0;
 		freeing_dpointer(coordinates);
 		return(vector);
 	}
+	vector.f = 1;
 	vector.x = char_to_double(coordinates[0]);
 	vector.y = char_to_double(coordinates[1]);
 	vector.z = char_to_double(coordinates[2]);

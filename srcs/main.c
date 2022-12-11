@@ -35,20 +35,6 @@ int	parse_line(char *line, t_data *data, char **splitted)
 	return (1);
 }
 
-double	char_to_double(char *value)
-{
-	double	result;
-	char	**splitted;
-
-	splitted = ft_split(value, '.');
-	result = -1;
-	
-	if (splitted[0] && splitted[1])
-		result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
-	freeing_dpointer(splitted);
-	return (result);
-}
-
 int	open_file(char **argv)
 {
 	int		fd;
@@ -126,9 +112,9 @@ void	object_allocation(t_data *data)
 	int 	obj_cont;
 
 	counter = data->counter;
-    obj_cont = counter->cylinder_count + counter->plane_count
-    + counter->sphere_count;
-	data->elements->objects = malloc(sizeof(t_elements) * obj_cont);
+	obj_cont = counter->cylinder_count + counter->plane_count
+	+ counter->sphere_count;
+	data->elements->objects = malloc(sizeof(t_obj) * obj_cont);
 }
 
 void	parsing(int argc, char **argv, t_data *data)
