@@ -27,8 +27,7 @@ int	init_A(t_data *data, char **splitted)
 	amb = data->elements->amb_light;
 	if (splitted[1])
 	{
-		amb->lratio = char_to_double(splitted[1]);
-		if (amb->lratio > 1 || amb->lratio < 0)
+		if (!char_to_double(splitted[1], &amb->lratio) || amb->lratio > 1 || amb->lratio < 0)
 		{
 			printf("ERROR\nWrong light ratio.");
 			return (0);
@@ -83,6 +82,36 @@ int	init_A(t_data *data, char **splitted)
 // 	}
 // 	return (1);
 // }
+/**
+ * @brief check if the given char* poiunt to an all digit string 
+ * with a leading + or -
+ * 
+ * @param value pointer to the string to test
+ * @return int 0 for testing false, 1 if everything are digits
+ */
+int	isaldigit(char **value)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	if (value[0][0] == '-' || value[0][0] == '+' )
+		i++;
+	while (value[j])
+	{
+		if (j != 0)
+			i = 0;
+		while (value[j][i])
+		{
+			if(!ft_isdigit(value[j][i]))
+				return (0);
+			i++;
+		}
+		j++;
+	}
+	return (1);
+}
 
 int	char_to_double(char *value, double *dst)
 {
@@ -90,16 +119,12 @@ int	char_to_double(char *value, double *dst)
 	char	**splitted;
 
 	splitted = ft_split(value, '.');
-	result = -1;
-	
-	if (splitted[0] && splitted[1])
-		result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
-	else
-	{
-		freeing_dpointer(splitted);
+	//word count test
+	if (!isaldigit(splitted))
 		return (0);
-	}
+	result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
 	freeing_dpointer(splitted);
+	*dst = result;
 	return (1);
 }
 
@@ -123,9 +148,10 @@ t_vec	init_vector(char *xyz)
 		return(vector);
 	}
 	vector.f = 1;
-	vector.x = char_to_double(coordinates[0]);
-	vector.y = char_to_double(coordinates[1]);
-	vector.z = char_to_double(coordinates[2]);
+	if(!char_to_double(coordinates[0], &vector.x)
+	|| !char_to_double(coordinates[1], &vector.y)
+	|| !char_to_double(coordinates[2], &vector.z))
+		vector.f = 0;
 	freeing_dpointer(coordinates);
 	return (vector);
 }
