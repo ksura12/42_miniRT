@@ -63,5 +63,6 @@ void	controls(t_data *data);
 
 //elements.c
 int	init_A(t_data *data, char **splitted);
+int	init_C(t_data *data, char **splitted);
 
 #endif
