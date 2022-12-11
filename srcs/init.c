@@ -13,6 +13,7 @@ void init_counter(t_data *data)
 	counter->cylinder_count = 0;
 	counter->plane_count = 0;
 	counter->newline_count = 0;
+	counter->create_count = 0;
 }
 
 int	init_elements(char **argv, t_data *data)

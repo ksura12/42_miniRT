@@ -86,29 +86,22 @@ int	init_L(t_data *data, char **splitted)
 	return (1);
 }
 
-int	init_O(t_data *data, char **splitted)
+int	init_S(t_data *data, char **splitted)
 {
-	t_obj	*object;
-	int		i;
+	//counter for maount of already created objects
+	t_obj	*obj;
 
-	i = 0;
-	while(data->elements->objects[i])
-		i++;
-	if (!expected_words(4, splitted))
+	obj = data->elements->objects[data->counter->create_count];
+	obj->v_pos = init_vector(splitted[1]);
+	if (obj->v_pos.f == 0 || !char_to_double(splitted[2], &obj->dia)
+	|| !check_colors(splitted[3], &obj->color))
 	{
-		printf("ERROR\nWrong Light declaration.");
-		return(0);
-	}
-	light->v_pos = init_vector(splitted[1]);
-	if (light->v_pos.f == 0
-	|| !char_to_double(splitted[2], &light->lratio)
-	|| light->lratio > 1 || light->lratio < 0
-	|| !check_colors(splitted[3], &light->color))
-	{
-		printf("ERROR\nWrong light declaration.");
+		printf("ERROR\nWrong sphere declaration.");
 		return (0);
 	}
-	printf("Succcesfull object creation\n");
+	printf("Succcesfull sphere creation\n");
+	printf("sphere diameter:%f\n", obj->dia);
+	data->counter->create_count += 1;
 	return (1);
 }
 
