@@ -4,18 +4,19 @@
 int	check_colors(char *rgb, t_color *location)
 {
 	char	**colors;
+
 	colors = ft_split(rgb, ',');
 	if (!expected_words(3, colors))
 		return (0);
-	if(ft_atoi(colors[0]) <= 255 && ft_atoi(colors[0]) >= 0)
+	if (ft_atoi(colors[0]) <= 255 && ft_atoi(colors[0]) >= 0)
 		location->r = ft_atoi(colors[0]);
 	else
 		return (0);
-	if(ft_atoi(colors[1]) <= 255 && ft_atoi(colors[1]) >= 0)
+	if (ft_atoi(colors[1]) <= 255 && ft_atoi(colors[1]) >= 0)
 		location->b = ft_atoi(colors[1]);
 	else
 		return (0);
-	if(ft_atoi(colors[2]) <= 255 && ft_atoi(colors[2]) >= 0)
+	if (ft_atoi(colors[2]) <= 255 && ft_atoi(colors[2]) >= 0)
 		location->g = ft_atoi(colors[2]);
 	else
 		return (0);
@@ -30,14 +31,15 @@ int	check_colors(char *rgb, t_color *location)
  * @param splitted input parameters for amb_light from .rt file
  * @return int 0 for unsuccessfull, 1 for successfull creation
  */
-int	init_A(t_data *data, char **splitted)
+int	init_a(t_data *data, char **splitted)
 {
 	t_amb_light	*amb;
 
 	amb = data->elements->amb_light;
 	if (splitted[1])
 	{
-		if (!char_to_double(splitted[1], &amb->lratio) || amb->lratio > 1 || amb->lratio < 0)
+		if (!char_to_double(splitted[1], &amb->lratio)
+			|| amb->lratio > 1 || amb->lratio < 0)
 		{
 			printf("ERROR\nWrong light ratio.");
 			return (0);
@@ -62,7 +64,7 @@ int	init_A(t_data *data, char **splitted)
  * @param splitted input parameter for the light from .rt file
  * @return int 0 for fail, 1 for success in creation
  */
-int	init_L(t_data *data, char **splitted)
+int	init_l(t_data *data, char **splitted)
 {
 	t_light	*light;
 
@@ -70,19 +72,18 @@ int	init_L(t_data *data, char **splitted)
 	if (!expected_words(4, splitted))
 	{
 		printf("ERROR\nWrong Light declaration.");
-		return(0);
+		return (0);
 	}
 	light->v_pos = init_vector(splitted[1]);
 	if (light->v_pos.f == 0
-	|| !char_to_double(splitted[2], &light->lratio)
-	|| light->lratio > 1 || light->lratio < 0
-	|| !check_colors(splitted[3], &light->color))
+		|| !char_to_double(splitted[2], &light->lratio)
+		|| light->lratio > 1 || light->lratio < 0
+		|| !check_colors(splitted[3], &light->color))
 	{
 		printf("ERROR\nWrong light declaration.");
 		return (0);
 	}
 	printf("Succcesfull light creation\n");
-	// printf("light ratio: %f\n", light->lratio);
 	return (1);
 }
 
@@ -101,7 +102,7 @@ int	init_s(t_data *data, char **splitted)
 	obj->id = 's';
 	obj->v_pos = init_vector(splitted[1]);
 	if (obj->v_pos.f == 0 || !char_to_double(splitted[2], &obj->dia)
-	|| !check_colors(splitted[3], &obj->color))
+		|| !check_colors(splitted[3], &obj->color))
 	{
 		printf("ERROR\nWrong sphere declaration.");
 		return (0);
@@ -127,19 +128,16 @@ int	init_cylinder(t_data *data, char **splitted)
 	obj->id = 'c';
 	obj->v_pos = init_vector(splitted[1]);
 	obj->v_orient = init_vector(splitted[2]);
-
 	if (obj->v_pos.f == 0 || !check_boundries_vector(&obj->v_orient, -1, 1)
-	|| obj->v_orient.f == 0
-	|| !char_to_double(splitted[3], &obj->dia)
-	|| !char_to_double(splitted[4], &obj->height)
-	|| !check_colors(splitted[5], &obj->color))
+		|| obj->v_orient.f == 0
+		|| !char_to_double(splitted[3], &obj->dia)
+		|| !char_to_double(splitted[4], &obj->height)
+		|| !check_colors(splitted[5], &obj->color))
 	{
 		printf("ERROR\nWrong cylinder declaration.");
 		return (0);
 	}
 	printf("Succcesfull cylinder creation\n");
-	// printf("cy dia:%f\n", obj->dia);
-	// printf("cy height:%f\n", obj->height);
 	data->counter->create_count += 1;
 	return (1);
 }
@@ -159,10 +157,9 @@ int	init_plane(t_data *data, char **splitted)
 	obj->id = 'p';
 	obj->v_pos = init_vector(splitted[1]);
 	obj->v_orient = init_vector(splitted[2]);
-
 	if (obj->v_pos.f == 0 || !check_boundries_vector(&obj->v_orient, -1, 1)
-	|| obj->v_orient.f == 0
-	|| !check_colors(splitted[3], &obj->color))
+		|| obj->v_orient.f == 0
+		|| !check_colors(splitted[3], &obj->color))
 	{
 		printf("ERROR\nWrong plane declaration.");
 		return (0);
@@ -194,7 +191,7 @@ int	isaldigit(char **value)
 			i = 0;
 		while (value[j][i])
 		{
-			if(!ft_isdigit(value[j][i]))
+			if (!ft_isdigit(value[j][i]))
 				return (0);
 			i++;
 		}
@@ -208,7 +205,8 @@ int	isaldigit(char **value)
  * 
  * @param value original char *
  * @param dst pointer to the double value destination
- * @return int 0 for unsuccessfull casting, 1 for successfull creation of double value
+ * @return int 0 for unsuccessfull casting, 1 for successfull
+ * creation of double value
  */
 int	char_to_double(char *value, double *dst)
 {
@@ -244,10 +242,12 @@ int	char_to_double(char *value, double *dst)
 }
 
 /**
- * @brief initialises vector and fills its double parameters xyz from a char pointer
+ * @brief initialises vector and fills its double parameters xyz
+ * from a char pointer
  * 
  * @param xyz char pointer which holds xyz
- * @return t_vec vector structure including a flag f(1 for valid vector values, 0 for wrong vector values)
+ * @return t_vec vector structure including a flag f(1 for valid
+ * vector values, 0 for wrong vector values)
  */
 t_vec	init_vector(char *xyz)
 {
@@ -264,12 +264,12 @@ t_vec	init_vector(char *xyz)
 	if (!expected_words(3, coordinates))
 	{
 		freeing_dpointer(coordinates);
-		return(vector);
+		return (vector);
 	}
 	vector.f = 1;
-	if(!char_to_double(coordinates[0], &vector.x)
-	|| !char_to_double(coordinates[1], &vector.y)
-	|| !char_to_double(coordinates[2], &vector.z))
+	if (!char_to_double(coordinates[0], &vector.x)
+		|| !char_to_double(coordinates[1], &vector.y)
+		|| !char_to_double(coordinates[2], &vector.z))
 		vector.f = 0;
 	freeing_dpointer(coordinates);
 	return (vector);
@@ -286,12 +286,12 @@ t_vec	init_vector(char *xyz)
 int	check_boundries_vector(t_vec *vector, int min, int max)
 {
 	if (vector->x < min || vector->x > max)
-		return(0);
+		return (0);
 	if (vector->y < min || vector->y > max)
-		return(0);
+		return (0);
 	if (vector->z < min || vector->z > max)
-		return(0);
-	return(1);
+		return (0);
+	return (1);
 }
 
 /**
@@ -301,26 +301,26 @@ int	check_boundries_vector(t_vec *vector, int min, int max)
  * @param splitted splitted camera input parameters
  * @return int 0 for wrong input, 1 for valid input
  */
-int	init_Camera_fov(t_cam *cam, char **splitted)
+int	init_camera_fov(t_cam *cam, char **splitted)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(splitted[3][i] != '\n')
+	while (splitted[3][i] != '\n')
 	{
-		if(ft_isdigit(splitted[3][i]))
+		if (ft_isdigit(splitted[3][i]))
 			i++;
 		else
 		{
 			printf("ERROR\nWrong Camera-Orientation Vector declaration.");
-			return(0);
+			return (0);
 		}
 	}
 	cam->fov = ft_atoi(splitted[3]);
-	if(cam->fov < 0 || cam->fov > 180)
+	if (cam->fov < 0 || cam->fov > 180)
 	{
 		printf("ERROR\nWrong Camera field-of-view declaration.");
-		return(0);
+		return (0);
 	}
 	return (1);
 }
@@ -332,7 +332,7 @@ int	init_Camera_fov(t_cam *cam, char **splitted)
  * @param splitted array of input parameters from .rt file for the camera
  * @return int 0 for wrong input, 1 for successfull camera creation
  */
-int	init_Camera(t_data *data, char **splitted)
+int	init_camera(t_data *data, char **splitted)
 {
 	t_cam	*cam;
 
@@ -340,25 +340,22 @@ int	init_Camera(t_data *data, char **splitted)
 	if (!expected_words(4, splitted))
 	{
 		printf("ERROR\nWrong Camera declaration.");
-		return(0);
+		return (0);
 	}
 	cam->v_pos = init_vector(splitted[1]);
 	if (cam->v_pos.f == 0)
 	{
 		printf("ERROR\nWrong Camera-Viewpoint declaration.");
-		return(0);
+		return (0);
 	}
 	cam->v_orient = init_vector(splitted[2]);
-	if(!check_boundries_vector(&cam->v_orient, -1, 1))
+	if (!check_boundries_vector(&cam->v_orient, -1, 1))
 	{
 		printf("ERROR\nWrong Camera-Orientation Vector declaration.");
-		return(0);
+		return (0);
 	}
-	if(!init_Camera_fov(cam, splitted))
+	if (!init_Camera_fov(cam, splitted))
 		return (0);
 	printf("Succcesfull Camera creation\n");
-	// printf("init_c x-coordinate:%f\n", cam->v_pos.x);
-	// printf("init_c y-coordinate:%f\n", cam->v_pos.y);
-	// printf("init_c z-coordinate:%f\n", cam->v_pos.z);
 	return (1);
 }

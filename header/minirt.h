@@ -76,13 +76,13 @@ int assign_info(char **splitted);
 void	controls(t_data *data);
 
 //elements.c
-int		init_A(t_data *data, char **splitted);
-int		init_Camera(t_data *data, char **splitted);
-int		init_L(t_data *data, char **splitted);
+int		init_a(t_data *data, char **splitted);
+int		init_camera(t_data *data, char **splitted);
+int		init_l(t_data *data, char **splitted);
 int		init_s(t_data *data, char **splitted);
 int		init_cylinder(t_data *data, char **splitted);
 int		init_plane(t_data *data, char **splitted);
-int		init_Camera_fov(t_cam *cam, char **splitted);
+int		init_camera_fov(t_cam *cam, char **splitted);
 int		check_boundries_vector(t_vec *vector, int min, int max);
 t_vec	init_vector(char *xyz);
 int		isaldigit(char **value);
