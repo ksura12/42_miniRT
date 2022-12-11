@@ -32,6 +32,11 @@ int	parse_line(char *line, t_data *data, char **splitted)
 		if(!init_cylinder(data, splitted))
 			return(0);
 	}
+	else if (!ft_strncmp(splitted[0], "pl\0", 3))
+	{
+		if(!init_plane(data, splitted))
+			return(0);
+	}
 	// || !ft_strncmp(splitted[0], "cy\0", 3)
 	// || !ft_strncmp(splitted[0], "pl\0", 3))
 	

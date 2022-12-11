@@ -86,6 +86,13 @@ int	init_L(t_data *data, char **splitted)
 	return (1);
 }
 
+/**
+ * @brief initialises the sphere in the data structure
+ * 
+ * @param data main data strcuture
+ * @param splitted input parameter for the sphere from .rt file
+ * @return int 0 for fail, 1 for success in creation
+ */
 int	init_s(t_data *data, char **splitted)
 {
 	t_obj	*obj;
@@ -105,6 +112,13 @@ int	init_s(t_data *data, char **splitted)
 	return (1);
 }
 
+/**
+ * @brief initialises the cylinder in the data structure
+ * 
+ * @param data main data strcuture
+ * @param splitted input parameter for the cylinder from .rt file
+ * @return int 0 for fail, 1 for success in creation
+ */
 int	init_cylinder(t_data *data, char **splitted)
 {
 	t_obj	*obj;
@@ -124,8 +138,36 @@ int	init_cylinder(t_data *data, char **splitted)
 		return (0);
 	}
 	printf("Succcesfull cylinder creation\n");
-	printf("cy dia:%f\n", obj->dia);
-	printf("cy height:%f\n", obj->height);
+	// printf("cy dia:%f\n", obj->dia);
+	// printf("cy height:%f\n", obj->height);
+	data->counter->create_count += 1;
+	return (1);
+}
+
+/**
+ * @brief initialises the plane in the data structure
+ * 
+ * @param data main data strcuture
+ * @param splitted input parameter for the plane from .rt file
+ * @return int 0 for fail, 1 for success in creation
+ */
+int	init_plane(t_data *data, char **splitted)
+{
+	t_obj	*obj;
+
+	obj = data->elements->objects[data->counter->create_count];
+	obj->id = 'p';
+	obj->v_pos = init_vector(splitted[1]);
+	obj->v_orient = init_vector(splitted[2]);
+
+	if (obj->v_pos.f == 0 || !check_boundries_vector(&obj->v_orient, -1, 1)
+	|| obj->v_orient.f == 0
+	|| !check_colors(splitted[3], &obj->color))
+	{
+		printf("ERROR\nWrong plane declaration.");
+		return (0);
+	}
+	printf("Succcesfull plane creation\n");
 	data->counter->create_count += 1;
 	return (1);
 }
