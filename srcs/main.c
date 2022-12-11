@@ -131,7 +131,7 @@ void	parsing(int argc, char **argv, t_data *data)
 	}	
 	check_counter(data, argv);
 	object_allocation(data);
-//	init_elements(argv, data);
+	init_elements(argv, data);
 }
 
 int	main(int argc, char **argv)

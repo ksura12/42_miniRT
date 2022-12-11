@@ -119,13 +119,25 @@ int	char_to_double(char *value, double *dst)
 	char	**splitted;
 
 	splitted = ft_split(value, '.');
-	//word count test
-	if (!isaldigit(splitted))
+	if (expected_words(1, splitted) && isaldigit(splitted))
+	{
+		result = ft_atoi(splitted[0]);
+		freeing_dpointer(splitted);
+		*dst = result;
+		return (1);
+	}
+	else if (expected_words(2, splitted) && isaldigit(splitted))
+	{
+		result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
+		freeing_dpointer(splitted);
+		*dst = result;
+		return (1);
+	}
+	else
+	{
+		freeing_dpointer(splitted);
 		return (0);
-	result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
-	freeing_dpointer(splitted);
-	*dst = result;
-	return (1);
+	}
 }
 
 t_vec	init_vector(char *xyz)
@@ -140,10 +152,7 @@ t_vec	init_vector(char *xyz)
 	vector.z = 0;
 	coordinates = ft_split(xyz, ',');
 	i = 0;
-	// if (expected_words())
-	while(coordinates[i])
-		i++;
-	if (i != 2)
+	if (!expected_words(3, coordinates))
 	{
 		freeing_dpointer(coordinates);
 		return(vector);
