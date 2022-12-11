@@ -20,6 +20,7 @@ typedef struct s_counter
 	int			cylinder_count;
 	int			plane_count;
 	int			newline_count;
+	int			create_count;
 }	t_counter;
 
 typedef struct s_elements
@@ -27,7 +28,7 @@ typedef struct s_elements
 	t_amb_light	*amb_light;
 	t_light		*light;
 	t_cam		*camera;
-	t_obj		*objects;
+	t_obj		**objects;
 }	t_elements;
 
 
@@ -65,7 +66,7 @@ typedef struct s_color
  * @param id [char] Identifier of the Object (c-cylinder, p-plane, s-sphere)
  * @param v_pos [t_vec] Vector for origin of Object
  * @param v_or [t_vec] Orientation Vector for Object
- * @param rad [double] Radius of the Object
+ * @param dia [double] diameter of the Object
  * @param h [double] Height of the Object
  * @param col [t_col] color of the Object
  */
@@ -74,7 +75,7 @@ typedef struct s_obj
 	char	id;
 	t_vec	v_pos;
 	t_vec	v_orient;
-	double	rad;
+	double	dia;
 	double	height;
 	t_color	color;
 }	t_obj;

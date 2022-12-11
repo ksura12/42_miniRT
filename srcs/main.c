@@ -22,13 +22,14 @@ int	parse_line(char *line, t_data *data, char **splitted)
 		if(!init_L(data, splitted))
 			return(0);
 	}
-	else if (!ft_strncmp(splitted[0], "sp\0", 3) 
-	|| !ft_strncmp(splitted[0], "cy\0", 3)
-	|| !ft_strncmp(splitted[0], "pl\0", 3))
+	else if (!ft_strncmp(splitted[0], "sp\0", 3))
 	{
-		if(!init_O(data, splitted))
+		if(!init_S(data, splitted))
 			return(0);
 	}
+	// || !ft_strncmp(splitted[0], "cy\0", 3)
+	// || !ft_strncmp(splitted[0], "pl\0", 3))
+	
 	// else if (!ft_strncmp(splitted[0], "cy\0", 3))
 	// else if (!ft_strncmp(splitted[0], "pl\0", 3))
 	// else if (splitted[0][0] == '\n')
@@ -120,12 +121,19 @@ int	check_counter(t_data *data, char **argv)
 void	object_allocation(t_data *data)
 {
 	t_counter	*counter;
-	int 	obj_cont;
+	int			obj_cont;
+	int			i;
 
 	counter = data->counter;
 	obj_cont = counter->cylinder_count + counter->plane_count
 	+ counter->sphere_count;
-	data->elements->objects = malloc(sizeof(t_obj) * obj_cont);
+	i = 0;
+	data->elements->objects = malloc(sizeof(t_obj *) * obj_cont);
+	while (i < obj_cont)
+	{
+		data->elements->objects[i] = malloc(sizeof(t_obj));
+		i++;
+	}
 }
 
 void	parsing(int argc, char **argv, t_data *data)
