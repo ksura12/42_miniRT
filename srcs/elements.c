@@ -73,23 +73,42 @@ int	init_L(t_data *data, char **splitted)
 		return(0);
 	}
 	light->v_pos = init_vector(splitted[1]);
-	if (light->v_pos.f == 0)
+	if (light->v_pos.f == 0
+	|| !char_to_double(splitted[2], &light->lratio)
+	|| light->lratio > 1 || light->lratio < 0
+	|| !check_colors(splitted[3], &light->color))
 	{
-		printf("ERROR\nWrong Camera-Vector declaration.");
-		return(0);
-	}
-	if (!char_to_double(splitted[2], &light->lratio) || light->lratio > 1
-	|| light->lratio < 0)
-	{
-		printf("ERROR\nWrong light ratio.");
-		return (0);
-	}
-	if (!check_colors(splitted[3], &light->color))
-	{
-		printf("ERROR\nWrong light color input.");
+		printf("ERROR\nWrong light declaration.");
 		return (0);
 	}
 	printf("Succcesfull light creation\n");
+	// printf("light ratio: %f\n", light->lratio);
+	return (1);
+}
+
+int	init_O(t_data *data, char **splitted)
+{
+	t_obj	*object;
+	int		i;
+
+	i = 0;
+	while(data->elements->objects[i])
+		i++;
+	if (!expected_words(4, splitted))
+	{
+		printf("ERROR\nWrong Light declaration.");
+		return(0);
+	}
+	light->v_pos = init_vector(splitted[1]);
+	if (light->v_pos.f == 0
+	|| !char_to_double(splitted[2], &light->lratio)
+	|| light->lratio > 1 || light->lratio < 0
+	|| !check_colors(splitted[3], &light->color))
+	{
+		printf("ERROR\nWrong light declaration.");
+		return (0);
+	}
+	printf("Succcesfull object creation\n");
 	return (1);
 }
 
@@ -272,8 +291,8 @@ int	init_C(t_data *data, char **splitted)
 	if(!init_C_fov(cam, splitted))
 		return (0);
 	printf("Succcesfull Camera creation\n");
-	printf("init_c x-coordinate:%f\n", cam->v_pos.x);
-	printf("init_c y-coordinate:%f\n", cam->v_pos.y);
-	printf("init_c z-coordinate:%f\n", cam->v_pos.z);
+	// printf("init_c x-coordinate:%f\n", cam->v_pos.x);
+	// printf("init_c y-coordinate:%f\n", cam->v_pos.y);
+	// printf("init_c z-coordinate:%f\n", cam->v_pos.z);
 	return (1);
 }
