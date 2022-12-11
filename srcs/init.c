@@ -44,15 +44,3 @@ int	init_elements(char **argv, t_data *data)
 		freeing_dpointer(splitted);
 	return (1);
 }
-
-void allocating_elements(t_data *data)
-{
-	int obj_cont;
-
-	obj_cont = data->counter->cylinder_count + data->counter->plane_count 
-	+ data->counter->sphere_count;
-	data->elements = malloc(sizeof(t_elements));
-	data->elements->amb_light = malloc(sizeof(t_amb_light));
-	data->elements->camera = malloc(sizeof(t_cam));
-	data->elements->objects = malloc(sizeof(t_elements) * obj_cont);
-}
