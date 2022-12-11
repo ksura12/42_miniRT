@@ -77,11 +77,12 @@ void	controls(t_data *data);
 //elements.c
 int		init_A(t_data *data, char **splitted);
 int		init_C(t_data *data, char **splitted);
+int		init_L(t_data *data, char **splitted);
 int		init_C_fov(t_cam *cam, char **splitted);
 int		check_boundries_vector(t_vec *vector, int min, int max);
 t_vec	init_vector(char *xyz);
 int		isaldigit(char **value);
-void	check_colors(char *rgb, t_color *location);
+int		check_colors(char *rgb, t_color *location);
 int		char_to_double(char *value, double *dst);
 
 #endif
