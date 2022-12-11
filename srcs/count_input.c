@@ -88,9 +88,8 @@ int	counting_elements(char **argv, t_data *data)
 		return (1);
 }
 
-int	expected_words(t_data *data, int expected, char **words)
+int	expected_words(int expected, char **words)
 {
-	(void)data;
 	int	i;
 
 	i = 0;

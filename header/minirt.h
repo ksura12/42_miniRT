@@ -63,7 +63,7 @@ int		init_elements(char **argv, t_data *data);
 void	init_counter(t_data *data);
 
 int	counting_elements(char **argv, t_data *data);
-int	expected_words(t_data *data, int expected, char **words);
+int	expected_words(int expected, char **words);
 
 void	controls(t_data *data);
 

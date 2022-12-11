@@ -140,6 +140,7 @@ t_vec	init_vector(char *xyz)
 	vector.z = 0;
 	coordinates = ft_split(xyz, ',');
 	i = 0;
+	// if (expected_words())
 	while(coordinates[i])
 		i++;
 	if (i != 2)
