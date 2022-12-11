@@ -2,17 +2,9 @@
 
 void	free_allocation(t_data *data)
 {
-	// int	i;
-
 	free(data->elements->light);
 	free(data->elements->camera);
 	free(data->elements->amb_light);
-	// i = 0;
-	// while(data->elements->objects[i])
-	// {
-	// 	free(data->elements->objects[i]);
-	// 	i++;
-	// }
 	free(data->elements);
 	free(data->counter);
 	free(data);

@@ -97,6 +97,8 @@ int	counting_elements(char **argv, t_data *data)
 	int		fd;
 
 	fd = open_file(argv);
+	if (fd == 0)
+		return (0);
 	line = get_next_line(fd);
 	while (line)
 	{

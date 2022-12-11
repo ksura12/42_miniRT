@@ -20,7 +20,10 @@ int	open_file(char **argv)
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (0); //TODO- Error messaga for file opening
+	{
+		printf("ERROR\nFile-opening failed.");
+		return (0);
+	}
 	return (fd);
 }
 
@@ -29,7 +32,7 @@ int	check_colors(char *rgb, t_color *location)
 	char	**colors;
 
 	colors = ft_split(rgb, ',');
-	if (!expected_words(3, colors))
+	if (!expected_words(3, colors) || !isaldigit(colors))
 		return (0);
 	if (ft_atoi(colors[0]) <= 255 && ft_atoi(colors[0]) >= 0)
 		location->r = ft_atoi(colors[0]);
@@ -69,7 +72,7 @@ int	isaldigit(char **value)
 			i = 0;
 		while (value[j][i])
 		{
-			if (!ft_isdigit(value[j][i]))
+			if (!ft_isdigit(value[j][i]) && value[j][i] != '\n')
 				return (0);
 			i++;
 		}

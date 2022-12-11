@@ -37,17 +37,6 @@ int	parse_line(char *line, t_data *data, char **splitted)
 		if (!init_plane(data, splitted))
 			return(0);
 	}
-	// || !ft_strncmp(splitted[0], "cy\0", 3)
-	// || !ft_strncmp(splitted[0], "pl\0", 3))
-	// else if (!ft_strncmp(splitted[0], "cy\0", 3))
-	// else if (!ft_strncmp(splitted[0], "pl\0", 3))
-	// else if (splitted[0][0] == '\n')
-	// else
-	// {
-	// 	printf("ERROR, unidentified element.\n");
-	// 	freeing_dpointer(splitted);
-	// 	return (0);
-	// }
 	freeing_dpointer(splitted);
 	if (stop)
 		return (0);
