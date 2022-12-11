@@ -37,12 +37,14 @@ typedef struct s_elements
  * @param x [double] Value for the X-Component of the vector
  * @param y [double] Value for the Y-Component of the vector
  * @param z [double] Value for the Z-Component of the vector
+ * @param f [int] Flag: 1 if vector is valid, 0 if not
 */
 typedef struct s_vec
 {
 	double	x;
 	double	y;
 	double	z;
+	int		f;
 }	t_vec;
 
 /**

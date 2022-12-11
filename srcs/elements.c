@@ -46,24 +46,63 @@ int	init_A(t_data *data, char **splitted)
 	}
 	return (1);
 }
+
+// int	init_L(t_data *data, char **splitted)
+// {
+// 	t_light	*light;
+
+// 	light = data->elements->light;
+
+// 	if (splitted[1])
+// 	{
+// 		light->v_pos = init_vector(splitted[1]);
+// 		if (light->v_pos.x == -2 || light->v_pos.y == -2 || light->v_pos.z == -2)
+// 		{
+// 			printf("ERROR\nWrong Camera-Viewpoint declaration.");
+// 			return(0);
+// 		}
+// 	}
+// 	if (splitted[2])
+// 	{
+// 		amb->lratio = char_to_double(splitted[1]);
+// 		if (amb->lratio > 1 || amb->lratio < 0)
+// 		{
+// 			printf("ERROR\nWrong light ratio.");
+// 			return (0);
+// 		}
+// 	}
+// 	if (splitted[3])
+// 	{
+// 		check_colors(splitted[2], &amb->color);
+// 		if (amb->color.r == -1 || amb->color.b == -1 || amb->color.g == -1)
+// 		{
+// 			printf("ERROR\nWrong light color input.");
+// 			return (0);
+// 		}
+// 		printf("Succcesfull light creation\n");
+// 	}
+// 	return (1);
+// }
+
 t_vec	init_vector(char *xyz)
 {
 	t_vec	vector;
+	int		i;
 	char	**coordinates;
 
 	coordinates = ft_split(xyz, ',');
-	if (coordinates[0])
-		vector.x = char_to_double(coordinates[0]);
-	else
-		vector.x = -2;
-	if (coordinates[1])
-		vector.y = char_to_double(coordinates[1]);
-	else
-		vector.y = -2;
-	if (coordinates[2])
-		vector.z = char_to_double(coordinates[2]);
-	else
-		vector.z = -2;
+	i = 0;
+	while(coordinates[i])
+		i++;
+	if (i != 2)
+	{
+		vector.f = 0;
+		freeing_dpointer(coordinates);
+		return(vector);
+	}
+	vector.x = char_to_double(coordinates[0]);
+	vector.y = char_to_double(coordinates[1]);
+	vector.z = char_to_double(coordinates[2]);
 	freeing_dpointer(coordinates);
 	return (vector);
 }
@@ -90,7 +129,7 @@ int	init_C(t_data *data, char **splitted)
 	if (splitted[1])
 	{
 		cam->v_pos = init_vector(splitted[1]);
-		if (cam->v_pos.x == -2 || cam->v_pos.y == -2 || cam->v_pos.z == -2)
+		if (cam->v_pos.f == 0)
 		{
 			printf("ERROR\nWrong Camera-Viewpoint declaration.");
 			return(0);
@@ -107,16 +146,10 @@ int	init_C(t_data *data, char **splitted)
 	}
 	if (splitted[3])
 	{
-		//TODO --check if splitted is al digits
-		// ch(ecking if the fow is between 0-180
-		// if (splitted[3][i] == '+' || splitted[3][i] == '-')
-		// 	i++;
 		while(splitted[3][i] != '\n')
 		{
 			if(ft_isdigit(splitted[3][i]))
-			{
 				i++;
-			}
 			else
 			{
 				printf("ERROR\nWrong Camera-Orientation Vector declaration.");
@@ -130,6 +163,9 @@ int	init_C(t_data *data, char **splitted)
 			return(0);
 		}
 		printf("Succcesfull Camera creation\n");
+		printf("x-coordinate:%f\n", cam->v_pos.x);
+		printf("y-coordinate:%f\n", cam->v_pos.y);
+		printf("z-coordinate:%f\n", cam->v_pos.z);
 	}
 	return (1);
 }
