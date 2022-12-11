@@ -47,7 +47,6 @@ double	char_to_double(char *value)
 		result = 1 * ft_atoi(splitted[0]) + 0.1 * ft_atoi(splitted[1]);
 	freeing_dpointer(splitted);
 	return (result);
-
 }
 
 int	open_file(char **argv)
@@ -60,35 +59,17 @@ int	open_file(char **argv)
 	return (fd);
 }
 
-int	load_input(int argc, char **argv, t_data *data)
-{
-	int 	len;
-
-	if (argc != 2)
-		return (0);
-	len = ft_strlen(argv[1]);
-	if (ft_strncmp(&argv[1][len - 3], ".rt", 3) != 0)
-		return (0);
-	if (!counting_elements(argv, data))
-	{
-		printf("check your input\n");
-		exit(0);
-	}
-	return (1);
-}
-
 /*
-
-
-
 void	mlx_handle(t_data *data)
 {
 	data->mlx = mlx_init();
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "miniRT");
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bit_per_pix, &data->line_len, &data->endian);
+	controls(data);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+	mlx_loop(data->mlx);
 }
-
 */
 
 void	free_allocation(t_data *data)
@@ -139,6 +120,17 @@ void	check_counter(t_data *data, char **argv)
 	counting_elements(argv, data);
 }
 
+void	object_allocation(t_data *data)
+{
+	t_counter	*counter;
+	int 	obj_cont;
+
+	counter = data->counter;
+    obj_cont = counter->cylinder_count + counter->plane_count
+    + counter->sphere_count;
+	data->elements->objects = malloc(sizeof(t_elements) * obj_cont);
+}
+
 void	parsing(int argc, char **argv, t_data *data)
 {
 	if (!check_arguments(argc, argv))
@@ -152,6 +144,8 @@ void	parsing(int argc, char **argv, t_data *data)
 		exit(0);
 	}	
 	check_counter(data, argv);
+	object_allocation(data);
+	init_elements(argv, data);
 }
 
 int	main(int argc, char **argv)
@@ -161,16 +155,8 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (0);
+	//mlx_handle(data);
 	parsing(argc, argv, data);
-//	allocating_elements(data);
-//	load_input(argc, argv, data);
-//	init_elements(argv, data);
-	// controls(data);
-	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-	// mlx_loop(data->mlx);
+	free_allocation(data);
 	return (0);
-
-	// data = load_input(argc, argv);
-	// data->win_ptr =mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "miniRT");
-
 }

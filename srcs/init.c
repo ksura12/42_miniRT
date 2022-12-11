@@ -22,7 +22,6 @@ int	init_elements(char **argv, t_data *data)
 	char	**splitted;
 
 	fd = open_file(argv);
-	// allocating_elements(data);
 	line = get_next_line(fd);
 	splitted = NULL;
 	while (line)
