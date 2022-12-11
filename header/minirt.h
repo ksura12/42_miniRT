@@ -56,7 +56,6 @@ void	freeing_dpointer(char **paths);
 int open_file(char **argv);
 int	init_A(t_data *data, char **splitted);
 int	parse_line(char *line, t_data *data, char **splitted);
-int	char_to_double(char *value, double *dst);
 
 //init.c
 void	allocating_elements(t_data *data);
@@ -71,5 +70,6 @@ void	controls(t_data *data);
 //elements.c
 int	init_A(t_data *data, char **splitted);
 int	init_C(t_data *data, char **splitted);
+int	char_to_double(char *value, double *dst);
 
 #endif
