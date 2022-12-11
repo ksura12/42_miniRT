@@ -64,6 +64,7 @@ void	init_counter(t_data *data);
 
 int	counting_elements(char **argv, t_data *data);
 int	expected_words(int expected, char **words);
+int assign_info(char **splitted);
 
 void	controls(t_data *data);
 

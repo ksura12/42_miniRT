@@ -13,6 +13,7 @@ int	check_count(t_data *data)
 	if (counter->ambient_light_count != 1)
 	{
 		printf("ERROR, declare ambient light once.\n");
+		printf("Amount of ambient light is %i\n", counter->ambient_light_count);
 		return (0);
 	}
 	if (counter->light_count != 1)
@@ -28,17 +29,8 @@ int	check_count(t_data *data)
 	return (1);
 }
 
-// int	analyze_line(void *structure, )
-// {
-
-// 	data->counter-> += 1;
-// }
-
-int	count_elements(char *line, t_data *data)
+int	increase_count(t_data *data, char **splitted)
 {
-	char	**splitted;
-
-	splitted = ft_split(line, ' ');
 	if (!ft_strncmp(splitted[0], "A\0", 2))
 		data->counter->ambient_light_count += 1;
 	else if (!ft_strncmp(splitted[0], "C\0", 2))
@@ -56,6 +48,47 @@ int	count_elements(char *line, t_data *data)
 	else
 	{
 		printf("ERROR, unidentified element.\n");
+		return (0);
+	}
+	return (1);
+}
+
+int	assign_info(char **splitted)
+{
+	int	i;
+
+	i = 0;
+
+	if (!ft_strncmp(splitted[0], "A\0", 2))
+		i = INFO_AL;
+	else if (!ft_strncmp(splitted[0], "C\0", 2))
+		i = INFO_C;
+	else if (!ft_strncmp(splitted[0], "L\0", 2))
+		i = INFO_L;
+	else if (!ft_strncmp(splitted[0], "sp\0", 3))
+		i = INFO_SP;
+	else if (!ft_strncmp(splitted[0], "cy\0", 3))
+		i = INFO_CY;
+	else if (!ft_strncmp(splitted[0], "pl\0", 3))
+		i = INFO_PL;
+	return (i);
+}
+
+int	count_elements(char *line, t_data *data)
+{
+	char	**splitted;
+	int		i;
+
+	splitted = ft_split(line, ' ');
+	if (!increase_count(data, splitted))
+	{
+		freeing_dpointer(splitted);
+		return (0);
+	}
+	i = assign_info(splitted);
+	if (!expected_words(i, splitted))
+	{
+		printf("ERROR\nToo much info per element.");
 		freeing_dpointer(splitted);
 		return (0);
 	}
