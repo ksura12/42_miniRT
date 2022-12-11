@@ -28,10 +28,11 @@ int	check_count(t_data *data)
 	return (1);
 }
 
-// int	analyze_line(void *structure, )
+// int	analyze_line(void *structure, int	a, char *c)
 // {
+// 	char *counter = 'data->counter->al', data->counter->c, data->counter->l , data->counter->obj
 
-// 	data->counter-> += 1;
+// 	c += 1;
 // }
 
 int	count_elements(char *line, t_data *data)

@@ -35,6 +35,13 @@
 
 typedef struct s_elements	t_elements;
 typedef struct s_counter	t_counter;
+typedef struct s_elements	t_elements;
+typedef struct s_amb_light	t_amb_light;
+typedef struct s_light		t_light;
+typedef struct s_cam		t_cam;
+typedef struct s_obj		t_obj;
+typedef struct s_vec		t_vec;
+typedef struct s_color		t_color;
 
 typedef	struct s_data 
 {
@@ -68,8 +75,13 @@ int	expected_words(int expected, char **words);
 void	controls(t_data *data);
 
 //elements.c
-int	init_A(t_data *data, char **splitted);
-int	init_C(t_data *data, char **splitted);
-int	char_to_double(char *value, double *dst);
+int		init_A(t_data *data, char **splitted);
+int		init_C(t_data *data, char **splitted);
+int		init_C_fov(t_cam *cam, char **splitted);
+int		check_boundries_vector(t_vec *vector, int min, int max);
+t_vec	init_vector(char *xyz);
+int		isaldigit(char **value);
+void	check_colors(char *rgb, t_color *location);
+int		char_to_double(char *value, double *dst);
 
 #endif
