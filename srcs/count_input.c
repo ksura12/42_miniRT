@@ -58,7 +58,6 @@ int	assign_info(char **splitted)
 	int	i;
 
 	i = 0;
-
 	if (!ft_strncmp(splitted[0], "A\0", 2))
 		i = INFO_AL;
 	else if (!ft_strncmp(splitted[0], "C\0", 2))
@@ -108,7 +107,7 @@ int	counting_elements(char **argv, t_data *data)
 		if (!count_elements(line, data))
 		{
 			free(line);
-			close(fd); 
+			close(fd);
 			return (0);
 		}
 		free (line);
@@ -119,17 +118,4 @@ int	counting_elements(char **argv, t_data *data)
 		return (0);
 	else
 		return (1);
-}
-
-int	expected_words(int expected, char **words)
-{
-	int	i;
-
-	i = 0;
-	while(words[i] && words[i][0] != '\n')
-		i++;
-	if (i == expected)
-		return (1);
-	else
-		return (0);
 }
