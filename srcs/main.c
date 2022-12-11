@@ -109,10 +109,12 @@ int	check_arguments(int argc, char **argv)
 	return (1);
 }
 
-void	check_counter(t_data *data, char **argv)
+int	check_counter(t_data *data, char **argv)
 {
 	init_counter(data);
-	counting_elements(argv, data);
+	if (!counting_elements(argv, data))
+		return (0);
+	return (1);
 }
 
 void	object_allocation(t_data *data)
@@ -138,7 +140,11 @@ void	parsing(int argc, char **argv, t_data *data)
 		printf("Allocation error.\n");
 		exit(0);
 	}	
-	check_counter(data, argv);
+	if (!check_counter(data, argv))
+	{
+		free_allocation(data);
+		exit (0);
+	}
 	object_allocation(data);
 	init_elements(argv, data);
 }
