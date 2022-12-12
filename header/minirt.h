@@ -18,9 +18,12 @@
 #  include <mlx.h>
 # endif
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4
+# endif
+
 # define WIDTH			1400
 # define HEIGHT 		1400
-# define BUFFERSIZE 	1000
 # define INFO_AL		3
 # define INFO_C			4
 # define INFO_L			4
