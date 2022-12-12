@@ -23,7 +23,10 @@
 # endif
 
 # define WIDTH			1400
-# define HEIGHT 		1400
+# define HEIGHT			1400
+# define ASPECT_RATIO	WIDTH / HEIGHT
+# define RAY_T_MAX		1.0e30
+# define RAY_T_MIN		0.0001
 # define INFO_AL		3
 # define INFO_C			4
 # define INFO_L			4

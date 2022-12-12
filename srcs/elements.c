@@ -86,8 +86,8 @@ int	init_camera_fov(t_cam *cam, char **splitted)
 			return (0);
 		}
 	}
-	cam->fov = ft_atoi(splitted[3]);
-	if (cam->fov < 0 || cam->fov > 180)
+	cam->fov = ft_atoi(splitted[3]) / 2;
+	if (cam->fov < 0 || cam->fov > 90)
 	{
 		printf("ERROR\nWrong Camera field-of-view declaration.");
 		return (0);
@@ -126,6 +126,7 @@ int	init_camera(t_data *data, char **splitted)
 	}
 	if (!init_camera_fov(cam, splitted))
 		return (0);
+	
 	printf("Succcesfull Camera creation\n");
 	return (1);
 }

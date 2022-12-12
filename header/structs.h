@@ -106,13 +106,22 @@ typedef struct s_light
  * @brief struct for a camera
  * @param v_pos [t_vec] Vector for postion of the camera
  * @param v_or [t_vec] Vector for the orientation of the camera
- * @param fov [int] Field of view in degrees(0,0 -180)
+ * @param fov [int] Field of view in degrees(0,0 -90)
  */
 typedef struct s_cam
 {
 	t_vec	v_pos;
 	t_vec	v_orient;
+	t_vec	v_right;
+	t_vec	v_up;
 	int		fov;
 }	t_cam;
+
+typedef struct s_ray
+{
+	t_vec	v_pos;
+	t_vec	v_direct;
+	double	tmax;
+}	t_ray;
 
 #endif

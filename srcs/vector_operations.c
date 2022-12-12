@@ -22,7 +22,7 @@ double	vector_lensqr(t_vec v)
 
 double	vector_len(t_vec v)
 {
-	return (sqrt(vector_lensqr(v)));
+	return (sqrtf(vector_lensqr(v)));
 }
 
 t_vec	cross_prod(t_vec v1, t_vec v2)
