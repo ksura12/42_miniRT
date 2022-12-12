@@ -109,4 +109,11 @@ int		init_plane(t_data *data, char **splitted);
 t_vec	init_vector(char *xyz);
 int		check_boundries_vector(t_vec *vector, int min, int max);
 
+//vector_operations.c
+t_vec	normalise(t_vec vector);
+double	dot_prod(t_vec v1, t_vec v2);
+t_vec	cross_prod(t_vec v1, t_vec v2);
+double	vector_lensqr(t_vec v);
+double	vector_len(t_vec v);
+
 #endif

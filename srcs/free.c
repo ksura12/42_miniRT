@@ -31,8 +31,6 @@ void	free_allocation_objects(t_data *data)
 	free(data->elements->objects);
 	free(data->elements);
 	free(data->counter);
-
-	
 	free(data);
 }
 
