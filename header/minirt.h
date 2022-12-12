@@ -24,7 +24,7 @@
 
 # define WIDTH			1400
 # define HEIGHT			1400
-# define ASPECT_RATIO	WIDTH / HEIGHT
+# define ASPECT_RATIO	HEIGHT / WIDTH
 # define RAY_T_MAX		1.0e30
 # define RAY_T_MIN		0.0001
 # define INFO_AL		3
@@ -107,6 +107,7 @@ int		init_a(t_data *data, char **splitted);
 int		init_l(t_data *data, char **splitted);
 int		init_camera(t_data *data, char **splitted);
 int		init_camera_fov(t_cam *cam, char **splitted);
+t_coord	conversion(int px, int py);
 
 //objects.c
 int		init_s(t_data *data, char **splitted);

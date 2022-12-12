@@ -86,13 +86,25 @@ int	init_camera_fov(t_cam *cam, char **splitted)
 			return (0);
 		}
 	}
-	cam->fov = ft_atoi(splitted[3]) / 2;
-	if (cam->fov < 0 || cam->fov > 90)
+	cam->fov_w = ft_atoi(splitted[3]);
+	if (cam->fov_w < 0 || cam->fov_w > 180)
 	{
 		printf("ERROR\nWrong Camera field-of-view declaration.");
 		return (0);
 	}
+	cam->fov_h = cam->fov_w * ASPECT_RATIO;
+	cam->angle_vert = cam->fov_h / HEIGHT;
+	cam->angle_horz = cam->fov_w / WIDTH;
 	return (1);
+}
+
+t_coord	conversion(int px, int py)
+{
+	t_coord	coord;
+
+	coord.x = px - (WIDTH / 2);
+	coord.y = py - (HEIGHT / 2);
+	return (coord);
 }
 
 /**

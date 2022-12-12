@@ -3,6 +3,7 @@
 
 # include "minirt.h"
 
+typedef struct s_coordenate	t_coord;
 typedef struct s_elements	t_elements;
 typedef struct s_amb_light	t_amb_light;
 typedef struct s_light		t_light;
@@ -106,15 +107,16 @@ typedef struct s_light
  * @brief struct for a camera
  * @param v_pos [t_vec] Vector for postion of the camera
  * @param v_or [t_vec] Vector for the orientation of the camera
- * @param fov [int] Field of view in degrees(0,0 -90)
+ * @param fov [int] Field of view in degrees(0,0 180)
  */
 typedef struct s_cam
 {
 	t_vec	v_pos;
 	t_vec	v_orient;
-	t_vec	v_right;
-	t_vec	v_up;
-	int		fov;
+	double	angle_vert;
+	double	angle_horz;
+	int		fov_w;
+	int		fov_h;
 }	t_cam;
 
 typedef struct s_ray
@@ -123,5 +125,11 @@ typedef struct s_ray
 	t_vec	v_direct;
 	double	tmax;
 }	t_ray;
+
+typedef struct s_coordenate
+{
+	double	x;
+	double	y;
+}	t_coord;
 
 #endif
