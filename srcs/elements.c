@@ -98,12 +98,12 @@ int	init_camera_fov(t_cam *cam, char **splitted)
 	return (1);
 }
 
-t_coord	conversion(int px, int py)
+t_coord	conversion(int pixel_x, int pixel_y)
 {
 	t_coord	coord;
 
-	coord.x = px - (WIDTH / 2);
-	coord.y = py - (HEIGHT / 2);
+	coord.x = pixel_x - (WIDTH / 2);
+	coord.y = pixel_y - (HEIGHT / 2);
 	return (coord);
 }
 

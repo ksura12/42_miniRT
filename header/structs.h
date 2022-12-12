@@ -126,7 +126,7 @@ typedef struct s_ray
 	double	tmax;
 }	t_ray;
 
-typedef struct s_coordenate
+typedef struct s_coordenates
 {
 	double	x;
 	double	y;
