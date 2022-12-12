@@ -61,6 +61,7 @@ typedef struct s_data
 //free.c
 void	freeing_dpointer(char **paths);
 void	free_allocation(t_data *data);
+void	free_allocation_objects(t_data *data);
 
 //alloc.c
 int		struct_allocation(t_data *data);

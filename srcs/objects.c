@@ -94,7 +94,7 @@ int	init_plane(t_data *data, char **splitted)
 t_vec	init_vector(char *xyz)
 {
 	t_vec	vector;
-	int		i;
+	// int		i;
 	char	**coordinates;
 
 	vector.f = 0;
@@ -102,7 +102,7 @@ t_vec	init_vector(char *xyz)
 	vector.y = 0;
 	vector.z = 0;
 	coordinates = ft_split(xyz, ',');
-	i = 0;
+	// i = 0;
 	if (!expected_words(3, coordinates))
 	{
 		freeing_dpointer(coordinates);

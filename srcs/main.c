@@ -1,7 +1,7 @@
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
-/*
+
 void	mlx_handle(t_data *data)
 {
 	data->mlx = mlx_init();
@@ -12,7 +12,7 @@ void	mlx_handle(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_loop(data->mlx);
 }
-*/
+
 
 int	main(int argc, char **argv)
 {
@@ -21,8 +21,8 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (0);
-	//mlx_handle(data);
+	// mlx_handle(data);
 	parsing(argc, argv, data);
-	free_allocation(data);
+	free_allocation_objects(data);
 	return (0);
 }

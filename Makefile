@@ -1,6 +1,6 @@
 NAME = miniRT
 CC = gcc
-CFLAGS := -Wall -Werror -Wextra -g
+CFLAGS := -Wall -Werror -Wextra -g -fsanitize=address
 HEADER = ./header
 SRCDIR = ./srcs/
 OBJDIR := ./build/
@@ -24,10 +24,9 @@ OS = $(shell uname)
 # FLAGS_OS = -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
 # endif
 ifeq ($(OS), Linux)
-	LIBS += -Lmlx -lmlx -L/usr/lib -lX11 -lXext -lz 
-#	-Imlx 
+	LIBS += -Lmlx -lmlx -L/usr/lib -lX11 -lXext -lz -Imlx 
 	OBLI += -I/usr/inlcude -Imlx
-	SRCS += destroy_linux.c
+#	SRCS += destroy_linux.c
 endif
 ifeq ($(OS), Darwin)
 	LIBS += -L /usr/X11/lib -lXext -lx11 -Lmlx -lmlx -framework OpenGL -framework AppKit

@@ -10,6 +10,32 @@ void	free_allocation(t_data *data)
 	free(data);
 }
 
+void	free_allocation_objects(t_data *data)
+{
+	int i;
+	t_counter	*counter;
+	int			obj_cont;
+
+	counter = data->counter;
+	obj_cont = counter->cylinder_count + counter->plane_count
+		+ counter->sphere_count;
+	free(data->elements->light);
+	free(data->elements->camera);
+	free(data->elements->amb_light);
+	i = 0;
+	while(i < obj_cont)
+	{
+		free(data->elements->objects[i]);
+		i++;
+	}
+	free(data->elements->objects);
+	free(data->elements);
+	free(data->counter);
+
+	
+	free(data);
+}
+
 void	freeing_dpointer(char **paths)
 {
 	int	i;
