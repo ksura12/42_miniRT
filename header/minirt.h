@@ -36,6 +36,9 @@
 # define INFO_COLOR		3
 # define INFO_V			3
 
+//color
+# define JUNGLE			0x00A7CBD0
+
 //events
 # define RED_CROSS		17
 # define KEY_PRESS		2
@@ -123,6 +126,10 @@ double	dot_prod(t_vec v1, t_vec v2);
 t_vec	cross_prod(t_vec v1, t_vec v2);
 double	vector_lensqr(t_vec v);
 double	vector_len(t_vec v);
+
+//render.c
+void    my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void    render(t_data *data);
 
 //vector_operations_2.c
 t_vec	vector_dev(t_vec u, t_vec v);
