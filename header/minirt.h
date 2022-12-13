@@ -123,4 +123,9 @@ t_vec	cross_prod(t_vec v1, t_vec v2);
 double	vector_lensqr(t_vec v);
 double	vector_len(t_vec v);
 
+//vector_operations_2.c
+t_vec	vector_rot_x(t_vec v, double alpha);
+t_vec	vector_rot_y(t_vec v, double alpha);
+t_vec	vector_rot_z(t_vec v, double alpha);
+
 #endif
