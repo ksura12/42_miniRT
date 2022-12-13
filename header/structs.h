@@ -3,14 +3,14 @@
 
 # include "minirt.h"
 
-typedef struct s_coordenate	t_coord;
-typedef struct s_elements	t_elements;
-typedef struct s_amb_light	t_amb_light;
-typedef struct s_light		t_light;
-typedef struct s_cam		t_cam;
-typedef struct s_obj		t_obj;
-typedef struct s_vec		t_vec;
-typedef struct s_color		t_color;
+typedef struct s_coordenates	t_coord;
+typedef struct s_elements		t_elements;
+typedef struct s_amb_light		t_amb_light;
+typedef struct s_light			t_light;
+typedef struct s_cam			t_cam;
+typedef struct s_obj			t_obj;
+typedef struct s_vec			t_vec;
+typedef struct s_color			t_color;
 
 typedef struct s_counter
 {
