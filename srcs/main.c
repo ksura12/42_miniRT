@@ -9,8 +9,6 @@ void	mlx_handle(t_data *data)
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bit_per_pix, &data->line_len, &data->endian);
 	controls(data);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-	mlx_loop(data->mlx);
 }
 
 
@@ -21,21 +19,10 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (0);
-	data->mlx = mlx_init();
-	perror("mlx init");
-	if (data->mlx == 0)
-	{
-		printf("failed");	
-	}
-	//	data->mlx_win = mlx_new_window(data->mlx, 140, 140, "mi");
-//	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-//	data->addr = mlx_get_data_addr(data->img, &data->bit_per_pix, &data->line_len, &data->endian);
-//	controls(data);
-//	mlx_handle(data);
+	mlx_handle(data);
 	parsing(argc, argv, data);
-//	render(data);
-//	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-//	mlx_loop(data->mlx);
+	render(data);
+	mlx_loop(data->mlx);
 	free_allocation_objects(data);
 	return (0);
 }

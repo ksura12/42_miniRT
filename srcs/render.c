@@ -25,4 +25,5 @@ void	render(t_data *data)
 		}
 		pixel_y++;
 	}
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 }
