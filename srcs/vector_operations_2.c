@@ -1,5 +1,14 @@
 #include	"../header/minirt.h"
 
+t_vec	vector_dev(t_vec u, t_vec v)
+{
+	t_vec	ret;
+
+	ret.x = u.x - v.x;
+	ret.y = u.y - v.y;
+	ret.z = u.z - v.z;
+	return (ret);
+}
 t_vec	vector_rot_x(t_vec v, double alpha)
 {
 	t_vec	rot;

@@ -132,6 +132,7 @@ void    my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void    render(t_data *data);
 
 //vector_operations_2.c
+t_vec	vector_dev(t_vec u, t_vec v);
 t_vec	vector_rot_x(t_vec v, double alpha);
 t_vec	vector_rot_y(t_vec v, double alpha);
 t_vec	vector_rot_z(t_vec v, double alpha);
