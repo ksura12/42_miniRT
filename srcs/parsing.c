@@ -7,36 +7,18 @@ int	parse_line(char *line, t_data *data, char **splitted)
 
 	stop = 1;
 	splitted = ft_split(line, ' ');
-	if (!ft_strncmp(splitted[0], "A\0", 2) && !stop)
-	{
-		if (!init_a(data, splitted))
-			stop = 0;
-	}
-	else if (!ft_strncmp(splitted[0], "C\0", 2) && !stop)
-	{
-		if (!init_camera(data, splitted))
-			stop = 0;
-	}
-	else if (!ft_strncmp(splitted[0], "L\0", 2) && !stop)
-	{
-		if (!init_l(data, splitted))
-			stop = 0;
-	}
-	else if (!ft_strncmp(splitted[0], "sp\0", 3) && !stop)
-	{
-		if (!init_s(data, splitted))
-			stop = 0;
-	}
-	else if (!ft_strncmp(splitted[0], "cy\0", 3) && !stop)
-	{
-		if (!init_cylinder(data, splitted))
-			stop = 0;
-	}
-	else if (!ft_strncmp(splitted[0], "pl\0", 3) && !stop)
-	{
-		if (!init_plane(data, splitted))
-			stop = 0;
-	}
+	if (!ft_strncmp(splitted[0], "A\0", 2))
+		stop = init_a(data, splitted);
+	else if (!ft_strncmp(splitted[0], "C\0", 2))
+		stop = init_camera(data, splitted);
+	else if (!ft_strncmp(splitted[0], "L\0", 2))
+		stop = init_l(data, splitted);
+	else if (!ft_strncmp(splitted[0], "sp\0", 3))
+		stop = init_s(data, splitted);
+	else if (!ft_strncmp(splitted[0], "cy\0", 3))
+		stop = init_cylinder(data, splitted);
+	else if (!ft_strncmp(splitted[0], "pl\0", 3))
+		stop = init_plane(data, splitted);
 	freeing_dpointer(splitted);
 	if (!stop)
 		return (0);
