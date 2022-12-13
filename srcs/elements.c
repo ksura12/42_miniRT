@@ -97,7 +97,7 @@ int	init_camera_fov(t_cam *cam, char **splitted)
 	cam->angle_horz = cam->fov_w / WIDTH;
 	return (1);
 }
-
+/*
 t_coord	conversion(int pixel_x, int pixel_y)
 {
 	t_coord	coord;
@@ -105,7 +105,7 @@ t_coord	conversion(int pixel_x, int pixel_y)
 	coord.x = pixel_x - (WIDTH / 2);
 	coord.y = pixel_y - (HEIGHT / 2);
 	return (coord);
-}
+}*/
 
 /**
  * @brief initialises camera objects
