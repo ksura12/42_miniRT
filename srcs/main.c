@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 	mlx_handle(data);
 	parsing(argc, argv, data);
 	render(data);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_loop(data->mlx);
 	free_allocation_objects(data);
 	return (0);
