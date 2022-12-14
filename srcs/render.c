@@ -13,6 +13,7 @@ void	render(t_data *data)
 {
 	int pixel_x;
 	int pixel_y;
+	t_ray	ray;
 
 	pixel_y = 0;
 	while (pixel_y < HEIGHT)
@@ -20,7 +21,11 @@ void	render(t_data *data)
 		pixel_x = 0;
 		while (pixel_x < WIDTH)
 		{
-			my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);
+			ray_create(data, &ray, pixel_x, pixel_y);
+			if (does_intersect_p(ray, data) == 1)
+				my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);
+			else
+				my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00000000);
 			pixel_x++;
 		}
 		pixel_y++;

@@ -38,6 +38,7 @@
 
 //color
 # define JUNGLE			0x00A7CBD0
+# define CORIANDER		0x00BDCCAC
 
 //events
 # define RED_CROSS		17
@@ -53,6 +54,7 @@ typedef struct s_light			t_light;
 typedef struct s_cam			t_cam;
 typedef struct s_obj			t_obj;
 typedef struct s_vec			t_vec;
+typedef struct s_ray			t_ray;
 typedef struct s_color			t_color;
 
 typedef struct s_data
@@ -136,5 +138,10 @@ t_vec	vector_dev(t_vec u, t_vec v);
 t_vec	vector_rot_x(t_vec v, double alpha);
 t_vec	vector_rot_y(t_vec v, double alpha);
 t_vec	vector_rot_z(t_vec v, double alpha);
+
+//rays.c
+int	ray_create(t_data *data, t_ray *ray, int px, int py);
+int	does_intersect_p(t_ray ray, t_data *data);
+int	intersect_p(t_ray ray, t_data *data);
 
 #endif
