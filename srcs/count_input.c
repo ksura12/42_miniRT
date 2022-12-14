@@ -83,7 +83,7 @@ int	count_elements(char *line, t_data *data)
 	i = assign_info(splitted);
 	if (!expected_words(i, splitted))
 	{
-		printf("ERROR\nToo much info per element.");
+		printf("ERROR\nNot the right amount of info per element %s.", splitted[0]);
 		freeing_dpointer(splitted);
 		return (0);
 	}
