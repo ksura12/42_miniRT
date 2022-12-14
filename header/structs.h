@@ -10,6 +10,7 @@ typedef struct s_light			t_light;
 typedef struct s_cam			t_cam;
 typedef struct s_obj			t_obj;
 typedef struct s_vec			t_vec;
+typedef struct s_ray			t_ray;
 typedef struct s_color			t_color;
 
 typedef struct s_counter
