@@ -22,11 +22,11 @@
 #  define BUFFER_SIZE 4
 # endif
 
-# define WIDTH			1400
-# define HEIGHT			1400
+# define WIDTH			100
+# define HEIGHT			200
 # define ASPECT_RATIO	HEIGHT / WIDTH
-# define RAY_T_MAX		1.0e30
-# define RAY_T_MIN		0.0001
+# define RAY_T_MAX		1.0e30f
+# define RAY_T_MIN		0.0001f
 # define INFO_AL		3
 # define INFO_C			4
 # define INFO_L			4
@@ -134,6 +134,7 @@ void    my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void    render(t_data *data);
 
 //vector_operations_2.c
+double	degtorad(double deg);
 t_vec	vector_dev(t_vec u, t_vec v);
 t_vec	vector_rot_x(t_vec v, double alpha);
 t_vec	vector_rot_y(t_vec v, double alpha);
@@ -143,5 +144,6 @@ t_vec	vector_rot_z(t_vec v, double alpha);
 int	ray_create(t_data *data, t_ray *ray, int px, int py);
 int	does_intersect_p(t_ray ray, t_data *data);
 int	intersect_p(t_ray ray, t_data *data);
+int does_intersect_s(t_ray ray, t_data *data);
 
 #endif

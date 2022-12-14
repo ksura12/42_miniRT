@@ -22,10 +22,19 @@ void	render(t_data *data)
 		while (pixel_x < WIDTH)
 		{
 			ray_create(data, &ray, pixel_x, pixel_y);
-			if (does_intersect_p(ray, data) == 1)
+			
+			if (does_intersect_s(ray, data) == 1)
+			{
 				my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);
+				// printf("1 ray direction pixel %i x/y/z: %f/%f/%f\n", pixel_x, ray.v_direct.x, ray.v_direct.y, ray.v_direct.z);
+			}
+				
 			else
+			{
 				my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00000000);
+				// printf("0 ray direction pixel %i x/y/z: %f/%f/%f\n", pixel_x, ray.v_direct.x, ray.v_direct.y, ray.v_direct.z);
+			}
+				
 			pixel_x++;
 		}
 		pixel_y++;

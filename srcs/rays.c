@@ -8,12 +8,21 @@ int	ray_create(t_data *data, t_ray *ray, int px, int py)
 
 	cam = data->elements->camera->v_orient;
 	coord = conversion(px, py);
+	// printf("angel per pixel h: %f\n", data->elements->camera->angle_horz);
+	// printf("angel per pixel v: %f\n", data->elements->camera->angle_vert);
+	// printf("original x: %i\n", px);
+	// printf("new x: %f\n", coord.x);
+	// printf("original y: %i\n", py);
+	// printf("new y: %f\n", coord.y);
+	// printf("angel of rotation h: %f\n", (coord.x * data->elements->camera->angle_horz));
+	
 	ray->tmax = RAY_T_MAX;
 	ray->v_pos = data->elements->camera->v_pos;
 	if(cam.y == 0 && cam.z == 0)
 	{
-		dir = vector_rot_z(cam, coord.y * data->elements->camera->angle_vert);
-		dir = vector_rot_y(dir, coord.x * data->elements->camera->angle_horz);
+		dir = vector_rot_y(cam, coord.x * data->elements->camera->angle_horz);
+		dir = vector_rot_x(dir, coord.y * data->elements->camera->angle_vert);
+		
 		//rotate for pixel row around z and for colum araound y
 	}
 	if(cam.x == 0 && cam.z == 0)
@@ -83,14 +92,14 @@ int does_intersect_s(t_ray ray, t_data *data)
 	// Calculate quadratic coefficients
 	a = vector_lensqr(ray.v_direct);
 	b = 2 * dot_prod(ray.v_direct, ray.v_pos);
-	c = vector_lensqr(ray.v_pos) - sqr(data->elements->objects[0]->dia / 2);
+	c = vector_lensqr(ray.v_pos) - pow((data->elements->objects[0]->dia / 2), 2);
 	// float a = localRay.direction.length2();
 	// float b = 2 * dot(localRay.direction, localRay.origin);
 	// float c = localRay.origin.length2() - sqr(radius);
 
 	// Check whether we intersect
-	discriminant = sqr(b) - 4 * a* c;
-	float discriminant = sqr(b) - 4 * a * c;
+	discriminant = pow(b, 2) - 4 * a* c;
+	// float discriminant = sqr(b) - 4 * a * c;
 
 	if (discriminant < 0.0)
 		return (0);
@@ -100,7 +109,7 @@ int does_intersect_s(t_ray ray, t_data *data)
 	if (t[0] > RAY_T_MIN && t[0] < ray.tmax)
 		return (1);
 
-	float t[1] = (-b + sqrt(discriminant)) / (2 * a);
+	// float t[1] = (-b + sqrt(discriminant)) / (2 * a);
 	if (t[1] > RAY_T_MIN && t[1] < ray.tmax)
 		return (1);
 
