@@ -15,7 +15,9 @@ void	render(t_data *data)
 	int pixel_y;
 	t_ray	ray;
 	double	scale;
-		
+	double	**camtoworld;
+
+	camtoworld = ft_calloc(4, sizeof(double) * 4);
 	scale = tan(degtorad(data->elements->camera->fov_h * 0.5));
 	pixel_y = 0;
 	while (pixel_y < HEIGHT)

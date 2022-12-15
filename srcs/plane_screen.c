@@ -5,13 +5,11 @@ t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale)
 	double	x;
 	double	y;
 	t_ray	ray;
-	double	camtoworld[4][4];
 
 	x = (2 * (px + 0.5) / (float)WIDTH -1) * ASPECT_RATIO * scale;
 	y = (1- 2 * (py + 0.5) / (float)HEIGHT) * scale;
 	ray.v_direct = make_vector(x, y, -1);
-	cam_to_world_mat(data->elements->camera->v_orient, camtoworld);
-	ray.v_direct = mult_vec_mat(ray.v_direct, camtoworld);
+	ray.v_direct = mult_vec_mat(ray.v_direct, data->elements->camera->camtoworld);
 	ray.v_direct = normalise(ray.v_direct);
 	ray.v_pos = data->elements->camera->v_pos;
 	return (ray);
