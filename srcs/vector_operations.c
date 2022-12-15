@@ -1,5 +1,15 @@
 #include	"../header/minirt.h"
 
+t_vec	make_vector(double x, double y, double z)
+{
+	t_vec	v;
+
+	v.x = x;
+	v.y = y;
+	v.z = z;
+	return (v);
+}
+
 t_vec	normalise(t_vec vector)
 {
 	t_vec	v;

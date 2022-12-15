@@ -12,6 +12,7 @@ typedef struct s_obj			t_obj;
 typedef struct s_vec			t_vec;
 typedef struct s_ray			t_ray;
 typedef struct s_color			t_color;
+typedef struct s_matrix			t_mat;
 
 typedef struct s_counter
 {
@@ -132,5 +133,10 @@ typedef struct s_coordenates
 	double	x;
 	double	y;
 }	t_coord;
+
+// typedef struct s_matrix
+// {
+// 	double m[4][4];
+// }	t_mat;
 
 #endif

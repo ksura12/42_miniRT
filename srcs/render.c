@@ -14,15 +14,17 @@ void	render(t_data *data)
 	int pixel_x;
 	int pixel_y;
 	t_ray	ray;
-
+	double	scale;
+		
+	scale = tan(degtorad(data->elements->camera->fov_h * 0.5));
 	pixel_y = 0;
 	while (pixel_y < HEIGHT)
 	{
 		pixel_x = 0;
 		while (pixel_x < WIDTH)
 		{
-			ray_create(data, &ray, pixel_x, pixel_y);
-			
+			// ray_create(data, &ray, pixel_x, pixel_y);
+			ray = ray_creation_plane_screen(pixel_x, pixel_y, data, scale);
 			if (does_intersect_s(ray, data) == 1)
 			{
 				my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);

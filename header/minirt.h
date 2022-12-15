@@ -56,6 +56,7 @@ typedef struct s_obj			t_obj;
 typedef struct s_vec			t_vec;
 typedef struct s_ray			t_ray;
 typedef struct s_color			t_color;
+typedef struct s_matrix			t_mat;
 
 typedef struct s_data
 {
@@ -130,20 +131,27 @@ double	vector_lensqr(t_vec v);
 double	vector_len(t_vec v);
 
 //render.c
-void    my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void    render(t_data *data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	render(t_data *data);
 
 //vector_operations_2.c
+t_vec	make_vector(double x, double y, double z);
 double	degtorad(double deg);
 t_vec	vector_dev(t_vec u, t_vec v);
 t_vec	vector_rot_x(t_vec v, double alpha);
 t_vec	vector_rot_y(t_vec v, double alpha);
 t_vec	vector_rot_z(t_vec v, double alpha);
+void	make_mat44(t_vec forward, t_vec up, t_vec right, double **ctw);
+t_vec	mult_vec_mat(t_vec vec, double **mat);
 
 //rays.c
 int	ray_create(t_data *data, t_ray *ray, int px, int py);
 int	does_intersect_p(t_ray ray, t_data *data);
 int	intersect_p(t_ray ray, t_data *data);
-int does_intersect_s(t_ray ray, t_data *data);
+int	does_intersect_s(t_ray ray, t_data *data);
+
+//plane_screen.c
+t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
+void	cam_to_world_mat(t_vec c_orient, double **mat);
 
 #endif
