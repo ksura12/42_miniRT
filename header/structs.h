@@ -119,7 +119,7 @@ typedef struct s_cam
 	double	angle_horz;
 	int		fov_w;
 	int		fov_h;
-	double	***camtoworld;
+	double	**camtoworld;
 }	t_cam;
 
 typedef struct s_ray

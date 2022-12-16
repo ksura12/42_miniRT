@@ -28,6 +28,12 @@ void	render(t_data *data)
 		{
 			// ray_create(data, &ray, pixel_x, pixel_y);
 			ray = ray_creation_plane_screen(pixel_x, pixel_y, data, scale);
+			// printf("ray.pos.x: %f\n", ray.v_pos.x);
+			// printf("ray.pos.y: %f\n", ray.v_pos.y);
+			// printf("ray.pos.z: %f\n", ray.v_pos.z);
+			// printf("ray.direct.x: %f\n", ray.v_direct.x);
+			// printf("ray.direct.y: %f\n", ray.v_direct.y);
+			// printf("ray.direct.z: %f\n", ray.v_direct.z);
 			if (does_intersect_s(ray, data) == 1)
 			{
 				my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);

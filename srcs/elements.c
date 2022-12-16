@@ -138,7 +138,10 @@ int	init_camera(t_data *data, char **splitted)
 	}
 	if (!init_camera_fov(cam, splitted))
 		return (0);
-	cam_to_world_mat(data->elements->camera->v_orient, data->elements->camera->camtoworld);
+	cam_to_world_mat(data->elements->camera->v_orient, &data->elements->camera->camtoworld, data);
+	printf("init camera- m00:%f\n",data->elements->camera->camtoworld[0][0]);
+	printf("init camera- m01:%f\n",data->elements->camera->camtoworld[0][1]);
+	printf("init camera- m02:%f\n",data->elements->camera->camtoworld[0][2]);
 	printf("Succcesfull Camera creation\n");
 	return (1);
 }
