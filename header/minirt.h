@@ -22,8 +22,8 @@
 #  define BUFFER_SIZE 4
 # endif
 
-# define WIDTH			2
-# define HEIGHT			2
+# define WIDTH			500
+# define HEIGHT			500
 # define ASPECT_RATIO	HEIGHT / WIDTH
 # define RAY_T_MAX		1.0e30f
 # define RAY_T_MIN		0.0001f

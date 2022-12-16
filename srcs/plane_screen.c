@@ -13,6 +13,7 @@ t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale)
 	ray.v_direct = normalise(ray.v_direct);
 	// ray.v_direct.x = ray.v_direct.x * -1;
 	ray.v_pos = data->elements->camera->v_pos;
+	ray.tmax = RAY_T_MAX;
 	return (ray);
 }
 

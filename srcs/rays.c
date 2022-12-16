@@ -54,9 +54,18 @@ int	does_intersect_p(t_ray ray, t_data *data)
 	if (raydotn == 0)
 		return(0);
 	t = dot_prod(vector_dev(data->elements->objects[0]->v_pos, ray.v_pos), data->elements->objects[0]->v_orient) / raydotn;
-	if (t <= RAY_T_MIN || t >= ray.tmax)
+	if (-t <= RAY_T_MIN)
 	{
 		printf("heer\n");
+		printf("t: %f\n", t);
+		printf("t.max: %f\n", ray.tmax);
+		return(0);
+	}
+	if ( -t >= ray.tmax)
+	{
+		printf("heer1\n");
+		printf("t.max: %f\n", ray.tmax);
+		printf("t: %f\n", t);
 		return(0);
 	}
 		
@@ -107,20 +116,20 @@ int does_intersect_s(t_ray ray, t_data *data)
 
 	if (discriminant < 0.0)
 	{
-		printf("disk: %f\n", discriminant);
+		// printf("disk: %f\n", discriminant);
 		return (0);
 	}
 		
 
 	// Find two points of intersection, t1 close and t2 far
 	t[0] = (-b - sqrt(discriminant)) / (2 * a);
-	if (t[0] > RAY_T_MIN && t[0] < ray.tmax)
+	if (-t[0] > RAY_T_MIN && -t[0] < ray.tmax)
 		return (1);
-	printf("t[0]: %f\n", t[0]);
+	// printf("t[0]: %f\n", t[0]);
 	// float t[1] = (-b + sqrt(discriminant)) / (2 * a);
-	if (t[1] > RAY_T_MIN && t[1] < ray.tmax)
+	if (-t[1] > RAY_T_MIN && -t[1] < ray.tmax)
 		return (1);
-	printf("t[1]: %f\n", t[1]);
-	printf("end disk: %f\n", discriminant);
+	// printf("t[1]: %f\n", t[1]);
+	// printf("end disk: %f\n", discriminant);
 	return(0);
 }
