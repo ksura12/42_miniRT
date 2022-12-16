@@ -25,11 +25,14 @@ int	struct_allocation(t_data *data)
 }
 
 
-int alloc_camtoworld(t_data *data)
-{	int i;
+int	alloc_camtoworld(t_data *data)
+{	
+	int i;
 	int j;
 	i = 0;
-	data->elements->camera->camtoworld = malloc(sizeof(double **));
+	data->elements->camera->camtoworld = malloc(sizeof(double) * 17);
+	if (!data->elements->camera->camtoworld)
+		return (0);
 	while(i < 4)
 	{
 		j = 0;
@@ -37,9 +40,12 @@ int alloc_camtoworld(t_data *data)
 		{
 			data->elements->camera->camtoworld[i][j] = malloc(sizeof(double));
 			j++;
+			if (!data->elements->camera->camtoworld[i][j])
+				return (0);
 		}
 		i++;
 	}
+	return (1);
 }
 void	object_allocation(t_data *data)
 {

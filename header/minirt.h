@@ -79,6 +79,7 @@ void	free_allocation_objects(t_data *data);
 //alloc.c
 int		struct_allocation(t_data *data);
 void	object_allocation(t_data *data);
+int		alloc_camtoworld(t_data *data);
 
 //utils.c
 int		expected_words(int expected, char **words);
@@ -141,8 +142,8 @@ t_vec	vector_dev(t_vec u, t_vec v);
 t_vec	vector_rot_x(t_vec v, double alpha);
 t_vec	vector_rot_y(t_vec v, double alpha);
 t_vec	vector_rot_z(t_vec v, double alpha);
-void	make_mat44(t_vec forward, t_vec up, t_vec right, double **ctw);
-t_vec	mult_vec_mat(t_vec vec, double **mat);
+void	make_mat44(t_vec forward, t_vec up, t_vec right, double ***ctw);
+t_vec	mult_vec_mat(t_vec vec, double ***mat);
 
 //rays.c
 int	ray_create(t_data *data, t_ray *ray, int px, int py);
@@ -152,6 +153,6 @@ int	does_intersect_s(t_ray ray, t_data *data);
 
 //plane_screen.c
 t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
-void	cam_to_world_mat(t_vec c_orient, double **mat);
+void	cam_to_world_mat(t_vec c_orient, double ***mat);
 
 #endif

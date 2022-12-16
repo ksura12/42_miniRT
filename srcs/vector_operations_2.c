@@ -44,34 +44,34 @@ t_vec	vector_rot_z(t_vec v, double alpha)
 	return (rot);
 }
 
-void	make_mat44(t_vec forward, t_vec up, t_vec right, double **ctw)
+void	make_mat44(t_vec forward, t_vec up, t_vec right, double ***ctw)
 {
-	ctw[0][0] = right.x;
-	ctw[0][1] = right.y;
-	ctw[0][2] = right.z;
-	ctw[0][3] = 0;
-	ctw[1][0] = up.x;
-	ctw[1][1] = up.y;
-	ctw[1][2] = up.z;
-	ctw[1][3] = 0;
-	ctw[2][0] = forward.x;
-	ctw[2][1] = forward.y;
-	ctw[2][2] = forward.z;
-	ctw[2][3] = 0;
-	ctw[3][0] = 0;
-	ctw[3][1] = 0;
-	ctw[3][2] = 0;
-	ctw[3][3] = 1;
+	*ctw[0][0] = right.x;
+	*ctw[0][1] = right.y;
+	*ctw[0][2] = right.z;
+	*ctw[0][3] = 0;
+	*ctw[1][0] = up.x;
+	*ctw[1][1] = up.y;
+	*ctw[1][2] = up.z;
+	*ctw[1][3] = 0;
+	*ctw[2][0] = forward.x;
+	*ctw[2][1] = forward.y;
+	*ctw[2][2] = forward.z;
+	*ctw[2][3] = 0;
+	*ctw[3][0] = 0;
+	*ctw[3][1] = 0;
+	*ctw[3][2] = 0;
+	*ctw[3][3] = 1;
 	return ;
 }
 
-t_vec	mult_vec_mat(t_vec vec, double **mat)
+t_vec	mult_vec_mat(t_vec vec, double ***mat)
 {
 	t_vec	ret;
 
-	ret.x = vec.x * mat[0][0] + vec.y * mat[1][0] + vec.z * mat[2][0] + mat[3][0];
-	ret.y = vec.x * mat[0][1] + vec.y * mat[1][1] + vec.z * mat[2][1] + mat[3][1];
-	ret.z = vec.x * mat[0][2] + vec.y * mat[1][2] + vec.z * mat[2][2] + mat[3][2];
+	ret.x = vec.x * *mat[0][0] + vec.y * *mat[1][0] + vec.z * *mat[2][0] + *mat[3][0];
+	ret.y = vec.x * *mat[0][1] + vec.y * *mat[1][1] + vec.z * *mat[2][1] + *mat[3][1];
+	ret.z = vec.x * *mat[0][2] + vec.y * *mat[1][2] + vec.z * *mat[2][2] + *mat[3][2];
 	ret.f = 1;
 	return (ret);
 }

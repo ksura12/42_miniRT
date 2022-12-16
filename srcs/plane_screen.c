@@ -16,7 +16,7 @@ t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale)
 }
 
 
-void	cam_to_world_mat(t_vec c_orient, double **mat)
+void	cam_to_world_mat(t_vec c_orient, double ***mat)
 {
 	t_vec	forward;
 	t_vec	right;
