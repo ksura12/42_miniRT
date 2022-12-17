@@ -44,37 +44,40 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 {
 	int	i;
 	int	color;
-	double	objectnumber;
+	int	*objid;
 
 	i = 0;
-	objectnumber = -1;
+	objid = NULL;
 	color = -1;
 	while(i < data->counter->create_count)
 	{
-		if (data->elements->objects[i]->intersection_fkt(ray, data) == 1)
-		{
-			objectnumber = i;
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			if (shadow_rays(ray, data))
-				my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00066000);
-			else
-				my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);
-		}
-		// else
-		// {
-		// 	my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00000000);
-		// }
+		if (data->elements->objects[i]->intersection_fkt(ray, data, i, objid))
+			my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);
+		else
+			my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00000000);
 		i++;
 	}
+	// if ( *objid != -1)
+	// {
+	// 	i = 0;
+	// 	while(i < data->counter->create_count)
+	// 	{
+	// 		if (shadow_rays(ray, data) == 1)
+	// 			my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00066000); // put pixel with color of object[objid] in shadow
+	// 		i++;
+	// 	}
+	// }
+	// 	i++;
+	// }	
+	// 		if (shadow_rays(ray, data))
+	// 			my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00066000);
+	// 		else
+	// 			my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);
+	// 	}
+	// 	// else
+	// 	// {
+	// 	// 	my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00000000);
+	// 	// }
+	// 	i++;
+	// }
 }

@@ -74,7 +74,7 @@ typedef struct s_color
  */
 typedef struct s_obj //figure 
 {
-	int		(*intersection_fkt) (t_ray*, t_data*);
+	int		(*intersection_fkt) (t_ray*, t_data*, int, int*);
 	//void pointer normal function
 	char	id;
 	t_vec	v_pos;

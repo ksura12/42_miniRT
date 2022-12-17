@@ -152,7 +152,7 @@ t_vec	make_opposite_vector(t_vec vec);
 int		ray_create(t_data *data, t_ray *ray, int px, int py);
 int		does_intersect_p(t_ray ray, t_data *data);
 int		intersect_p(t_ray ray, t_data *data);
-int		does_intersect_s(t_ray *ray, t_data *data, int id);
+int		does_intersect_s(t_ray *ray, t_data *data, int id, int *objid);
 int		does_intersect_s_shadow(t_ray *ray, t_data *data);
 
 //plane_screen.c
