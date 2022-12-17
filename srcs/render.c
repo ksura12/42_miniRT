@@ -18,10 +18,12 @@ void	render(t_data *data)
 {
 	int pixel_x;
 	int pixel_y;
+	int	i;
 	t_ray	*ray;
 	double	scale;
 
 	// ray = NULL;
+	i = 0;
 	ray = malloc (sizeof(t_ray));
 	scale = tan(degtorad(data->elements->camera->fov_h * 0.5));
 	pixel_y = 0;
@@ -38,7 +40,8 @@ void	render(t_data *data)
 			// printf("ray.direct.x: %f\n", ray.v_direct.x);
 			// printf("ray.direct.y: %f\n", ray.v_direct.y);
 			// printf("ray.direct.z: %f\n", ray.v_direct.z);
-			if (does_intersect_s(ray, data) == 1)
+			if (data->elements->objects[i]->intersection_fkt(ray, data) == 1)
+		//	if (does_intersect_s(ray, data) == 1)
 			{
 				// printf("render ray tmax : %f\n", ray->tmax);
 				if (shadow_rays(ray, data))
@@ -47,13 +50,11 @@ void	render(t_data *data)
 					my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);
 				// printf("1 ray direction pixel %i x/y/z: %f/%f/%f\n", pixel_x, ray.v_direct.x, ray.v_direct.y, ray.v_direct.z);
 			}
-				
 			else
 			{
 				my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00000000);
 				// printf("0 ray direction pixel %i x/y/z: %f/%f/%f\n", pixel_x, ray.v_direct.x, ray.v_direct.y, ray.v_direct.z);
 			}
-			
 			pixel_x++;
 		}
 		pixel_y++;
