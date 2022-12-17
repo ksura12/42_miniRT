@@ -4,6 +4,7 @@
 # include "minirt.h"
 
 typedef struct s_coordenates	t_coord;
+typedef struct s_data			t_data;
 typedef struct s_elements		t_elements;
 typedef struct s_amb_light		t_amb_light;
 typedef struct s_light			t_light;
@@ -73,8 +74,7 @@ typedef struct s_color
  */
 typedef struct s_obj //figure 
 {
-	// void pointer intersection function
-	// void	*intersection_fkt;
+	int		(*intersection_fkt) (t_ray*, t_data*);
 	//void pointer normal function
 	char	id;
 	t_vec	v_pos;

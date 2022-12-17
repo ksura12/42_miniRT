@@ -51,7 +51,7 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 	color = -1;
 	while(i < data->counter->create_count)
 	{
-		if (does_intersect_s(ray, data, i) == 1)
+		if (data->elements->objects[i]->intersection_fkt(ray, data) == 1)
 		{
 			objectnumber = i;
 			
