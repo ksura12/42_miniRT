@@ -133,6 +133,7 @@ double	vector_len(t_vec v);
 //render.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	render(t_data *data);
+void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y);
 
 //vector_operations_2.c
 t_vec	make_vector(double x, double y, double z);
@@ -151,7 +152,7 @@ t_vec	make_opposite_vector(t_vec vec);
 int		ray_create(t_data *data, t_ray *ray, int px, int py);
 int		does_intersect_p(t_ray ray, t_data *data);
 int		intersect_p(t_ray ray, t_data *data);
-int		does_intersect_s(t_ray *ray, t_data *data);
+int		does_intersect_s(t_ray *ray, t_data *data, int id);
 int		does_intersect_s_shadow(t_ray *ray, t_data *data);
 
 //plane_screen.c

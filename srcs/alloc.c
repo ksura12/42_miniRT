@@ -35,7 +35,7 @@ void	object_allocation(t_data *data)
 	obj_cont = counter->cylinder_count + counter->plane_count
 		+ counter->sphere_count;
 	i = 0;
-	data->elements->objects = malloc(sizeof(t_obj *) * obj_cont);
+	data->elements->objects = malloc(sizeof(t_obj) * obj_cont);
 	while (i < obj_cont)
 	{
 		data->elements->objects[i] = malloc(sizeof(t_obj));

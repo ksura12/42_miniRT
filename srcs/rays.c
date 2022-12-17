@@ -91,8 +91,9 @@ int	intersect_p(t_ray ray, t_data *data)
 	return(1);
 }
 
-int does_intersect_s(t_ray *ray, t_data *data)
+int does_intersect_s(t_ray *ray, t_data *data, int id)
 {
+
 	double a;
 	double b;
 	double c;
@@ -100,17 +101,14 @@ int does_intersect_s(t_ray *ray, t_data *data)
 	double t[2];
 	int		ret;
 	// Transform ray so we can consider origin-centred sphere
-	ray->v_pos = vector_dev(ray->v_pos, data->elements->objects[0]->v_pos);
-	
-
+	ray->v_pos = vector_dev(ray->v_pos, data->elements->objects[id]->v_pos);
 	// Calculate quadratic coefficients
 	a = vector_lensqr(ray->v_direct);
 	b = 2 * dot_prod(ray->v_direct, ray->v_pos);
-	c = vector_lensqr(ray->v_pos) - pow((data->elements->objects[0]->dia / 2), 2);
+	c = vector_lensqr(ray->v_pos) - pow((data->elements->objects[id]->dia / 2), 2);
 	// float a = localRay.direction.length2();
 	// float b = 2 * dot(localRay.direction, localRay.origin);
 	// float c = localRay.origin.length2() - sqr(radius);
-
 	// Check whether we intersect
 	discriminant = pow(b, 2) - 4 * a* c;
 	// float discriminant = sqr(b) - 4 * a * c;

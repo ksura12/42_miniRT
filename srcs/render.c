@@ -30,34 +30,51 @@ void	render(t_data *data)
 		pixel_x = 0;
 		while (pixel_x < WIDTH)
 		{
-			// ray_create(data, &ray, pixel_x, pixel_y);
 			*ray = ray_creation_plane_screen(pixel_x, pixel_y, data, scale);
-			// printf("ray.pos.x: %f\n", ray.v_pos.x);
-			// printf("ray.pos.y: %f\n", ray.v_pos.y);
-			// printf("ray.pos.z: %f\n", ray.v_pos.z);
-			// printf("ray.direct.x: %f\n", ray.v_direct.x);
-			// printf("ray.direct.y: %f\n", ray.v_direct.y);
-			// printf("ray.direct.z: %f\n", ray.v_direct.z);
-			if (does_intersect_s(ray, data) == 1)
-			{
-				// printf("render ray tmax : %f\n", ray->tmax);
-				if (shadow_rays(ray, data))
-					my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00066000);
-				else
-					my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);
-				// printf("1 ray direction pixel %i x/y/z: %f/%f/%f\n", pixel_x, ray.v_direct.x, ray.v_direct.y, ray.v_direct.z);
-			}
-				
-			else
-			{
-				my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00000000);
-				// printf("0 ray direction pixel %i x/y/z: %f/%f/%f\n", pixel_x, ray.v_direct.x, ray.v_direct.y, ray.v_direct.z);
-			}
-			
+			intersections(data, ray, pixel_x, pixel_y);
 			pixel_x++;
 		}
 		pixel_y++;
 	}
 	free(ray);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+}
+
+void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
+{
+	int	i;
+	int	color;
+	double	objectnumber;
+
+	i = 0;
+	objectnumber = -1;
+	color = -1;
+	while(i < data->counter->create_count)
+	{
+		if (does_intersect_s(ray, data, i) == 1)
+		{
+			objectnumber = i;
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			if (shadow_rays(ray, data))
+				my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00066000);
+			else
+				my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);
+		}
+		// else
+		// {
+		// 	my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00000000);
+		// }
+		i++;
+	}
 }
