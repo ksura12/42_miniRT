@@ -22,8 +22,8 @@
 #  define BUFFER_SIZE 4
 # endif
 
-# define WIDTH			500
-# define HEIGHT			500
+# define WIDTH			400
+# define HEIGHT			400
 # define ASPECT_RATIO	HEIGHT / WIDTH
 # define RAY_T_MAX		1.0e30f
 # define RAY_T_MIN		0.0001f
@@ -136,22 +136,28 @@ void	render(t_data *data);
 
 //vector_operations_2.c
 t_vec	make_vector(double x, double y, double z);
-double	degtorad(double deg);
 t_vec	vector_dev(t_vec u, t_vec v);
 t_vec	vector_rot_x(t_vec v, double alpha);
 t_vec	vector_rot_y(t_vec v, double alpha);
 t_vec	vector_rot_z(t_vec v, double alpha);
-double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data);
+
+
+//vector_operations_3.c
+double	degtorad(double deg);
 t_vec	mult_vec_mat(t_vec vec, double **mat);
+t_vec	make_opposite_vector(t_vec vec);
 
 //rays.c
-int	ray_create(t_data *data, t_ray *ray, int px, int py);
-int	does_intersect_p(t_ray ray, t_data *data);
-int	intersect_p(t_ray ray, t_data *data);
-int	does_intersect_s(t_ray ray, t_data *data);
+int		ray_create(t_data *data, t_ray *ray, int px, int py);
+int		does_intersect_p(t_ray ray, t_data *data);
+int		intersect_p(t_ray ray, t_data *data);
+int		does_intersect_s(t_ray *ray, t_data *data);
+int		does_intersect_s_shadow(t_ray *ray, t_data *data);
 
 //plane_screen.c
 t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
 void	cam_to_world_mat(t_vec c_orient, double ***mat, t_data *data);
+double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data);
+int		shadow_rays(t_ray *ray, t_data *data);
 
 #endif

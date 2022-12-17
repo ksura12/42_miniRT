@@ -16,7 +16,7 @@ RED = \033[0;31m
 
 SRCS = main.c free.c init.c count_input.c controls.c elements.c \
 	utils.c alloc.c parsing.c objects.c vector_operations.c render.c \
-	rays.c vector_operations_2.c plane_screen.c
+	rays.c vector_operations_2.c vector_operations_3.c plane_screen.c
 
 OS = $(shell uname)
 # ifeq ($(OS), Linux)
