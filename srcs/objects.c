@@ -13,6 +13,7 @@ int	init_s(t_data *data, char **splitted)
 	t_obj	*obj;
 
 	obj = data->elements->objects[data->counter->create_count];
+	obj->intersection_fkt = does_intersect_s;
 	obj->id = 's';
 	obj->v_pos = init_vector(splitted[1]);
 	if (obj->v_pos.f == 0 || !char_to_double(splitted[2], &obj->dia)

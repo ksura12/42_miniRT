@@ -8,11 +8,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_len + x * (data->bit_per_pix / 8));
 	*(unsigned int*)dst = color;
 }
-
+/*
 int		color_trgb(int t, int r, int g, int b)
 {
-	return (t )
-}
+	return (t << 24 | r << 16 )
+}*/
 
 void	render(t_data *data)
 {

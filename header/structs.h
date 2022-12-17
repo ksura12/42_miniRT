@@ -71,8 +71,11 @@ typedef struct s_color
  * @param h [double] Height of the Object
  * @param col [t_col] color of the Object
  */
-typedef struct s_obj
+typedef struct s_obj //figure 
 {
+	 //void pointer intersection function
+	void	*intersection_fkt;
+	//void pointer normal function
 	char	id;
 	t_vec	v_pos;
 	t_vec	v_orient;
