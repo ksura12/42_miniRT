@@ -9,6 +9,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+int		color_trgb(int t, int r, int g, int b)
+{
+	return (t )
+}
+
 void	render(t_data *data)
 {
 	int pixel_x;
@@ -37,9 +42,9 @@ void	render(t_data *data)
 			{
 				// printf("render ray tmax : %f\n", ray->tmax);
 				if (shadow_rays(ray, data))
-					my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);
+					my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00066000);
 				else
-					my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00000000);
+					my_mlx_pixel_put(data, pixel_x, pixel_y, JUNGLE);
 				// printf("1 ray direction pixel %i x/y/z: %f/%f/%f\n", pixel_x, ray.v_direct.x, ray.v_direct.y, ray.v_direct.z);
 			}
 				
