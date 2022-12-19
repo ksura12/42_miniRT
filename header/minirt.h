@@ -22,8 +22,8 @@
 #  define BUFFER_SIZE 4
 # endif
 
-# define WIDTH			400
-# define HEIGHT			400
+# define WIDTH			1000
+# define HEIGHT			1000
 # define ASPECT_RATIO	HEIGHT / WIDTH
 # define RAY_T_MAX		1.0e30f
 # define RAY_T_MIN		0.0001f
@@ -161,6 +161,6 @@ int		does_intersect_s_shadow(t_ray *ray, t_data *data);
 t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
 void	cam_to_world_mat(t_vec c_orient, double ***mat, t_data *data);
 double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data);
-int		shadow_rays(t_ray *ray, t_data *data, int *objid);
+int		shadow_rays(t_ray *ray, t_data *data);
 
 #endif

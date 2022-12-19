@@ -78,13 +78,14 @@ double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data)
  * @param data 
  * @return int returns 1 if its in the shadow of smth, 0 if its not
  */
-int	shadow_rays(t_ray *ray, t_data *data, int *objid)
+int	shadow_rays(t_ray *ray, t_data *data)
 {
 	t_ray	shadow_ray;
 	int		i;
+	int		tmp;
 
 	i = 0;
-	// shadow_ray = NULL;
+	tmp = 0;
 	shadow_ray.v_pos = get_point_of_intersection(ray->tmax, *ray);
 	shadow_ray.v_direct = vector_dev(data->elements->light->v_pos, shadow_ray.v_pos);
 	shadow_ray.v_direct = normalise(shadow_ray.v_direct);
@@ -96,7 +97,7 @@ int	shadow_rays(t_ray *ray, t_data *data, int *objid)
 	// - position of intersection + position of light source
 	while (i < data->counter->create_count)
 	{
-		if (data->elements->objects[i]->intersection_fkt(&shadow_ray, data, i, objid))
+		if (data->elements->objects[i]->intersection_fkt(&shadow_ray, data, i, &tmp))
 			return (1);
 		i++;
 	}
