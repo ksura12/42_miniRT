@@ -14,7 +14,6 @@ int	init_s(t_data *data, char **splitted)
 
 	obj = data->elements->objects[data->counter->create_count];
 	obj->intersection_fkt = &does_intersect_s;
-	obj->intersection_shadow = &does_intersect_s_shadow;
 	obj->id = 's';
 	obj->v_pos = init_vector(splitted[1]);
 	if (obj->v_pos.f == 0 || !char_to_double(splitted[2], &obj->dia)

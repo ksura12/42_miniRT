@@ -153,38 +153,3 @@ int does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	// else
 	// 	return (-((tmp.y) + sqrt(disc)) / tmp.x);
 }
-
-int does_intersect_s_shadow(t_ray *ray, t_data *data)
-{
-	double a;
-	double b;
-	double c;
-	double discriminant;
-	double t[2];
-	// Transform ray so we can consider origin-centred sphere
-	ray->v_pos = vector_dev(ray->v_pos, data->elements->objects[0]->v_pos);
-	// Calculate quadratic coefficients
-	a = vector_lensqr(ray->v_direct);
-	b = 2 * dot_prod(ray->v_direct, ray->v_pos);
-	c = vector_lensqr(ray->v_pos) - pow((data->elements->objects[0]->dia / 2), 2);
-	// Check whether we intersect
-	discriminant = pow(b, 2) - 4 * a * c;
-	if (discriminant < 0.0)
-	{
-		return (0);
-	}
-	// Find two points of intersection, t1 close and t2 far
-	t[0] = (-b - sqrt(discriminant)) / (2 * a);
-	if (t[0] > (float)RAY_T_MIN && t[0] < ray->tmax)
-	{
-		ray->tmax = t[0];
-		return (1);
-	}
-	t[1] = (-b + sqrt(discriminant)) / (2 * a);
-	if (t[1] > (float)RAY_T_MIN && t[1] < ray->tmax)
-	{
-		ray->tmax = t[1];
-		return (1);
-	}
-	return(0);
-}

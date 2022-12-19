@@ -81,9 +81,9 @@ double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data)
 int	shadow_rays(t_ray *ray, t_data *data, int *objid)
 {
 	t_ray	shadow_ray;
-	int	i;
-	i = 0;
+	int		i;
 
+	i = 0;
 	// shadow_ray = NULL;
 	shadow_ray.v_pos = get_point_of_intersection(ray->tmax, *ray);
 	shadow_ray.v_direct = vector_dev(data->elements->light->v_pos, shadow_ray.v_pos);
@@ -97,10 +97,7 @@ int	shadow_rays(t_ray *ray, t_data *data, int *objid)
 	while (i < data->counter->create_count)
 	{
 		if (data->elements->objects[i]->intersection_fkt(&shadow_ray, data, i, objid))
-		{
-			*objid = i;
 			return (1);
-		}
 		i++;
 	}
 	return (0);
