@@ -39,6 +39,7 @@
 //color
 # define JUNGLE			0x00A7CBD0
 # define CORIANDER		0x00BDCCAC
+# define BLACK			0x00000000
 
 //events
 # define RED_CROSS		17
@@ -159,6 +160,6 @@ int		does_intersect_s_shadow(t_ray *ray, t_data *data);
 t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
 void	cam_to_world_mat(t_vec c_orient, double ***mat, t_data *data);
 double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data);
-int		shadow_rays(t_ray *ray, t_data *data);
+int		shadow_rays(t_ray *ray, t_data *data, int *objid);
 
 #endif

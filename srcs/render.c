@@ -41,8 +41,10 @@ void	render(t_data *data)
 void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 {
 	int	i;
+	int	color;
 	int	objid;
 
+	color = BLACK;
 	i = 0;
 	objid = -1;
 	while(i < data->counter->create_count)
@@ -52,11 +54,17 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 	}
 	if (objid != -1)
 	{
-		my_mlx_pixel_put(data, pixel_x, pixel_y, color_trgb(data->elements->objects[objid]->color));
+		color = color_trgb(data->elements->objects[objid]->color);
+		my_mlx_pixel_put(data, pixel_x, pixel_y, color);
 	}
 	// color_trgb(data->elements->objects[i]->color
 	else
-		my_mlx_pixel_put(data, pixel_x, pixel_y, 0x00000000);
+		my_mlx_pixel_put(data, pixel_x, pixel_y, color);
+	if (shadow_rays(ray, data, &objid) == 1)
+	{
+//		color = color_trgb(data->elements->objects[objid]->color);
+//		my_mlx_pixel_put(data, pixel_x, pixel_y, BLACK); // put pixel with color of object[objid] in shadow
+	}
 	
 	// if ( *objid != -1)
 	// {

@@ -78,9 +78,11 @@ double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data)
  * @param data 
  * @return int returns 1 if its in the shadow of smth, 0 if its not
  */
-int	shadow_rays(t_ray *ray, t_data *data)
+int	shadow_rays(t_ray *ray, t_data *data, int *objid)
 {
 	t_ray	shadow_ray;
+	int	i;
+	i = 0;
 
 	// shadow_ray = NULL;
 	shadow_ray.v_pos = get_point_of_intersection(ray->tmax, *ray);
@@ -92,8 +94,15 @@ int	shadow_rays(t_ray *ray, t_data *data)
 	// printf("direct z : %f\n", shadow_ray.v_direct.z);
 	// printf("lensq: %f\n", vector_lensqr(ray->v_direct));
 	// - position of intersection + position of light source
-	if (does_intersect_s_shadow(&shadow_ray, data ))
-		return (1);
+	while (i < data->counter->create_count)
+	{
+		if (data->elements->objects[i]->intersection_shadow(&shadow_ray, data))
+		{
+			*objid = i;
+			return (1);
+		}
+		i++;
+	}
 	return (0);
 }
 
