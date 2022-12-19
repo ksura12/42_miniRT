@@ -40,6 +40,7 @@
 # define JUNGLE			0x00A7CBD0
 # define CORIANDER		0x00BDCCAC
 # define BLACK			0x00000000
+# define SHADOW			0x00306000
 
 //events
 # define RED_CROSS		17

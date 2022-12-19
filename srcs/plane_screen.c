@@ -96,7 +96,7 @@ int	shadow_rays(t_ray *ray, t_data *data, int *objid)
 	// - position of intersection + position of light source
 	while (i < data->counter->create_count)
 	{
-		if (data->elements->objects[i]->intersection_shadow(&shadow_ray, data))
+		if (data->elements->objects[i]->intersection_fkt(&shadow_ray, data, i, objid))
 		{
 			*objid = i;
 			return (1);
