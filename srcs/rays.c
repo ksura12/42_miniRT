@@ -137,19 +137,4 @@ int does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 		*objid = i;
 	}
 	return(ret);
-
-
-	// t_vec	oc;
-	// t_vec	tmp;
-	// double	disc;
-
-	// oc = vector_dev(ray->v_pos, data->elements->objects[i]->v_pos);
-	// tmp.x = dot_prod(ray->v_direct, NULL);
-	// tmp.y = 2.0 * dot_prod(oc, ray->v_direct);
-	// tmp.z = dot_prod(oc, NULL) - pow(data->elements->objects[i]->dia / 2, 2);
-	// disc = tmp.y * tmp.y - 4 * tmp.x * tmp.z;
-	// if (disc < 0)
-	// 	return (0);
-	// else
-	// 	return (-((tmp.y) + sqrt(disc)) / tmp.x);
 }

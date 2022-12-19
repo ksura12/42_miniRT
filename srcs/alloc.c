@@ -18,9 +18,9 @@ int	struct_allocation(t_data *data)
 	data->elements->camera = malloc(sizeof(t_cam));
 	if (!data->elements->camera)
 		return (0);
-	data->elements->camera->camtoworld = malloc(sizeof(double **));
-	if (!data->elements->camera->camtoworld)
-		return (0);
+//	data->elements->camera->camtoworld = malloc(sizeof(double **));
+//	if (!data->elements->camera->camtoworld)
+//		return (0);
 	return (1);
 }
 
