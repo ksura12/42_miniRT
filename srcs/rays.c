@@ -105,8 +105,11 @@ int does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	pos_new = vector_dev(ray->v_pos, data->elements->objects[i]->v_pos);
 	// Calculate quadratic coefficients
 	a = vector_lensqr(ray->v_direct);
+	// a = dot_prod(ray->v_direct, make_vector(0,0,0));
 	b = 2 * dot_prod(ray->v_direct, pos_new);
+	
 	c = vector_lensqr(pos_new) - pow((data->elements->objects[i]->dia / 2), 2);
+	// c = dot_prod(pos_new, make_vector(0,0,0)) -  pow((data->elements->objects[i]->dia / 2), 2);
 	// Check whether we intersect
 	discriminant = pow(b, 2) - 4 * a* c;
 	if (discriminant < 0.0)
