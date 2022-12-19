@@ -94,33 +94,25 @@ int	intersect_p(t_ray ray, t_data *data)
 int does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 {
 
-	double a;
-	double b;
-	double c;
-	double discriminant;
-	double t[2];
+	double	a;
+	double	b;
+	double	c;
+	t_vec	pos_new;
+	double	discriminant;
+	double	t[2];
 	int		ret;
-	(void)objid;
 	// Transform ray so we can consider origin-centred sphere
-	ray->v_pos = vector_dev(ray->v_pos, data->elements->objects[i]->v_pos);
+	pos_new = vector_dev(ray->v_pos, data->elements->objects[i]->v_pos);
 	// Calculate quadratic coefficients
 	a = vector_lensqr(ray->v_direct);
-	b = 2 * dot_prod(ray->v_direct, ray->v_pos);
-	c = vector_lensqr(ray->v_pos) - pow((data->elements->objects[i]->dia / 2), 2);
-	// float a = localRay.direction.length2();
-	// float b = 2 * dot(localRay.direction, localRay.origin);
-	// float c = localRay.origin.length2() - sqr(radius);
+	b = 2 * dot_prod(ray->v_direct, pos_new);
+	c = vector_lensqr(pos_new) - pow((data->elements->objects[i]->dia / 2), 2);
 	// Check whether we intersect
 	discriminant = pow(b, 2) - 4 * a* c;
-	// float discriminant = sqr(b) - 4 * a * c;
-
 	if (discriminant < 0.0)
 	{
-		// printf("disk: %f\n", discriminant);
 		return (0);
 	}
-		
-
 	// Find two points of intersection, t1 close and t2 far
 	t[0] = (-b - sqrt(discriminant)) / (2 * a);
 	ret = 0;
@@ -128,7 +120,10 @@ int does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	{
 		ray->tmax = t[0];
 		ret = 1;
-		//*objid = i;
+		*objid = i;
+		// printf("ray.t0 = %f\n", t[0]);
+		// printf("ray.tmax = %f\n",ray->tmax);
+		// printf("ray. objid %i was hit\n", *objid);
 	}
 	// printf("init ray t[0]: %f\n", t[0]);
 	t[1] = (-b + sqrt(discriminant)) / (2 * a);
@@ -136,12 +131,24 @@ int does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	{
 		ray->tmax = t[1];
 		ret = 1;
-		//*objid = i;
+		*objid = i;
 	}
-	// printf("init ray t[1]: %f\n", t[1]);
-	// printf("init ray tmax: %f\n", ray->tmax);
-	// printf("end disk: %f\n", discriminant);
 	return(ret);
+
+
+	// t_vec	oc;
+	// t_vec	tmp;
+	// double	disc;
+
+	// oc = vector_dev(ray->v_pos, data->elements->objects[i]->v_pos);
+	// tmp.x = dot_prod(ray->v_direct, NULL);
+	// tmp.y = 2.0 * dot_prod(oc, ray->v_direct);
+	// tmp.z = dot_prod(oc, NULL) - pow(data->elements->objects[i]->dia / 2, 2);
+	// disc = tmp.y * tmp.y - 4 * tmp.x * tmp.z;
+	// if (disc < 0)
+	// 	return (0);
+	// else
+	// 	return (-((tmp.y) + sqrt(disc)) / tmp.x);
 }
 
 int does_intersect_s_shadow(t_ray *ray, t_data *data)
@@ -157,21 +164,12 @@ int does_intersect_s_shadow(t_ray *ray, t_data *data)
 	a = vector_lensqr(ray->v_direct);
 	b = 2 * dot_prod(ray->v_direct, ray->v_pos);
 	c = vector_lensqr(ray->v_pos) - pow((data->elements->objects[0]->dia / 2), 2);
-	// float a = localRay.direction.length2();
-	// float b = 2 * dot(localRay.direction, localRay.origin);
-	// float c = localRay.origin.length2() - sqr(radius);
-
 	// Check whether we intersect
-	discriminant = pow(b, 2) - 4 * a* c;
-	// float discriminant = sqr(b) - 4 * a * c;
-
+	discriminant = pow(b, 2) - 4 * a * c;
 	if (discriminant < 0.0)
 	{
-		// printf("disk: %f\n", discriminant);
 		return (0);
 	}
-		
-
 	// Find two points of intersection, t1 close and t2 far
 	t[0] = (-b - sqrt(discriminant)) / (2 * a);
 	if (t[0] > (float)RAY_T_MIN && t[0] < ray->tmax)
@@ -179,18 +177,11 @@ int does_intersect_s_shadow(t_ray *ray, t_data *data)
 		ray->tmax = t[0];
 		return (1);
 	}
-	// printf("shadow t[0]: %f\n", t[0]);
-	// printf("shadow a: %f\n", a);
-	// printf("shadow b: %f\n", b);
-	// printf("shadow discriminant: %f\n", discriminant);
-	// float t[1] = (-b + sqrt(discriminant)) / (2 * a);
 	t[1] = (-b + sqrt(discriminant)) / (2 * a);
 	if (t[1] > (float)RAY_T_MIN && t[1] < ray->tmax)
 	{
 		ray->tmax = t[1];
 		return (1);
 	}
-	// printf("shadow t[1]: %f\n", t[1]);
-	// printf("end disk: %f\n", discriminant);
 	return(0);
 }

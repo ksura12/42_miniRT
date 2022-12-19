@@ -61,6 +61,7 @@ typedef struct s_color
 	int	r;
 	int	g;
 	int	b;
+	int	t;
 }	t_color;
 
 /**

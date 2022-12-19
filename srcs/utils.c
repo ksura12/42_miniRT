@@ -46,6 +46,7 @@ int	check_colors(char *rgb, t_color *location)
 		location->g = ft_atoi(colors[2]);
 	else
 		return (0);
+	location->t = 0;
 	freeing_dpointer(colors);
 	return (1);
 }

@@ -24,6 +24,9 @@ int	init_s(t_data *data, char **splitted)
 	}
 	printf("Succcesfull sphere creation\n");
 	printf("sphere diameter:%f\n", obj->dia);
+	printf("sphere x:%f\n", obj->v_pos.x);
+	printf("sphere y:%f\n", obj->v_pos.y);
+	printf("sphere z:%f\n", obj->v_pos.z);
 	data->counter->create_count += 1;
 	return (1);
 }
