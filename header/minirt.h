@@ -136,6 +136,8 @@ double	vector_len(t_vec v);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	render(t_data *data);
 void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y);
+t_vec	get_point_of_intersection(double t, t_ray ray);
+int		color_trgb(t_color color, double lratio);
 
 //vector_operations_2.c
 t_vec	make_vector(double x, double y, double z);
@@ -162,5 +164,8 @@ t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
 void	cam_to_world_mat(t_vec c_orient, double ***mat, t_data *data);
 double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data);
 int		shadow_rays(t_ray *ray, t_data *data);
+
+//coloring.c
+int	diffuse_color(t_data *data, t_ray *ray, int *objid);
 
 #endif

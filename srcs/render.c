@@ -46,12 +46,12 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 	int	i;
 	int	color;
 	int	objid;
-	double	facingratio;
-	double	brightness;
+	// double	facingratio;
+	// double	brightness;
 
-	brightness = data->elements->amb_light->lratio + data->elements->light->lratio;
+	// brightness = data->elements->amb_light->lratio + data->elements->light->lratio;
 
-	facingratio = 1;
+	// facingratio = 1;
 	color = BLACK;
 	i = 0;
 	objid = -1;
@@ -63,9 +63,13 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 	if (objid != -1)
 	{
 		if (shadow_rays(ray, data) == 1)
-			color = color_trgb(data->elements->objects[objid]->color, data->elements->amb_light->lratio / brightness * 100);
+			color = diffuse_color(data, ray, &objid);
 		else
-			color = color_trgb(data->elements->objects[objid]->color, 1);
+			color = diffuse_color(data, ray, &objid);
+		// if (shadow_rays(ray, data) == 1)
+		// 	color = color_trgb(data->elements->objects[objid]->color, data->elements->amb_light->lratio / brightness * 100);
+		// else
+		// 	color = color_trgb(data->elements->objects[objid]->color, 1);
 	}
 	my_mlx_pixel_put(data, pixel_x, pixel_y, color);
 }

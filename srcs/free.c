@@ -20,6 +20,7 @@ void	free_allocation_objects(t_data *data)
 	obj_cont = counter->cylinder_count + counter->plane_count
 		+ counter->sphere_count;
 	free(data->elements->light);
+	free(data->elements->camera->camtoworld);
 	free(data->elements->camera);
 	free(data->elements->amb_light);
 	i = 0;
