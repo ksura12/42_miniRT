@@ -44,3 +44,13 @@ t_vec	cross_prod(t_vec v1, t_vec v2)
 	v.z = v1.x * v2.y - v1.y * v2.x;
 	return (v);
 }
+
+t_vec	vec_mult(t_vec v, double a)
+{
+	t_vec	ret;
+
+	ret.x  = v.x  * a;
+	ret.y  = v.y  * a;
+	ret.z  = v.z  * a;
+	return (ret);
+}

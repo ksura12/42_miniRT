@@ -38,3 +38,13 @@ t_vec	make_opposite_vector(t_vec vec)
 	opp.z = -vec.z;
 	return(opp);
 }
+
+t_vec	vec_add(t_vec a, t_vec b)
+{
+	t_vec	sum;
+
+	sum.x = a.x + b.x;
+	sum.y = a.y + b.y;
+	sum.z = a.z + b.z;
+	return (sum);
+}

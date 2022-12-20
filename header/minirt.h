@@ -151,6 +151,8 @@ t_vec	vector_rot_z(t_vec v, double alpha);
 double	degtorad(double deg);
 t_vec	mult_vec_mat(t_vec vec, double **mat);
 t_vec	make_opposite_vector(t_vec vec);
+t_vec	vec_mult(t_vec v, double a);
+t_vec	vec_add(t_vec a, t_vec b);
 
 //rays.c
 int		ray_create(t_data *data, t_ray *ray, int px, int py);
