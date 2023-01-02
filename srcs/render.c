@@ -63,7 +63,7 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 	if (objid != -1)
 	{
 		if (shadow_rays(ray, data) == 1)
-			color = BLACK;
+			color = amb_color(data, &objid);
 		else
 			color = diffuse_color(data, ray, &objid);
 		// if (shadow_rays(ray, data) == 1)

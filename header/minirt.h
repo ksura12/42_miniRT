@@ -169,5 +169,7 @@ int		shadow_rays(t_ray *ray, t_data *data);
 
 //coloring.c
 int	diffuse_color(t_data *data, t_ray *ray, int *objid);
+int	amb_color(t_data *data, int *objid);
+int	shadow_color(t_data *data, int *objid);
 
 #endif
