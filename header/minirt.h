@@ -59,6 +59,7 @@ typedef struct s_vec			t_vec;
 typedef struct s_ray			t_ray;
 typedef struct s_color			t_color;
 typedef struct s_matrix			t_mat;
+typedef struct s_shadow			t_shadow;
 
 typedef struct s_data
 {
@@ -168,8 +169,16 @@ double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data);
 int		shadow_rays(t_ray *ray, t_data *data);
 
 //coloring.c
-int	diffuse_color(t_data *data, t_ray *ray, int *objid);
-int	amb_color(t_data *data, int *objid);
-int	shadow_color(t_data *data, int *objid);
+void	make_shadow(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+int		light_object(t_data *data, t_ray *ray, int *objid, int light);
+t_color	amb_color(t_data *data, int *objid);
+t_color	specular_color(t_data *data, t_shadow *shadow);
+
+//coloring_utils.c
+t_color	color_limits(t_color color);
+t_color	color_ratio(t_color color, double lratio);
+t_color	color_mult(t_color object, t_color light);
+t_color	color_add(t_color a, t_color b);
+
 
 #endif

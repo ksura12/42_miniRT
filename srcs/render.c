@@ -63,9 +63,9 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 	if (objid != -1)
 	{
 		if (shadow_rays(ray, data) == 1)
-			color = amb_color(data, &objid);
+			color = light_object(data, ray, &objid, 1);
 		else
-			color = diffuse_color(data, ray, &objid);
+			color = light_object(data, ray, &objid, 0);
 		// if (shadow_rays(ray, data) == 1)
 		// 	color = color_trgb(data->elements->objects[objid]->color, data->elements->amb_light->lratio / brightness * 100);
 		// else
