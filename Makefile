@@ -20,12 +20,6 @@ SRCS = main.c free.c init.c count_input.c controls.c elements.c \
 	coloring.c coloring_utils.c intersections.c
 
 OS = $(shell uname)
-# ifeq ($(OS), Linux)
-# FLAGS_OS = -lreadline
-# endif
-# ifeq ($(OS), Darwin)
-# FLAGS_OS = -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
-# endif
 ifeq ($(OS), Linux)
 	LIBS += -Lmlx -lmlx -L/usr/lib -lX11 -lXext -lz -Imlx 
 	OBLI += -I/usr/inlcude -Imlx
