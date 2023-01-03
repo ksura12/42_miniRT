@@ -139,9 +139,15 @@ typedef struct s_coordenates
 	double	y;
 }	t_coord;
 
-// typedef struct s_matrix
-// {
-// 	double m[4][4];
-// }	t_mat;
+typedef struct s_shadow
+{
+	t_vec	intersection;
+	t_vec	i_normal;
+	t_vec	to_light;
+	t_vec	from_light;
+	t_vec	reflection;
+	t_vec	to_cam;
+	double	cos_theta;
+}	t_shadow;
 
 #endif
