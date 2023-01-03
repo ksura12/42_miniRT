@@ -64,7 +64,6 @@ int	light_object(t_data *data, t_ray *ray, int *objid, int light)
 		shadow.intersection))));
 	spec_part = specular_color(data, &shadow);
 	result = color_add(amb_part, diffu_part);
-	result = color_ratio(result, 1.0);
 	result = color_limits(color_add(spec_part, result));
 	return (color_trgb(result, 1));
 }
