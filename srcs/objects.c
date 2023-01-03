@@ -14,7 +14,7 @@ int	init_s(t_data *data, char **splitted)
 
 	obj = data->elements->objects[data->counter->create_count];
 	obj->intersection_fkt = &does_intersect_s;
-	obj->normal_fkt = &normal_sphere;
+	obj->surface_normal = &surface_normal_sp;
 	obj->id = 's';
 	obj->v_pos = init_vector(splitted[1]);
 	if (obj->v_pos.f == 0 || !char_to_double(splitted[2], &obj->dia)
@@ -44,6 +44,8 @@ int	init_cylinder(t_data *data, char **splitted)
 	t_obj	*obj;
 
 	obj = data->elements->objects[data->counter->create_count];
+	obj->intersection_fkt = &does_intersect_cy;
+	obj->surface_normal = &surface_normal_cy;
 	obj->id = 'c';
 	obj->v_pos = init_vector(splitted[1]);
 	obj->v_orient = init_vector(splitted[2]);
@@ -74,6 +76,7 @@ int	init_plane(t_data *data, char **splitted)
 
 	obj = data->elements->objects[data->counter->create_count];
 	obj->intersection_fkt = &does_intersect_p;
+	obj->surface_normal = &surface_normal_pl;
 	obj->id = 'p';
 	obj->v_pos = init_vector(splitted[1]);
 	obj->v_orient = init_vector(splitted[2]);

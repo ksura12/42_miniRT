@@ -76,3 +76,12 @@ int	does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	}
 	return (ret);
 }
+
+int	does_intersect_cy(t_ray *ray, t_data *data, int i, int *objid)
+{
+	(void) ray;
+	(void) data;
+	(void) i;
+	(void) objid;
+	return (1);
+}

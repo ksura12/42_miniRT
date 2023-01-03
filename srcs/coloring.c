@@ -16,7 +16,7 @@ void	make_shadow(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 	shadow->intersection = get_point_of_intersection(ray->tmax, *ray);
 //	shadow->i_normal = vector_dev(shadow->intersection, data->elements->objects[*objid]->v_pos);
 //	shadow->i_normal = normalise(shadow->i_normal);
-	data->elements->objects[*objid]->normal_fkt(data, ray, objid, shadow);
+	data->elements->objects[*objid]->surface_normal(data, ray, objid, shadow);
 	shadow->to_light = vector_dev(data->elements->light->v_pos, \
 		shadow->intersection);
 	shadow->to_light = normalise(shadow->to_light);

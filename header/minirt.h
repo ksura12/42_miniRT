@@ -164,6 +164,7 @@ int		ray_create(t_data *data, t_ray *ray, int px, int py);
 int		intersect_p(t_ray ray, t_data *data);
 int		does_intersect_s(t_ray *ray, t_data *data, int id, int *objid);
 int		does_intersect_p(t_ray *ray, t_data *data, int id, int *objid);
+int		does_intersect_cy(t_ray *ray, t_data *data, int id, int *objid);
 
 //plane_screen.c
 t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
@@ -184,6 +185,8 @@ t_color	color_mult(t_color object, t_color light);
 t_color	color_add(t_color a, t_color b);
 
 //normal.c
-void    normal_sphere(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+void	surface_normal_sp(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+void	surface_normal_pl(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+void	surface_normal_cy(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
 
 #endif
