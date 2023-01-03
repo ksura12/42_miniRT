@@ -19,9 +19,8 @@
 # endif
 
 # ifndef M_PI
-  #define M_PI 3.14159265358979323846
+#  define M_PI 3.14159265358979323846
 # endif
-
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4
@@ -32,15 +31,13 @@
 # define ASPECT_RATIO	HEIGHT / WIDTH
 # define RAY_T_MAX		1.0e30f
 # define RAY_T_MIN		0.0001f
-# define EPSILON		1e-6f
+# define EPSILON		0.000001f
 # define INFO_AL		3
 # define INFO_C			4
 # define INFO_L			4
 # define INFO_PL		4
 # define INFO_SP		4
 # define INFO_CY		6
-# define INFO_COLOR		3
-# define INFO_V			3
 
 //color
 # define JUNGLE			0x00A7CBD0
@@ -153,7 +150,6 @@ t_vec	vector_rot_x(t_vec v, double alpha);
 t_vec	vector_rot_y(t_vec v, double alpha);
 t_vec	vector_rot_z(t_vec v, double alpha);
 
-
 //vector_operations_3.c
 double	degtorad(double deg);
 t_vec	mult_vec_mat(t_vec vec, double **mat);
@@ -163,6 +159,8 @@ t_vec	vec_add(t_vec a, t_vec b);
 
 //rays.c
 int		ray_create(t_data *data, t_ray *ray, int px, int py);
+
+//intersections.c
 int		intersect_p(t_ray ray, t_data *data);
 int		does_intersect_s(t_ray *ray, t_data *data, int id, int *objid);
 int		does_intersect_p(t_ray *ray, t_data *data, int id, int *objid);
@@ -185,5 +183,7 @@ t_color	color_ratio(t_color color, double lratio);
 t_color	color_mult(t_color object, t_color light);
 t_color	color_add(t_color a, t_color b);
 
+//normal.c
+void    normal_sphere(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
 
 #endif

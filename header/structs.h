@@ -14,6 +14,7 @@ typedef struct s_vec			t_vec;
 typedef struct s_ray			t_ray;
 typedef struct s_color			t_color;
 typedef struct s_matrix			t_mat;
+typedef struct s_shadow			t_shadow;
 
 typedef struct s_counter
 {
@@ -75,8 +76,8 @@ typedef struct s_color
  */
 typedef struct s_obj //figure 
 {
-	int		(*intersection_fkt) (t_ray*, t_data*, int, int*);
-	//void pointer normal function
+	int		(*intersection_fkt)(t_ray*, t_data*, int, int*);
+	void	(*normal_fkt)(t_data*, t_ray*, int*, t_shadow*);
 	char	id;
 	t_vec	v_pos;
 	t_vec	v_orient;
