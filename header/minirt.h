@@ -27,6 +27,7 @@
 # define ASPECT_RATIO	HEIGHT / WIDTH
 # define RAY_T_MAX		1.0e30f
 # define RAY_T_MIN		0.0001f
+# define EPSILON		1e-6f
 # define INFO_AL		3
 # define INFO_C			4
 # define INFO_L			4
@@ -156,10 +157,9 @@ t_vec	vec_add(t_vec a, t_vec b);
 
 //rays.c
 int		ray_create(t_data *data, t_ray *ray, int px, int py);
-int		does_intersect_p(t_ray ray, t_data *data);
 int		intersect_p(t_ray ray, t_data *data);
 int		does_intersect_s(t_ray *ray, t_data *data, int id, int *objid);
-int		does_intersect_s_shadow(t_ray *ray, t_data *data);
+int		does_intersect_p(t_ray *ray, t_data *data, int id, int *objid);
 
 //plane_screen.c
 t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);

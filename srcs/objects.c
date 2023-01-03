@@ -72,6 +72,7 @@ int	init_plane(t_data *data, char **splitted)
 	t_obj	*obj;
 
 	obj = data->elements->objects[data->counter->create_count];
+	obj->intersection_fkt = &does_intersect_p;
 	obj->id = 'p';
 	obj->v_pos = init_vector(splitted[1]);
 	obj->v_orient = init_vector(splitted[2]);

@@ -45,31 +45,30 @@ int	ray_create(t_data *data, t_ray *ray, int px, int py)
  * @brief returns 1 of it intersects with scene, 0 if not
  * 
  */
-int	does_intersect_p(t_ray ray, t_data *data)
-{	
-	double raydotn;
+int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
+{
+	t_obj *plane;
+	double ndotray;
+	t_vec	w;
 	double t;
 
-	raydotn = dot_prod(ray.v_direct, data->elements->objects[0]->v_orient);
-	if (raydotn == 0)
-		return(0);
-	t = dot_prod(vector_dev(data->elements->objects[0]->v_pos, ray.v_pos), data->elements->objects[0]->v_orient) / raydotn;
-	if (-t <= RAY_T_MIN)
+	plane = data->elements->objects[i];
+	ndotray = dot_prod(plane->v_orient, ray->v_direct);
+//		printf("ndotray: %f\n", ndotray);
+	if (fabs(ndotray) < EPSILON)
 	{
-		printf("heer\n");
-		printf("t: %f\n", t);
-		printf("t.max: %f\n", ray.tmax);
-		return(0);
+	//	printf("return epsilon\n");
+		return (0);
 	}
-	if ( -t >= ray.tmax)
-	{
-		printf("heer1\n");
-		printf("t.max: %f\n", ray.tmax);
-		printf("t: %f\n", t);
+	w = vector_dev(plane->v_pos, ray->v_pos);
+	t = -dot_prod(plane->v_orient, w) / ndotray;
+	if (t <= RAY_T_MIN)
 		return(0);
-	}
-		
-	return(1);
+//	printf("t: %f\n", t);
+	*objid = i;
+	ray->tmax = t;
+//	printf("there\n");
+	return (1);
 }
 
 /**

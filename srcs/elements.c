@@ -143,6 +143,8 @@ int	init_camera(t_data *data, char **splitted)
 	printf("init camera- m01:%f\n",data->elements->camera->camtoworld[0][1]);
 	printf("init camera- m02:%f\n",data->elements->camera->camtoworld[0][2]);
 	printf("init camera.x%f\n",data->elements->camera->v_pos.x);
+	printf("init camera.y%f\n",data->elements->camera->v_pos.y);
+	printf("init camera.z%f\n",data->elements->camera->v_pos.z);
 	printf("Succcesfull Camera creation\n");
 	return (1);
 }
