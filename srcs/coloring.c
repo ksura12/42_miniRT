@@ -1,5 +1,15 @@
 #include	"../header/minirt.h"
 
+/**
+ * @brief calculates from the given ray, object and data struct the incoming
+ * and outgoing rays and angles between and fills the data struct "shadow"
+ * with it to ahnd it to the functions for diffuse and specular light parts
+ * 
+ * @param data holds all data to elements and lights of the scene
+ * @param ray is the incoming ray from the light source to the object
+ * @param objid id to specify the obejct hitted by the ray
+ * @param shadow data struct for rays and directions
+ */
 void	make_shadow(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 {
 	shadow->intersection = get_point_of_intersection(ray->tmax, *ray);
@@ -24,6 +34,17 @@ void	make_shadow(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 	shadow->to_cam = normalise(shadow->to_cam);
 }
 
+/**
+ * @brief adds up all light parts of the Phong shading model (ambient, diffuse, specular)
+ * when parameter light == 1, then the object surface part is in the shadow
+ * if light == 0, then object part is fully lightend up
+ * 
+ * @param data holds all data to elements and lights of the scene
+ * @param ray is the incoming ray from the light source to the object
+ * @param objid id to specify the obejct hitted by the ray
+ * @param light flag for indicating if object is in the shadow(==1) or not (==0)
+ * @return int hexadecimal color for coloring the pixel
+ */
 int	light_object(t_data *data, t_ray *ray, int *objid, int light)
 {
 	t_shadow	shadow;
@@ -47,6 +68,14 @@ int	light_object(t_data *data, t_ray *ray, int *objid, int light)
 	return (color_trgb(result, 1));
 }
 
+/**
+ * @brief calculates the ambient light part for shading
+ * ambient_part = object color * amb_light color
+ * 
+ * @param data holds all data to elements and lights of the scene
+ * @param objid id to specify the obejct hitted by the ray
+ * @return t_color: the color_part for ambient in a color-struct
+ */
 t_color	amb_color(t_data *data, int *objid)
 {
 	t_color	amb_part;
@@ -57,6 +86,13 @@ t_color	amb_color(t_data *data, int *objid)
 	return (amb_part);
 }
 
+/**
+ * @brief calculates the specular light part of the Phong-shading model
+ * 
+ * @param data holds all data to elements and lights of the scene
+ * @param shadow data struct for rays and directions
+ * @return t_color: the color_part for specular in a color-struct
+ */
 t_color	specular_color(t_data *data, t_shadow *shadow)
 {
 	t_color	spec_part;
