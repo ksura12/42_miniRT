@@ -35,7 +35,8 @@ void	make_shadow(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 }
 
 /**
- * @brief adds up all light parts of the Phong shading model (ambient, diffuse, specular)
+ * @brief adds up all light parts of the Phong shading model 
+ * (ambient, diffuse, specular)
  * when parameter light == 1, then the object surface part is in the shadow
  * if light == 0, then object part is fully lightend up
  * 
