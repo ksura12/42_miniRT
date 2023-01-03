@@ -105,7 +105,7 @@ int		check_counter(t_data *data, char **argv);
 void	parsing(int argc, char **argv, t_data *data);
 
 //init.c
-int		init_elements(char **argv, t_data *data);
+int		init_elements(char **argv, t_data *data, int fd);
 void	init_counter(t_data *data);
 
 //count_input.c

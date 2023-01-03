@@ -110,7 +110,7 @@ int	char_to_double(char *value, double *dst)
 		while (splitted[1][i])
 			i++;
 		if (ft_atoi(splitted[0]) < 0 || splitted[0][0] == '-')
-			result = ft_atoi(splitted[0]) +  -1 * pow(0.1, i) * ft_atoi(splitted[1]);
+			result = ft_atoi(splitted[0]) + -1 * pow(0.1, i) * ft_atoi(splitted[1]);
 		else
 			result = 1 * ft_atoi(splitted[0]) + pow(0.1, i) * ft_atoi(splitted[1]);
 		freeing_dpointer(splitted);

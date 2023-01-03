@@ -49,8 +49,8 @@ t_vec	vec_mult(t_vec v, double a)
 {
 	t_vec	ret;
 
-	ret.x  = v.x  * a;
-	ret.y  = v.y  * a;
-	ret.z  = v.z  * a;
+	ret.x = v.x * a;
+	ret.y = v.y * a;
+	ret.z = v.z * a;
 	return (ret);
 }

@@ -112,6 +112,12 @@ t_coord	conversion(int pixel_x, int pixel_y)
  * 
  * @param data structure which holds all elements
  * @param splitted array of input parameters from .rt file for the camera
+	printf("init camera- m00:%f\n", data->elements->camera->camtoworld[0][0]);
+	printf("init camera- m01:%f\n", data->elements->camera->camtoworld[0][1]);
+	printf("init camera- m02:%f\n", data->elements->camera->camtoworld[0][2]);
+	printf("init camera.x%f\n", data->elements->camera->v_pos.x);
+	printf("init camera.y%f\n", data->elements->camera->v_pos.y);
+	printf("init camera.z%f\n", data->elements->camera->v_pos.z);
  * @return int 0 for wrong input, 1 for successfull camera creation
  */
 int	init_camera(t_data *data, char **splitted)
@@ -138,13 +144,8 @@ int	init_camera(t_data *data, char **splitted)
 	}
 	if (!init_camera_fov(cam, splitted))
 		return (0);
-	cam_to_world_mat(data->elements->camera->v_orient, &data->elements->camera->camtoworld, data);
-	printf("init camera- m00:%f\n",data->elements->camera->camtoworld[0][0]);
-	printf("init camera- m01:%f\n",data->elements->camera->camtoworld[0][1]);
-	printf("init camera- m02:%f\n",data->elements->camera->camtoworld[0][2]);
-	printf("init camera.x%f\n",data->elements->camera->v_pos.x);
-	printf("init camera.y%f\n",data->elements->camera->v_pos.y);
-	printf("init camera.z%f\n",data->elements->camera->v_pos.z);
+	cam_to_world_mat(data->elements->camera->v_orient, \
+		&data->elements->camera->camtoworld, data);
 	printf("Succcesfull Camera creation\n");
 	return (1);
 }

@@ -47,6 +47,9 @@ int	check_counter(t_data *data, char **argv)
 
 void	parsing(int argc, char **argv, t_data *data)
 {
+	int	fd;
+
+	fd = -1;
 	if (!check_arguments(argc, argv))
 	{
 		printf("Check your input.\n");
@@ -63,5 +66,5 @@ void	parsing(int argc, char **argv, t_data *data)
 		exit (0);
 	}
 	object_allocation(data);
-	init_elements(argv, data);
+	init_elements(argv, data, fd);
 }

@@ -6,10 +6,10 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_len + x * (data->bit_per_pix / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
-int		color_trgb(t_color color, double lratio)
+int	color_trgb(t_color color, double lratio)
 {
 	color.t = color.t * lratio;
 	color.r = color.r * lratio;
@@ -41,21 +41,27 @@ void	render(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 }
 
+// double	facingratio;
+// double	brightness;
+// brightness = 
+// data->elements->amb_light->lratio + data->elements->light->lratio;
+// facingratio = 1;
+// if (shadow_rays(ray, data) == 1)
+//color = 
+//color_trgb(data->elements->objects[objid]->color, 
+//data->elements->amb_light->lratio / brightness * 100);
+// else
+// 	color = color_trgb(data->elements->objects[objid]->color, 1);
 void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 {
 	int	i;
 	int	color;
 	int	objid;
-	// double	facingratio;
-	// double	brightness;
 
-	// brightness = data->elements->amb_light->lratio + data->elements->light->lratio;
-
-	// facingratio = 1;
 	color = BLACK;
 	i = 0;
 	objid = -1;
-	while(i < data->counter->create_count)
+	while (i < data->counter->create_count)
 	{
 		data->elements->objects[i]->intersection_fkt(ray, data, i, &objid);
 		i++;
@@ -66,10 +72,6 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 			color = light_object(data, ray, &objid, 1);
 		else
 			color = light_object(data, ray, &objid, 0);
-		// if (shadow_rays(ray, data) == 1)
-		// 	color = color_trgb(data->elements->objects[objid]->color, data->elements->amb_light->lratio / brightness * 100);
-		// else
-		// 	color = color_trgb(data->elements->objects[objid]->color, 1);
 	}
 	my_mlx_pixel_put(data, pixel_x, pixel_y, color);
 }

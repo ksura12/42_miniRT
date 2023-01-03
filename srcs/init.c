@@ -16,10 +16,9 @@ void	init_counter(t_data *data)
 	counter->create_count = 0;
 }
 
-int	init_elements(char **argv, t_data *data)
+int	init_elements(char **argv, t_data *data, int fd)
 {
 	char	*line;
-	int		fd;
 	char	**splitted;
 
 	fd = open_file(argv);
@@ -33,7 +32,7 @@ int	init_elements(char **argv, t_data *data)
 			close(fd);
 			if (splitted)
 				freeing_dpointer(splitted);
-			return (0);//TODO- Error message for parsing
+			return (0);
 		}
 		free (line);
 		if (splitted)

@@ -12,7 +12,7 @@ void	free_allocation(t_data *data)
 
 void	free_allocation_objects(t_data *data)
 {
-	int i;
+	int			i;
 	t_counter	*counter;
 	int			obj_cont;
 
@@ -24,7 +24,7 @@ void	free_allocation_objects(t_data *data)
 	free(data->elements->camera);
 	free(data->elements->amb_light);
 	i = 0;
-	while(i < obj_cont)
+	while (i < obj_cont)
 	{
 		free(data->elements->objects[i]);
 		i++;
