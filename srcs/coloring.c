@@ -37,10 +37,12 @@ int	light_object(t_data *data, t_ray *ray, int *objid, int light)
 	if (light == 1)
 		return (color_trgb(amb_part, 1));
 	diffu_part = color_ratio(data->elements->objects[*objid]->color, \
-		shadow.cos_theta);
+		(shadow.cos_theta * data->elements->light->lratio \
+		/ vector_len(vector_dev(data->elements->light->v_pos, \
+		shadow.intersection))));
 	spec_part = specular_color(data, &shadow);
 	result = color_add(amb_part, diffu_part);
-	result = color_ratio(result, 1.0 - shadow.cos_theta);
+	result = color_ratio(result, 1.0);
 	result = color_limits(color_add(spec_part, result));
 	return (color_trgb(result, 1));
 }
@@ -58,11 +60,17 @@ t_color	amb_color(t_data *data, int *objid)
 t_color	specular_color(t_data *data, t_shadow *shadow)
 {
 	t_color	spec_part;
+	double	shininess;
+	double	r;
 
+	shininess = 10;
 	shadow->cos_theta = dot_prod(shadow->reflection, shadow->to_cam);
 	if (shadow->cos_theta < 0.0f)
 		shadow->cos_theta = 0.0f;
-	shadow->cos_theta = pow(shadow->cos_theta, 10);
-	spec_part = color_ratio(data->elements->light->color, shadow->cos_theta);
+	shadow->cos_theta = pow(shadow->cos_theta, shininess);
+	r = vector_len(vector_dev(data->elements->light->v_pos, \
+		shadow->intersection));
+	spec_part = color_ratio(data->elements->light->color, \
+		(shadow->cos_theta * data->elements->light->lratio / r));
 	return (spec_part);
 }
