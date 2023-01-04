@@ -51,3 +51,23 @@ t_vec	vec_add(t_vec a, t_vec b)
 	sum.z = a.z + b.z;
 	return (sum);
 }
+/**
+ * @brief compares two vectors if they are the same, returns 0 if
+ * they are different, 1 if they are similar
+ * 
+ * @param a first vector
+ * @param b second vector
+ * @return int: 0 for different, 1 for identical
+ */
+int	vec_comp(t_vec a, t_vec b)
+{
+	if (a.f != b.f)
+		return (0);
+	if (a.x != b.x)
+		return (0);
+	if (a.y != b.y)
+		return (0);
+	if (a.z != b.z)
+		return (0);
+	return (1);
+}

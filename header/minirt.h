@@ -131,10 +131,12 @@ int		check_boundries_vector(t_vec *vector, int min, int max);
 
 //vector_operations.c
 t_vec	normalise(t_vec vector);
+t_vec	make_vector(double x, double y, double z);
 double	dot_prod(t_vec v1, t_vec v2);
 t_vec	cross_prod(t_vec v1, t_vec v2);
 double	vector_lensqr(t_vec v);
 double	vector_len(t_vec v);
+t_vec	vec_mult(t_vec v, double a);
 
 //render.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -144,7 +146,6 @@ t_vec	get_point_of_intersection(double t, t_ray ray);
 int		color_trgb(t_color color, double lratio);
 
 //vector_operations_2.c
-t_vec	make_vector(double x, double y, double z);
 t_vec	vector_dev(t_vec u, t_vec v);
 t_vec	vector_rot_x(t_vec v, double alpha);
 t_vec	vector_rot_y(t_vec v, double alpha);
@@ -154,8 +155,8 @@ t_vec	vector_rot_z(t_vec v, double alpha);
 double	degtorad(double deg);
 t_vec	mult_vec_mat(t_vec vec, double **mat);
 t_vec	make_opposite_vector(t_vec vec);
-t_vec	vec_mult(t_vec v, double a);
 t_vec	vec_add(t_vec a, t_vec b);
+int		vec_comp(t_vec a, t_vec b);
 
 //rays.c
 int		ray_create(t_data *data, t_ray *ray, int px, int py);
