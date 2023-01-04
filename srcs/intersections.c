@@ -21,11 +21,14 @@ int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
 		return (0);
 	}
 	w = vector_dev(plane->v_pos, ray->v_pos);
-	t = -dot_prod(plane->v_orient, w) / ndotray;
+	t = dot_prod(plane->v_orient, w) / ndotray;
 	if (t <= RAY_T_MIN || t >= ray->tmax)
 		return (0);
 	*objid = i;
 	ray->tmax = t;
+	//could there be a shadow of a sphere at the plane?
+	if (t > vector_len(vector_dev(data->elements->light->v_pos, ray->v_pos)))
+		return (0);
 	return (1);
 }
 

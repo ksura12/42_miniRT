@@ -71,7 +71,7 @@ double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data)
 }
 
 /**
- * @brief checks if intersection poitn of ray is in the 
+ * @brief checks if intersection point of ray is in the 
  * shadow of smth (visible without ambient light)
 	// printf("direct x : %f\n", shadow_ray.v_direct.x);
 	// printf("direct y : %f\n", shadow_ray.v_direct.y);
