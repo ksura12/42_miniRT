@@ -169,8 +169,8 @@ int		does_intersect_cy(t_ray *ray, t_data *data, int id, int *objid);
 
 //plane_screen.c
 t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
-void	cam_to_world_mat(t_vec c_orient, double ***mat, t_data *data);
-double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data);
+void	obj_to_world_mat(t_vec c_orient, double ***mat, t_vec *pos);
+double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_vec *pos);
 int		shadow_rays(t_ray *ray, t_data *data);
 
 //coloring.c

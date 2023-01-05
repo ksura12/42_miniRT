@@ -26,4 +26,5 @@ void	surface_normal_cy(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 	(void) data;
 	(void) objid;
 	(void) shadow;
+	// shadow->i_normal = get_point_of_intersection(ray->tmax, ray)
 }

@@ -20,7 +20,7 @@ t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale)
 	return (ray);
 }
 
-void	cam_to_world_mat(t_vec c_orient, double ***mat, t_data *data)
+void	obj_to_world_mat(t_vec c_orient, double ***mat, t_vec *pos)
 {
 	t_vec	forward;
 	t_vec	right;
@@ -38,11 +38,11 @@ void	cam_to_world_mat(t_vec c_orient, double ***mat, t_data *data)
 	right.f = 0;
 	up_new = cross_prod(forward, right);
 	up_new.f = 0;
-	*mat = make_mat44(forward, up_new, right, data);
+	*mat = make_mat44(forward, up_new, right, pos);
 	return ;
 }
 
-double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data)
+double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_vec *pos)
 {
 	int		i;
 	double	**ctw;
@@ -63,9 +63,9 @@ double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data)
 	ctw[2][1] = forward.y;
 	ctw[2][2] = forward.z;
 	ctw[2][3] = 0;
-	ctw[3][0] = data->elements->camera->v_pos.x;
-	ctw[3][1] = data->elements->camera->v_pos.y;
-	ctw[3][2] = data->elements->camera->v_pos.z;
+	ctw[3][0] = pos->x;
+	ctw[3][1] = pos->y;
+	ctw[3][2] = pos->z;
 	ctw[3][3] = 1;
 	return (ctw);
 }

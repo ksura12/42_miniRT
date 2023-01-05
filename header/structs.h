@@ -85,6 +85,7 @@ typedef struct s_obj //figure
 	double	dia;
 	double	height;
 	t_color	color;
+	double	**objtoworld;
 }	t_obj;
 
 /**

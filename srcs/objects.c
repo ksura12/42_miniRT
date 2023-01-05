@@ -47,6 +47,7 @@ int	init_cylinder(t_data *data, char **splitted)
 	obj = data->elements->objects[data->counter->create_count];
 	obj->intersection_fkt = &does_intersect_cy;
 	obj->surface_normal = &surface_normal_cy;
+	obj->make_shadow = &make_shadow_sp;
 	obj->id = 'c';
 	obj->v_pos = init_vector(splitted[1]);
 	obj->v_orient = init_vector(splitted[2]);
@@ -59,6 +60,8 @@ int	init_cylinder(t_data *data, char **splitted)
 		printf("ERROR\nWrong cylinder declaration.");
 		return (0);
 	}
+	obj_to_world_mat(obj->v_orient, \
+		&obj->objtoworld, &obj->v_pos);
 	printf("Succcesfull cylinder creation\n");
 	data->counter->create_count += 1;
 	return (1);

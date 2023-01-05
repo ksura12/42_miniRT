@@ -14,32 +14,13 @@
 void	make_shadow_sp(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 {
 	shadow->intersection = get_point_of_intersection(ray->tmax, *ray);
-	// printf("intersection x: %f\n", shadow->intersection.x);
-	// printf("intersection y: %f\n", shadow->intersection.y);
-	// printf("intersection z: %f\n", shadow->intersection.z);
 	data->elements->objects[*objid]->surface_normal(data, ray, objid, shadow);
-	// printf("light->v_pos. x: %f\n", data->elements->light->v_pos.x);
-	// printf("light->v_pos. y: %f\n", data->elements->light->v_pos.y);
-	// printf("light->v_pos. z: %f\n", data->elements->light->v_pos.z);
 	shadow->to_light = vector_dev(data->elements->light->v_pos, \
 		shadow->intersection);
-	// printf("before cto_light x: %f\n", shadow->to_light.x);
-	// printf("before cto_light y: %f\n", shadow->to_light.y);
-	// printf("before cto_light z: %f\n", shadow->to_light.z);	
 	shadow->to_light = normalise(shadow->to_light);
-
 	shadow->cos_theta = dot_prod(shadow->i_normal, shadow->to_light);
-	// printf("costheta: %f\n", shadow->cos_theta);
-	// printf("cto_light x: %f\n", shadow->to_light.x);
-	// printf("cto_light y: %f\n", shadow->to_light.y);
-	// printf("cto_light z: %f\n", shadow->to_light.z);
-	// printf("i_normal x: %f\n", shadow->i_normal.x);
-	// printf("i_normal y: %f\n", shadow->i_normal.y);
-	// printf("i_normal z: %f\n", shadow->i_normal.z);
 	if (shadow->cos_theta < 0.0f)
 		shadow->cos_theta = 0.0f;
-	// if (shadow->cos_theta < 0.0f)
-	// 	shadow->cos_theta = -shadow->cos_theta;
 	shadow->from_light = vector_dev(shadow->intersection, \
 		data->elements->light->v_pos);
 	shadow->from_light = normalise(shadow->from_light);
@@ -65,31 +46,11 @@ void	make_shadow_sp(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 void	make_shadow_pl(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 {
 	shadow->intersection = get_point_of_intersection(ray->tmax, *ray);
-	// printf("intersection x: %f\n", shadow->intersection.x);
-	// printf("intersection y: %f\n", shadow->intersection.y);
-	// printf("intersection z: %f\n", shadow->intersection.z);
 	shadow->i_normal = data->elements->objects[*objid]->v_orient;
-	// data->elements->objects[*objid]->surface_normal(data, ray, objid, shadow);
-	// printf("light->v_pos. x: %f\n", data->elements->light->v_pos.x);
-	// printf("light->v_pos. y: %f\n", data->elements->light->v_pos.y);
-	// printf("light->v_pos. z: %f\n", data->elements->light->v_pos.z);
 	shadow->to_light = vector_dev(data->elements->light->v_pos, \
 		shadow->intersection);
-	// printf("before cto_light x: %f\n", shadow->to_light.x);
-	// printf("before cto_light y: %f\n", shadow->to_light.y);
-	// printf("before cto_light z: %f\n", shadow->to_light.z);	
 	shadow->to_light = normalise(shadow->to_light);
-
 	shadow->cos_theta = dot_prod(shadow->i_normal, shadow->to_light);
-	// printf("costheta: %f\n", shadow->cos_theta);
-	// printf("cto_light x: %f\n", shadow->to_light.x);
-	// printf("cto_light y: %f\n", shadow->to_light.y);
-	// printf("cto_light z: %f\n", shadow->to_light.z);
-	// printf("i_normal x: %f\n", shadow->i_normal.x);
-	// printf("i_normal y: %f\n", shadow->i_normal.y);
-	// printf("i_normal z: %f\n", shadow->i_normal.z);
-	// if (shadow->cos_theta < 0.0f)
-	// 	shadow->cos_theta = 0.0f;
 	if (shadow->cos_theta < 0.0f)
 		shadow->cos_theta = -shadow->cos_theta;
 	shadow->from_light = vector_dev(shadow->intersection, \
@@ -126,22 +87,12 @@ int	light_object(t_data *data, t_ray *ray, int *objid, int light)
 
 	data->elements->objects[*objid]->make_shadow(data, ray, objid, &shadow);
 	amb_part = amb_color(data, objid);
-	// printf("amb r: %d\n", amb_part.r);
-	// printf("amb g: %d\n", amb_part.g);
-	// printf("amb b: %d\n", amb_part.b);
 	if (light == 1)
 		return (color_trgb(amb_part, 1));
 	diffu_part = color_ratio(data->elements->objects[*objid]->color, \
 		(shadow.cos_theta * data->elements->light->lratio \
 		/ vector_len(vector_dev(data->elements->light->v_pos, \
 		shadow.intersection))));
-		// diffu_part = color_ratio(data->elements->objects[*objid]->color, \
-		// (shadow.cos_theta * data->elements->light->lratio));
-	// printf("costheta: %f\n", shadow.cos_theta);
-	// printf("vector len: %f\n", vector_len(vector_dev(data->elements->light->v_pos, shadow.intersection)));
-	// printf("diffu r: %d\n", diffu_part.r);
-	// printf("diffu g: %d\n", diffu_part.g);
-	// printf("diffu b: %d\n", diffu_part.b);
 	spec_part = specular_color(data, &shadow);
 	result = color_add(amb_part, diffu_part);
 	result = color_limits(color_add(spec_part, result));
