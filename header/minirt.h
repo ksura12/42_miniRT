@@ -174,7 +174,8 @@ double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_data *data);
 int		shadow_rays(t_ray *ray, t_data *data);
 
 //coloring.c
-void	make_shadow(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+void	make_shadow_sp(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+void	make_shadow_pl(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
 int		light_object(t_data *data, t_ray *ray, int *objid, int light);
 t_color	amb_color(t_data *data, int *objid);
 t_color	specular_color(t_data *data, t_shadow *shadow);

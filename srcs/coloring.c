@@ -11,7 +11,58 @@
  * @param objid id to specify the obejct hitted by the ray
  * @param shadow data struct for rays and directions
  */
-void	make_shadow(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
+void	make_shadow_sp(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
+{
+	shadow->intersection = get_point_of_intersection(ray->tmax, *ray);
+	// printf("intersection x: %f\n", shadow->intersection.x);
+	// printf("intersection y: %f\n", shadow->intersection.y);
+	// printf("intersection z: %f\n", shadow->intersection.z);
+	data->elements->objects[*objid]->surface_normal(data, ray, objid, shadow);
+	// printf("light->v_pos. x: %f\n", data->elements->light->v_pos.x);
+	// printf("light->v_pos. y: %f\n", data->elements->light->v_pos.y);
+	// printf("light->v_pos. z: %f\n", data->elements->light->v_pos.z);
+	shadow->to_light = vector_dev(data->elements->light->v_pos, \
+		shadow->intersection);
+	// printf("before cto_light x: %f\n", shadow->to_light.x);
+	// printf("before cto_light y: %f\n", shadow->to_light.y);
+	// printf("before cto_light z: %f\n", shadow->to_light.z);	
+	shadow->to_light = normalise(shadow->to_light);
+
+	shadow->cos_theta = dot_prod(shadow->i_normal, shadow->to_light);
+	// printf("costheta: %f\n", shadow->cos_theta);
+	// printf("cto_light x: %f\n", shadow->to_light.x);
+	// printf("cto_light y: %f\n", shadow->to_light.y);
+	// printf("cto_light z: %f\n", shadow->to_light.z);
+	// printf("i_normal x: %f\n", shadow->i_normal.x);
+	// printf("i_normal y: %f\n", shadow->i_normal.y);
+	// printf("i_normal z: %f\n", shadow->i_normal.z);
+	if (shadow->cos_theta < 0.0f)
+		shadow->cos_theta = 0.0f;
+	// if (shadow->cos_theta < 0.0f)
+	// 	shadow->cos_theta = -shadow->cos_theta;
+	shadow->from_light = vector_dev(shadow->intersection, \
+		data->elements->light->v_pos);
+	shadow->from_light = normalise(shadow->from_light);
+	shadow->reflection = vec_mult(shadow->i_normal, dot_prod(shadow->i_normal, \
+		shadow->to_light) * 2);
+	shadow->reflection = vector_dev(shadow->reflection, shadow->to_light);
+	shadow->reflection = normalise(shadow->reflection);
+	shadow->to_cam = vector_dev(data->elements->camera->v_pos, \
+		shadow->intersection);
+	shadow->to_cam = normalise(shadow->to_cam);
+}
+
+/**
+ * @brief calculates from the given ray, object and data struct the incoming
+ * and outgoing rays and angles between and fills the data struct "shadow"
+ * with it to ahnd it to the functions for diffuse and specular light parts
+ * 
+ * @param data holds all data to elements and lights of the scene
+ * @param ray is the incoming ray from the light source to the object
+ * @param objid id to specify the obejct hitted by the ray
+ * @param shadow data struct for rays and directions
+ */
+void	make_shadow_pl(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 {
 	shadow->intersection = get_point_of_intersection(ray->tmax, *ray);
 	// printf("intersection x: %f\n", shadow->intersection.x);
@@ -72,7 +123,7 @@ int	light_object(t_data *data, t_ray *ray, int *objid, int light)
 	t_color		spec_part;
 	t_color		result;
 
-	make_shadow(data, ray, objid, &shadow);
+	data->elements->objects[*objid]->make_shadow(data, ray, objid, &shadow);
 	amb_part = amb_color(data, objid);
 	// printf("amb r: %d\n", amb_part.r);
 	// printf("amb g: %d\n", amb_part.g);

@@ -78,6 +78,7 @@ typedef struct s_obj //figure
 {
 	int		(*intersection_fkt)(t_ray*, t_data*, int, int*);
 	void	(*surface_normal)(t_data*, t_ray*, int*, t_shadow*);
+	void	(*make_shadow)(t_data*, t_ray*, int*, t_shadow*);
 	char	id;
 	t_vec	v_pos;
 	t_vec	v_orient;
