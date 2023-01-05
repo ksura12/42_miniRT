@@ -68,7 +68,8 @@ void	make_shadow_pl(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 	// printf("intersection x: %f\n", shadow->intersection.x);
 	// printf("intersection y: %f\n", shadow->intersection.y);
 	// printf("intersection z: %f\n", shadow->intersection.z);
-	data->elements->objects[*objid]->surface_normal(data, ray, objid, shadow);
+	shadow->i_normal = data->elements->objects[*objid]->v_orient;
+	// data->elements->objects[*objid]->surface_normal(data, ray, objid, shadow);
 	// printf("light->v_pos. x: %f\n", data->elements->light->v_pos.x);
 	// printf("light->v_pos. y: %f\n", data->elements->light->v_pos.y);
 	// printf("light->v_pos. z: %f\n", data->elements->light->v_pos.z);
