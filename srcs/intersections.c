@@ -1,5 +1,11 @@
 #include	"../header/minirt.h"
 
+
+void	set_tmax_shadow(t_data *data, t_ray *ray, double t)
+{
+	if(!vec_comp(ray->v_pos, data->elements->light->v_pos))
+		ray->tmax = vector_len(vector_dev(get_point_of_intersection(t, *ray), data->elements->light->v_pos));
+}
 /**
  * @brief returns 1 of it intersects with scene, 0 if not
  * 
@@ -17,19 +23,25 @@ int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
 	plane = data->elements->objects[i];
 	ndotray = dot_prod(plane->v_orient, ray->v_direct);
 	if (fabs(ndotray) < EPSILON)
+		return (0);
+	w = vector_dev(plane->v_pos, ray->v_pos);
+	t = dot_prod(plane->v_orient, w) / ndotray;
+	// set_tmax_shadow(data, ray, t);
+	if (t <= RAY_T_MIN || t >= ray->tmax)
 	{
 		return (0);
 	}
-	w = vector_dev(plane->v_pos, ray->v_pos);
-	t = dot_prod(plane->v_orient, w) / ndotray;
-	if (t <= RAY_T_MIN || t >= ray->tmax)
-		return (0);
+		
 	*objid = i;
 	ray->tmax = t;
 	// if (!vec_comp(ray->v_pos, data->elements->light->v_pos) && t < 0)
 	// 	return (0);
 	if (t > vector_len(vector_dev(data->elements->light->v_pos, ray->v_pos)))
 		return (0);
+	// if (vector_len(vector_dev(ray->v_pos, data->elements->light->v_pos)) \
+	// 	< vector_len(vector_dev(ray->v_pos, \
+	// 	get_point_of_intersection(ray->tmax, *ray))))
+	// 	return (0);
 	return (1);
 }
 
