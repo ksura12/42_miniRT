@@ -11,9 +11,9 @@ void	surface_normal_sp(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 void	surface_normal_pl(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 {
 	(void) ray;
-	shadow->intersection.x = 0.0;
-	shadow->intersection.y = 0.0;
-	shadow->intersection.z = 0.0;
+//	shadow->intersection.x = 0.0;
+//	shadow->intersection.y = 0.0;
+//	shadow->intersection.z = 0.0;
 //	if (dot_prod(ray->v_direct, data->elements->objects[*objid]->v_orient) < 0)
 		shadow->i_normal = vec_mult(data->elements->objects[*objid]->v_orient, 1);
 //	else

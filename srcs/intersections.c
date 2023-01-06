@@ -103,12 +103,12 @@ void	abc_calc(t_ray *ray, t_data *data, int i, float abc[3])
 	t_vec	w;
 
 	abc[0] = dot_prod(ray->v_direct, ray->v_direct) \
-		- pow(dot_prod(ray->v_direct, data->elements->objects[i]->v_orient), 2);
+		- powf(dot_prod(ray->v_direct, data->elements->objects[i]->v_orient), 2);
 	w = vector_dev(ray->v_pos, data->elements->objects[i]->v_pos);
 	abc[1] = 2 * (dot_prod(ray->v_direct, w) - dot_prod(ray->v_direct, \
 		data->elements->objects[i]->v_orient) * dot_prod(w, data->elements->objects[i]->v_orient));
-	abc[2] = dot_prod(w ,w) - pow(dot_prod(w, data->elements->objects[i]->v_orient), 2) \
-		- pow(data->elements->objects[i]->dia / 2, 2);
+	abc[2] = dot_prod(w ,w) - powf(dot_prod(w, data->elements->objects[i]->v_orient), 2) \
+		- powf(data->elements->objects[i]->dia / 2, 2);
 }
 
 int	isequal(float a, float b)
@@ -135,7 +135,7 @@ float does_intersect_cy_disk(t_ray *ray, t_data *data, int i, int disk, int *obj
 		inters = vec_add(ray->v_pos, vec_mult(ray->v_direct, t));
 		v = vector_dev(inters, vec_add(cy->v_pos, vec_mult(cy->v_orient, \
 			cy->height * disk)));
-		if (sqrt(dot_prod(v, v)) < (cy->dia / 2) && (t < ray->tmax || ray->tmax < 0))
+		if (sqrtf(dot_prod(v, v)) < (cy->dia / 2) && (t < ray->tmax || ray->tmax < 0))
 		{
 			ray->tmax = t;
 			*objid = i;
@@ -187,6 +187,8 @@ int	does_intersect_cy(t_ray *ray, t_data *data, int i, int *objid)
 	abc_calc(ray, data, i, abc);
 	if (islessequal(pow(abc[1], 2) - 4.0 * abc[0] * abc[2], 0) && tmp[0] < 0)
 		return (-1);
+	if (ray->cy_cap == 1)
+		return (1);
 	ret = quad_solver(abc[0], abc[1], abc[2]);
 	if ((tmp[0] > 0 && tmp[0] < ret) || ret < 0)
 		return (-1);
@@ -198,8 +200,8 @@ int	does_intersect_cy(t_ray *ray, t_data *data, int i, int *objid)
 		{
 			*objid = i;
 			ray->tmax = ret;
-			ray->cy_cap = 0;
-			return (tmp[0] || tmp[1]);
+			ray->cy_cap = 2;
+			return (1);
 		}
 	}
 	return (-1);

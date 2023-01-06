@@ -91,6 +91,7 @@ int	shadow_rays(t_ray *ray, t_data *data)
 
 	i = 0;
 	tmp = 0;
+	ray->cy_cap = 0;
 	shadow_ray.v_pos = get_point_of_intersection(ray->tmax, *ray);
 	shadow_ray.v_direct = vector_dev(data->elements->light->v_pos, \
 		shadow_ray.v_pos);
