@@ -14,6 +14,7 @@ int	init_s(t_data *data, char **splitted)
 
 	obj = data->elements->objects[data->counter->create_count];
 	obj->intersection_fkt = &does_intersect_s;
+	obj->intersection_shadow = &does_intersect_s;
 	obj->surface_normal = &surface_normal_sp;
 	obj->make_shadow = &make_shadow_sp;
 	obj->id = 's';
@@ -46,6 +47,7 @@ int	init_cylinder(t_data *data, char **splitted)
 
 	obj = data->elements->objects[data->counter->create_count];
 	obj->intersection_fkt = &does_intersect_cy;
+	obj->intersection_shadow = &does_intersect_cy_shadow;
 	obj->surface_normal = &surface_normal_cy;
 	obj->make_shadow = &make_shadow_sp;
 	obj->id = 'c';
@@ -80,6 +82,7 @@ int	init_plane(t_data *data, char **splitted)
 
 	obj = data->elements->objects[data->counter->create_count];
 	obj->intersection_fkt = &does_intersect_p;
+	obj->intersection_shadow = &does_intersect_p;
 	obj->surface_normal = &surface_normal_pl;
 	obj->make_shadow = &make_shadow_pl;
 	obj->id = 'p';

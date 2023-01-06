@@ -61,6 +61,7 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 	color = BLACK;
 	i = 0;
 	objid = -1;
+	ray->cy_cap = 0;
 	while (i < data->counter->create_count)
 	{
 		data->elements->objects[i]->intersection_fkt(ray, data, i, &objid);
@@ -68,7 +69,7 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 	}
 	if (objid != -1)
 	{
-		if (shadow_rays(ray, data))
+		if (shadow_rays(ray, data) > 0)
 			color = light_object(data, ray, &objid, 1);
 		else
 			color = light_object(data, ray, &objid, 0);

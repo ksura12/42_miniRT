@@ -167,6 +167,7 @@ int		intersect_p(t_ray ray, t_data *data);
 int		does_intersect_s(t_ray *ray, t_data *data, int id, int *objid);
 int		does_intersect_p(t_ray *ray, t_data *data, int id, int *objid);
 int		does_intersect_cy(t_ray *ray, t_data *data, int id, int *objid);
+int		does_intersect_cy_shadow(t_ray *ray, t_data *data, int id, int *objid);
 
 //plane_screen.c
 t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
