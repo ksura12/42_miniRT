@@ -100,7 +100,7 @@ int	does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	return (ret);
 }
 
-void	abc_calc(t_ray *ray, t_data *data, int i, double abc[3])
+void	abc_calc(t_ray *ray, t_data *data, int i, float abc[3])
 {
 	t_vec	w;
 
@@ -118,48 +118,53 @@ int	isequal(float a, float b)
 	return ((a - 0.00001 <= b) && (a + 0.00001 >= b));
 }
 
-double does_intersect_cy_disk(t_ray *ray, t_data *data, int i, int disk)
+float does_intersect_cy_disk(t_ray *ray, t_data *data, int i, int disk, int *objid)
 {
-	double	den;
-	double	t;
+	float	den;
+	float	t;
 	t_vec	inters;
 	t_vec	v;
 	t_obj	*cy;
 
 	cy = data->elements->objects[i];
-	den = dot_prod(ray->v_direct, data->elements->objects[i]->v_orient);
+	den = dot_prod(ray->v_direct, cy->v_orient);
 	if (!isequal(den, 0))
 	{
 		t = dot_prod(cy->v_orient, vector_dev(vec_add(cy->v_pos, \
 			vec_mult(cy->v_orient, cy->height * disk)), ray->v_pos)) / den;
-		if (!isequal(t, 0))
+		if (islessequal(t, 0))
 			return (-1);
 		inters = vec_add(ray->v_pos, vec_mult(ray->v_direct, t));
 		v = vector_dev(inters, vec_add(cy->v_pos, vec_mult(cy->v_orient, \
 			cy->height * disk)));
-		if (sqrt(dot_prod(v, v) < cy->dia / 2) && (t < ray->tmax || ray->tmax < 0))
+		if (sqrt(dot_prod(v, v)) < (cy->dia / 2) && (t < ray->tmax || ray->tmax < 0))
 		{
 			ray->tmax = t;
+			*objid = i;
 			return (t);
 		}
 	}
 	return (-1);
 }
 
-double	find_min_value(double a, double b)
+float	find_min_value(float a, float b)
 {
-	if (((a < b) && (a > 0)) || (a == b))
+	if ((isless(a, b) && isgreater(a, 0)) || (a == b))
+	{
 		return (a);
+	}
 	else if ((b < a) && (b > 0))
+	{
 		return (b);
+	}
 	else
 		return (-1);
 }
 
-double	quad_solver(double a, double b, double c)
+float	quad_solver(float a, float b, float c)
 {
-	double	delta;
-	double	t[2];
+	float	delta;
+	float	t[2];
 
 	delta = b * b - 4 * (a * c);
 	if (fabs(delta) < EPSILON)
@@ -174,18 +179,12 @@ double	quad_solver(double a, double b, double c)
 
 int	does_intersect_cy(t_ray *ray, t_data *data, int i, int *objid)
 {
-	// (void) ray;
-	// (void) data;
-	// (void) i;
-	// (void) objid;
-	// return (1);
+	float	tmp;
+	float	abc[3];
+	float	ret;
 
-
-	double	tmp;
-	double	abc[3];
-	double	ret;
-
-	tmp = find_min_value(does_intersect_cy_disk(ray, data, i, 0), does_intersect_cy_disk(ray, data, i, 1));
+	tmp = find_min_value(does_intersect_cy_disk(ray, data, i, 0, objid), \
+		does_intersect_cy_disk(ray, data, i, 1, objid));
 	abc_calc(ray, data, i, abc);
 	if (islessequal(pow(abc[1], 2) - 4.0 * abc[0] * abc[2], 0) && tmp < 0)
 		return (-1);
