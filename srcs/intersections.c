@@ -130,11 +130,13 @@ double does_intersect_cy_disk(t_ray *ray, t_data *data, int i, int disk)
 	den = dot_prod(ray->v_direct, data->elements->objects[i]->v_orient);
 	if (!isequal(den, 0))
 	{
-		t = dot_prod(cy->v_orient, vector_dev(vec_add(cy->v_pos, vec_mult(cy->v_orient, cy->height * disk)), ray->v_pos)) / den;
+		t = dot_prod(cy->v_orient, vector_dev(vec_add(cy->v_pos, \
+			vec_mult(cy->v_orient, cy->height * disk)), ray->v_pos)) / den;
 		if (!isequal(t, 0))
 			return (-1);
 		inters = vec_add(ray->v_pos, vec_mult(ray->v_direct, t));
-		v = vector_dev(inters, vec_add(cy->v_pos, vec_mult(cy->v_orient, cy->height * disk)));
+		v = vector_dev(inters, vec_add(cy->v_pos, vec_mult(cy->v_orient, \
+			cy->height * disk)));
 		if (sqrt(dot_prod(v, v) < cy->dia / 2) && (t < ray->tmax || ray->tmax < 0))
 		{
 			ray->tmax = t;
@@ -144,20 +146,66 @@ double does_intersect_cy_disk(t_ray *ray, t_data *data, int i, int disk)
 	return (-1);
 }
 
+double	find_min_value(double a, double b)
+{
+	if (((a < b) && (a > 0)) || (a == b))
+		return (a);
+	else if ((b < a) && (b > 0))
+		return (b);
+	else
+		return (-1);
+}
+
+double	quad_solver(double a, double b, double c)
+{
+	double	delta;
+	double	t[2];
+
+	delta = b * b - 4 * (a * c);
+	if (fabs(delta) < EPSILON)
+		return (0);
+	if (delta < 0)
+		return (0);
+	t[0] = (-b - sqrt(delta)) / ( 2 * a);
+	t[1] = (-b + sqrt(delta)) / ( 2 * a);
+	return (find_min_value(t[0], t[1]));
+}
+
 
 int	does_intersect_cy(t_ray *ray, t_data *data, int i, int *objid)
 {
-	(void) ray;
-	(void) data;
-	(void) i;
-	(void) objid;
-	return (1);
+	// (void) ray;
+	// (void) data;
+	// (void) i;
+	// (void) objid;
+	// return (1);
 
 
-	// double	tmp;
+	double	tmp;
+	double	abc[3];
+	double	ret;
 
+	tmp = find_min_value(does_intersect_cy_disk(ray, data, i, 0), does_intersect_cy_disk(ray, data, i, 1));
+	abc_calc(ray, data, i, abc);
+	if (islessequal(pow(abc[1], 2) - 4.0 * abc[0] * abc[2], 0) && tmp < 0)
+		return (-1);
+	ret = quad_solver(abc[0], abc[1], abc[2]);
+	if ((tmp > 0 && tmp < ret) || ret < 0)
+		return (-1);
+	else if (isgreaterequal(ret, 0))
+	{
+		tmp = dot_prod(vector_dev(vec_add(ray->v_pos, vec_mult(ray->v_direct, ret))\
+			, data->elements->objects[i]->v_pos), data->elements->objects[i]->v_orient);
+		if (isgreaterequal(tmp, 0) && islessequal(tmp, data->elements->objects[i]->height))
+		{
+			*objid = i;
+			ray->tmax = ret;
+			return (1);
+		}
+	}
+	return (-1);
+}
 
-	// double	abc[3];
 	// double	t[2];
 	// t_vec	w;
 	// int		ret;
@@ -194,7 +242,6 @@ int	does_intersect_cy(t_ray *ray, t_data *data, int i, int *objid)
 	// 	}
 	// }
 	// return (ret);
-}
 
 	
 
