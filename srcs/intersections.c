@@ -139,6 +139,7 @@ float does_intersect_cy_disk(t_ray *ray, t_data *data, int i, int disk, int *obj
 		{
 			ray->tmax = t;
 			*objid = i;
+			ray->cy_cap = 1;
 			return (t);
 		}
 	}
@@ -197,6 +198,7 @@ int	does_intersect_cy(t_ray *ray, t_data *data, int i, int *objid)
 		{
 			*objid = i;
 			ray->tmax = ret;
+			ray->cy_cap = 0;
 			return (1);
 		}
 	}

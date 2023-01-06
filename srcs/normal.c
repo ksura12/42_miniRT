@@ -22,9 +22,20 @@ void	surface_normal_pl(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 
 void	surface_normal_cy(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 {
-	(void) ray;
-	(void) data;
-	(void) objid;
-	(void) shadow;
-	// shadow->i_normal = get_point_of_intersection(ray->tmax, ray)
+	// (void) ray;
+	// (void) data;
+	// (void) objid;
+	// (void) shadow;
+	double	t;
+	t_vec	pt;
+
+	if (ray->cy_cap == 1)
+		shadow->i_normal = get_point_of_intersection(ray->tmax, *ray);
+	else
+	{
+		t = dot_prod(vector_dev(shadow->intersection, data->elements->objects[*objid]->v_pos), data->elements->objects[*objid]->v_orient);
+		pt = vec_add(data->elements->objects[*objid]->v_pos, vec_mult(data->elements->objects[*objid]->v_orient, t));
+		shadow->i_normal = normalise(vector_dev(shadow->intersection, pt));
+	}
 }
+
