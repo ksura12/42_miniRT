@@ -17,6 +17,7 @@ t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale)
 	ray.v_direct = make_opposite_vector(ray.v_direct);
 	ray.v_pos = data->elements->camera->v_pos;
 	ray.tmax = RAY_T_MAX;
+	ray.cy_cap = 0;
 	return (ray);
 }
 

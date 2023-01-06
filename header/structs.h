@@ -134,6 +134,7 @@ typedef struct s_ray
 	t_vec	v_pos;
 	t_vec	v_direct;
 	double	tmax;
+	uint8_t	cy_cap;
 }	t_ray;
 
 typedef struct s_coordenates

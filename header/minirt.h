@@ -3,6 +3,7 @@
 
 # include "../libft/libft.h"
 # include <math.h>
+# include <stdint.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include "structs.h"

@@ -38,9 +38,7 @@ int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
 	// 	return (0);
 	if (t > vector_len(vector_dev(data->elements->light->v_pos, ray->v_pos)))
 		return (0);
-	// if (vector_len(vector_dev(ray->v_pos, data->elements->light->v_pos)) \
-	// 	< vector_len(vector_dev(ray->v_pos, \
-	// 	get_point_of_intersection(ray->tmax, *ray))))
+	// if (vector_len(vector_dev(ray->v_pos, data->elements->light->v_pos)) \ 	< vector_len(vector_dev(ray->v_pos, \	get_point_of_intersection(ray->tmax, *ray))))
 	// 	return (0);
 	return (1);
 }
