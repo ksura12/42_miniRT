@@ -68,7 +68,7 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 	}
 	if (objid != -1)
 	{
-		if (shadow_rays(ray, data) == 1)
+		if (shadow_rays(ray, data) > 0)
 			color = light_object(data, ray, &objid, 1);
 		else
 			color = light_object(data, ray, &objid, 0);

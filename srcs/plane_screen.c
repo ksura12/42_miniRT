@@ -17,7 +17,7 @@ t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale)
 	ray.v_direct = make_opposite_vector(ray.v_direct);
 	ray.v_pos = data->elements->camera->v_pos;
 	ray.tmax = RAY_T_MAX;
-	ray.cy_cap = 0;
+	ray.cy_cap = 8;
 	return (ray);
 }
 
@@ -99,7 +99,7 @@ int	shadow_rays(t_ray *ray, t_data *data)
 	while (i < data->counter->create_count)
 	{
 		if (data->elements->objects[i]->intersection_fkt(&shadow_ray, \
-			data, i, &tmp))
+			data, i, &tmp) == 1)
 			return (1);
 		i++;
 	}
