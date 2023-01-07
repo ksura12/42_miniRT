@@ -6,7 +6,7 @@
 /*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 13:59:11 by ksura@student.42 ###   ########.fr       */
+/*   Updated: 2023/01/07 15:36:48 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
 	double	ndotray;
 	double	t;
 	t_vec	w;
+	double	cdotn;
 
 	plane = data->elements->objects[i];
 	ndotray = dot_prod(plane->v_orient, ray->v_direct);
@@ -43,6 +44,9 @@ int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
 	*objid = i;
 	ray->tmax = t;
 	if (t > vector_len(vector_dev(data->elements->light->v_pos, ray->v_pos)))
+		return (0);
+	cdotn = dot_prod(plane->v_orient, normalise(vector_dev(get_point_of_intersection(t, *ray), data->elements->camera->v_pos)));
+	if ((ndotray < 0 && cdotn > 0) || (ndotray > 0 && cdotn < 0))
 		return (0);
 	return (1);
 }

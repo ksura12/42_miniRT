@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections_cy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 14:01:28 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 15:34:53 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	does_intersect_cy_shadow(t_ray *ray, t_data *data, int i, int *objid)
 	{
 		tmp[1] = dot_prod(vector_dev(vec_add(ray->v_pos, vec_mult(ray->v_direct, ret))\
 			, data->elements->objects[i]->v_pos), data->elements->objects[i]->v_orient);
-		if (isgreaterequal(tmp[1], 0) && islessequal(tmp[1], data->elements->objects[i]->height))
+		if (isgreaterequal(tmp[1], 0) && isless(ret, ray->tmax) && islessequal(tmp[1], data->elements->objects[i]->height))
 		{
 			*objid = i;
 			ray->tmax = ret;
@@ -111,7 +111,7 @@ int	does_intersect_cy(t_ray *ray, t_data *data, int i, int *objid)
 	{
 		tmp[1] = dot_prod(vector_dev(vec_add(ray->v_pos, vec_mult(ray->v_direct, ret))\
 			, data->elements->objects[i]->v_pos), data->elements->objects[i]->v_orient);
-		if (isgreaterequal(tmp[1], 0) && islessequal(tmp[1], data->elements->objects[i]->height))
+		if (isgreaterequal(tmp[1], 0) && isless(ret, ray->tmax) && islessequal(tmp[1], data->elements->objects[i]->height))
 		{
 			*objid = i;
 			ray->tmax = ret;

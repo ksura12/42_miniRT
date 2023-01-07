@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elements.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:24:37 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:40:46 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 14:40:54 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int	init_camera_fov(t_cam *cam, char **splitted)
 		printf("ERROR\nWrong Camera field-of-view declaration.");
 		return (0);
 	}
+	if (cam->fov_w == 180)
+		cam->fov_w = 179;
 	cam->fov_h = cam->fov_w * ASPECT_RATIO;
 	cam->angle_vert = cam->fov_h / HEIGHT;
 	cam->angle_horz = cam->fov_w / WIDTH;
