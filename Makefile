@@ -18,7 +18,7 @@ SRCS = main.c free.c init.c count_input.c controls.c elements.c \
 	utils.c alloc.c parsing.c objects.c vector_operations.c render.c \
 	rays.c vector_operations_2.c vector_operations_3.c plane_screen.c \
 	coloring.c coloring_utils.c intersections.c normal.c utils2.c \
-	intersections_cy.c
+	intersections_cy.c utils_inter_cy.c
 
 OS = $(shell uname)
 ifeq ($(OS), Linux)

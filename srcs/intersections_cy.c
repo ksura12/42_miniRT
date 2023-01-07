@@ -6,14 +6,11 @@
 /*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 15:44:36 by ksura@student.42 ###   ########.fr       */
+/*   Updated: 2023/01/07 17:25:04 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include	"../header/minirt.h"
-
-float	disks(t_ray *ray, t_data *data, int i, int *objid);
 
 static void	abc_calc(t_ray *ray, t_data *data, int i, float abc[3])
 {
@@ -61,34 +58,26 @@ float	intersect_cy_disk(t_ray *ray, t_data *data, int util[], int *objid)
 
 int	does_intersect_cy_shadow(t_ray *ray, t_data *data, int i, int *objid)
 {
-	float	tmp[2];
+	float	tmp[3];
 	float	abc[3];
-	float	ret;
 
 	tmp[0] = disks(ray, data, i, objid);
 	abc_calc(ray, data, i, abc);
 	if (islessequal(pow(abc[1], 2) - 4.0 * abc[0] * abc[2], 0) && tmp[0] < 0)
 		return (-1);
-	if (ray->cy_cap == 1 && ray->tmax <= vector_len(vector_dev(data->elements->light->v_pos, ray->v_pos)))
-		return (1);
-	else if (ray->cy_cap == 1 && ray->tmax > vector_len(vector_dev(data->elements->light->v_pos, ray->v_pos)))
-		return (0);
-	ret = quad_solver(abc[0], abc[1], abc[2]);
-	if ((tmp[0] > 0 && tmp[0] < ret) || ret < 0)
+	if (ray->cy_cap == 1)
+		return (check(ray, data));
+	tmp[2] = quad_solver(abc[0], abc[1], abc[2]);
+	if ((tmp[0] > 0 && tmp[0] < tmp[2]) || tmp[2] < 0)
 		return (-1);
-	else if (isgreaterequal(ret, 0))
+	else if (isgreaterequal(tmp[2], 0))
 	{
-		tmp[1] = dot_prod(vector_dev(vec_add(ray->v_pos, vec_mult(ray->v_direct, ret)) \
-			, data->elements->objects[i]->v_pos), data->elements->objects[i]->v_orient);
-		if (isgreaterequal(tmp[1], 0) && isless(ret, ray->tmax) && islessequal(tmp[1], data->elements->objects[i]->height))
+		tmp[1] = precheck(ray, tmp, data, i);
+		if (isgreaterequal(tmp[1], 0) && isless(tmp[2], ray->tmax)
+			&& islessequal(tmp[1], data->elements->objects[i]->height))
 		{
-			*objid = i;
-			ray->tmax = ret;
-			ray->cy_cap = 0;
-			if (ray->tmax > vector_len(vector_dev(data->elements->light->v_pos, ray->v_pos)))
-				return (0);
-			else
-				return (1);
+			inter_found(i, objid, ray, tmp[2]);
+			return (check(ray, data));
 		}
 	}
 	return (0);
@@ -109,30 +98,15 @@ int	does_intersect_cy(t_ray *ray, t_data *data, int i, int *objid)
 		return (-1);
 	else if (isgreaterequal(ret, 0))
 	{
-		tmp[1] = dot_prod(vector_dev(vec_add(ray->v_pos, vec_mult(ray->v_direct, ret)) \
-			, data->elements->objects[i]->v_pos), data->elements->objects[i]->v_orient);
-		if (isgreaterequal(tmp[1], 0) && isless(ret, ray->tmax) && islessequal(tmp[1], data->elements->objects[i]->height))
+		tmp[1] = dot_prod(vector_dev(vec_add(ray->v_pos, \
+			vec_mult(ray->v_direct, ret)), data->elements->objects[i]->v_pos), \
+			data->elements->objects[i]->v_orient);
+		if (isgreaterequal(tmp[1], 0) && isless(ret, ray->tmax)
+			&& islessequal(tmp[1], data->elements->objects[i]->height))
 		{
-			*objid = i;
-			ray->tmax = ret;
-			ray->cy_cap = 0;
+			inter_found(i, objid, ray, ret);
 			return (tmp[0] || tmp[1]);
 		}
 	}
 	return (-1);
-}
-
-float	disks(t_ray *ray, t_data *data, int i, int *objid)
-{
-	int		util[2];
-	float	disks[2];
-	float	tmp;
-
-	util[0] = i;
-	util[1] = 0;
-	disks[0] = intersect_cy_disk(ray, data, util, objid);
-	util[1] = 1;
-	disks[1] = intersect_cy_disk(ray, data, util, objid);
-	tmp = find_min_value(disks[0], disks[1]);
-	return (tmp);
 }

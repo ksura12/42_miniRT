@@ -174,6 +174,13 @@ int		does_intersect_p(t_ray *ray, t_data *data, int id, int *objid);
 //intersections_cy.c
 int		does_intersect_cy(t_ray *ray, t_data *data, int id, int *objid);
 int		does_intersect_cy_shadow(t_ray *ray, t_data *data, int id, int *objid);
+float	intersect_cy_disk(t_ray *ray, t_data *data, int util[], int *objid);
+
+//utils_inter_cy.c
+int		check(t_ray *ray, t_data *data);
+void	inter_found(int i, int *objid, t_ray *ray, float ret);
+float	precheck(t_ray *ray, float tmp[], t_data *data, int i);
+float	disks(t_ray *ray, t_data *data, int i, int *objid);
 
 //plane_screen.c
 t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
