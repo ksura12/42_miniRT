@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:24:37 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:24:39 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 05:40:46 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	init_a(t_data *data, char **splitted)
 			printf("ERROR\nWrong ambient light color input.");
 			return (0);
 		}
-		printf("Succcesfull Ambient light creation\n");
 	}
 	return (1);
 }
@@ -72,7 +71,6 @@ int	init_l(t_data *data, char **splitted)
 		printf("ERROR\nWrong light declaration.");
 		return (0);
 	}
-	printf("Succcesfull light creation\n");
 	return (1);
 }
 
@@ -158,6 +156,5 @@ int	init_camera(t_data *data, char **splitted)
 		return (0);
 	obj_to_world_mat(data->elements->camera->v_orient, \
 		&data->elements->camera->camtoworld, &data->elements->camera->v_pos);
-	printf("Succcesfull Camera creation\n");
 	return (1);
 }

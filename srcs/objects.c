@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:23:06 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:38:10 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 05:40:18 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ int	init_s(t_data *data, char **splitted)
 		printf("ERROR\nWrong sphere declaration.");
 		return (0);
 	}
-	printf("Succcesfull sphere creation\n");
-	printf("sphere diameter:%f\n", obj->dia);
-	printf("sphere x:%f\n", obj->v_pos.x);
-	printf("sphere y:%f\n", obj->v_pos.y);
-	printf("sphere z:%f\n", obj->v_pos.z);
 	data->counter->create_count += 1;
 	return (1);
 }
@@ -76,7 +71,6 @@ int	init_cylinder(t_data *data, char **splitted)
 	}
 	obj_to_world_mat(obj->v_orient, \
 		&obj->objtoworld, &obj->v_pos);
-	printf("Succcesfull cylinder creation\n");
 	data->counter->create_count += 1;
 	return (1);
 }
@@ -107,7 +101,6 @@ int	init_plane(t_data *data, char **splitted)
 		printf("ERROR\nWrong plane declaration.");
 		return (0);
 	}
-	printf("Succcesfull plane creation\n");
 	data->counter->create_count += 1;
 	return (1);
 }
