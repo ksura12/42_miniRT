@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:30:19 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 05:44:22 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 void	set_tmax_shadow(t_data *data, t_ray *ray, double t)
 {
 	if (!vec_comp(ray->v_pos, data->elements->light->v_pos))
-		ray->tmax = vector_len(vector_dev(get_point_of_intersection(t, *ray), data->elements->light->v_pos));
+		ray->tmax = vector_len(vector_dev(get_point_of_intersection(t, *ray), \
+			data->elements->light->v_pos));
 }
 
 /**
  * @brief returns 1 of it intersects with scene, 0 if not
  * 
  */
-//	printf("ndotray: %f\n", ndotray);
-//	printf("return epsilon\n");
-//	printf("t: %f\n", t);
 int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
 {
 	t_obj	*plane;
@@ -44,12 +42,8 @@ int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
 	}
 	*objid = i;
 	ray->tmax = t;
-	// if (!vec_comp(ray->v_pos, data->elements->light->v_pos) && t < 0)
-	// 	return (0);
 	if (t > vector_len(vector_dev(data->elements->light->v_pos, ray->v_pos)))
 		return (0);
-	// if (vector_len(vector_dev(ray->v_pos, data->elements->light->v_pos)) \ 	< vector_len(vector_dev(ray->v_pos, \	get_point_of_intersection(ray->tmax, *ray))))
-	// 	return (0);
 	return (1);
 }
 
@@ -80,13 +74,11 @@ int	does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	abc[0] = vector_lensqr(ray->v_direct);
 	abc[1] = 2 * dot_prod(ray->v_direct, pos_new);
 	abc[2] = vector_lensqr(pos_new) - pow((data->elements->objects[i]->dia
-			/ 2), 2);
+				/ 2), 2);
 	discriminant = pow(abc[1], 2) - 4 * abc[0] * abc[2];
 	if (discriminant < 0.0)
 		return (0);
 	t[0] = (-abc[1] - sqrt(discriminant)) / (2 * abc[0]);
-	// if (!vec_comp(ray->v_pos, data->elements->light->v_pos) && t[0] < 0)
-	// 	return (0);
 	ret = 0;
 	if (t[0] > (float)RAY_T_MIN && t[0] < ray->tmax)
 	{

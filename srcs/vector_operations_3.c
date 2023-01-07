@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:23:38 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:23:39 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 05:41:49 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_vec	vec_add(t_vec a, t_vec b)
 	sum.z = a.z + b.z;
 	return (sum);
 }
+
 /**
  * @brief compares two vectors if they are the same, returns 0 if
  * they are different, 1 if they are similar
