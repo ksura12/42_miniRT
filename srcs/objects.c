@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   objects.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/07 05:23:06 by kaheinz           #+#    #+#             */
+/*   Updated: 2023/01/07 05:38:10 by kaheinz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
@@ -15,7 +27,7 @@ int	init_s(t_data *data, char **splitted)
 	obj = data->elements->objects[data->counter->create_count];
 	obj->intersection_fkt = &does_intersect_s;
 	obj->intersection_shadow = &does_intersect_s;
-	obj->surface_normal = &surface_normal_sp;
+	obj->surface_normal = &surface_normal_s;
 	obj->make_shadow = &make_shadow_sp;
 	obj->id = 's';
 	obj->v_pos = init_vector(splitted[1]);
@@ -48,7 +60,7 @@ int	init_cylinder(t_data *data, char **splitted)
 	obj = data->elements->objects[data->counter->create_count];
 	obj->intersection_fkt = &does_intersect_cy;
 	obj->intersection_shadow = &does_intersect_cy_shadow;
-	obj->surface_normal = &surface_normal_cy;
+	obj->surface_normal = &surface_normal_c;
 	obj->make_shadow = &make_shadow_sp;
 	obj->id = 'c';
 	obj->v_pos = init_vector(splitted[1]);
@@ -83,7 +95,7 @@ int	init_plane(t_data *data, char **splitted)
 	obj = data->elements->objects[data->counter->create_count];
 	obj->intersection_fkt = &does_intersect_p;
 	obj->intersection_shadow = &does_intersect_p;
-	obj->surface_normal = &surface_normal_pl;
+	obj->surface_normal = &surface_normal_p;
 	obj->make_shadow = &make_shadow_pl;
 	obj->id = 'p';
 	obj->v_pos = init_vector(splitted[1]);

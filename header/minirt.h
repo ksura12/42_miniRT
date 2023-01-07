@@ -189,8 +189,8 @@ t_color	color_mult(t_color object, t_color light);
 t_color	color_add(t_color a, t_color b);
 
 //normal.c
-void	surface_normal_sp(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
-void	surface_normal_pl(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
-void	surface_normal_cy(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+void	surface_normal_s(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+void	surface_normal_p(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+void	surface_normal_c(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
 
 #endif

@@ -1,11 +1,23 @@
-#include	"../header/minirt.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersections.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
+/*   Updated: 2023/01/07 05:30:19 by kaheinz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include	"../header/minirt.h"
 
 void	set_tmax_shadow(t_data *data, t_ray *ray, double t)
 {
-	if(!vec_comp(ray->v_pos, data->elements->light->v_pos))
+	if (!vec_comp(ray->v_pos, data->elements->light->v_pos))
 		ray->tmax = vector_len(vector_dev(get_point_of_intersection(t, *ray), data->elements->light->v_pos));
 }
+
 /**
  * @brief returns 1 of it intersects with scene, 0 if not
  * 
@@ -26,12 +38,10 @@ int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
 		return (0);
 	w = vector_dev(plane->v_pos, ray->v_pos);
 	t = dot_prod(plane->v_orient, w) / ndotray;
-	// set_tmax_shadow(data, ray, t);
 	if (t <= RAY_T_MIN || t >= ray->tmax)
 	{
 		return (0);
 	}
-		
 	*objid = i;
 	ray->tmax = t;
 	// if (!vec_comp(ray->v_pos, data->elements->light->v_pos) && t < 0)
@@ -69,8 +79,8 @@ int	does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	pos_new = vector_dev(ray->v_pos, data->elements->objects[i]->v_pos);
 	abc[0] = vector_lensqr(ray->v_direct);
 	abc[1] = 2 * dot_prod(ray->v_direct, pos_new);
-	abc[2] = vector_lensqr(pos_new) - pow((data->elements->objects[i]->dia 
-		/ 2), 2);
+	abc[2] = vector_lensqr(pos_new) - pow((data->elements->objects[i]->dia
+			/ 2), 2);
 	discriminant = pow(abc[1], 2) - 4 * abc[0] * abc[2];
 	if (discriminant < 0.0)
 		return (0);
@@ -116,7 +126,7 @@ int	isequal(float a, float b)
 	return ((a - 0.00001 <= b) && (a + 0.00001 >= b));
 }
 
-float does_intersect_cy_disk(t_ray *ray, t_data *data, int i, int disk, int *objid)
+float	does_intersect_cy_disk(t_ray *ray, t_data *data, int i, int disk, int *objid)
 {
 	float	den;
 	float	t;
@@ -239,79 +249,3 @@ int	does_intersect_cy(t_ray *ray, t_data *data, int i, int *objid)
 	}
 	return (-1);
 }
-
-	// double	t[2];
-	// t_vec	w;
-	// int		ret;
-
-	// ret = 0;
-
-
-	// delta = b * b - 4 * (a * c);
-	// if (fabs(delta) < EPSILON)
-	// 	return (0);
-	// if (delta < 0)
-	// 	return (0);
-
-	// t[0] = (-b - sqrt(delta)) / ( 2 * a);
-	// if (t[0] > RAY_T_MIN && t[0] < ray->tmax)
-	// {
-	// 	r = ray->v_pos.y + t[0] * ray->v_direct.y;
-	// 	if (r >= data->elements->objects[i]->v_pos.y && r <= data->elements->objects[i]->v_pos.y + data->elements->objects[i]->height)
-	// 	{
-	// 		ray->tmax = t[0];
-	// 		ret = 1;
-	// 		*objid = i;
-	// 	}
-	// }
-	// t[1] = (-b + sqrt(delta)) / ( 2 * a);
-	// if (t[1] > RAY_T_MIN && t[1] < ray->tmax)
-	// {
-	// 	r = ray->v_pos.y + t[1] * ray->v_direct.y;
-	// 	if (r >= data->elements->objects[i]->v_pos.y && r <= data->elements->objects[i]->v_pos.y + data->elements->objects[i]->height)
-	// 	{
-	// 		ray->tmax = t[1];
-	// 		ret = 1;
-	// 		*objid = i;
-	// 	}
-	// }
-	// return (ret);
-
-	
-
-
-
-// float Cylinder::intersect(Vector pos, Vector dir)
-// {   
-//     float a = (dir.x * dir.x) + (dir.z * dir.z);
-//     float b = 2*(dir.x*(pos.x-center.x) + dir.z*(pos.z-center.z));
-//     float c = (pos.x - center.x) * (pos.x - center.x) + (pos.z - center.z) * (pos.z - center.z) - (radius*radius);
-    
-//     float delta = b*b - 4*(a*c);
-// 	if(fabs(delta) < 0.001) return -1.0; 
-//     if(delta < 0.0) return -1.0;
-    
-//     float t1 = (-b - sqrt(delta))/(2*a);
-//     float t2 = (-b + sqrt(delta))/(2*a);
-//     float t;
-    
-//     if (t1>t2) t = t2;
-//     else t = t1;
-    
-//     float r = pos.y + t*dir.y;
-    
-//     if ((r >= center.y) and (r <= center.y + height))return t;
-//     else return -1;
-// }
-
-// /**
-// * Returns the unit normal vector at a given point.
-// * Assumption: The input point p lies on the sphere.
-// */
-// Vector Cylinder::normal(Vector p)
-// {
-//     Vector n = Vector (p.x-center.x,0,p.z-center.z);
-//     n.normalise();
-//     return n;
-// }
-// }
