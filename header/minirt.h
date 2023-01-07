@@ -89,10 +89,16 @@ void	object_allocation(t_data *data);
 
 //utils.c
 int		expected_words(int expected, char **words);
-int		open_file(char **argv);
 int		isaldigit(char **value);
 int		check_colors(char *rgb, t_color *location);
 int		char_to_double(char *value, double *dst);
+
+//utils2.c
+int		open_file(char **argv);
+double	degtorad(double deg);
+float	quad_solver(float a, float b, float c);
+float	find_min_value(float a, float b);
+int		isequal(float a, float b);
 
 //main.c
 
@@ -130,30 +136,28 @@ int		init_plane(t_data *data, char **splitted);
 t_vec	init_vector(char *xyz);
 int		check_boundries_vector(t_vec *vector, int min, int max);
 
+//render.c
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	render(t_data *data);
+void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y);
+int		color_trgb(t_color color, double lratio);
+
 //vector_operations.c
-t_vec	normalise(t_vec vector);
 t_vec	make_vector(double x, double y, double z);
 double	dot_prod(t_vec v1, t_vec v2);
 t_vec	cross_prod(t_vec v1, t_vec v2);
 double	vector_lensqr(t_vec v);
 double	vector_len(t_vec v);
-t_vec	vec_mult(t_vec v, double a);
-
-//render.c
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	render(t_data *data);
-void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y);
-t_vec	get_point_of_intersection(double t, t_ray ray);
-int		color_trgb(t_color color, double lratio);
 
 //vector_operations_2.c
 t_vec	vector_dev(t_vec u, t_vec v);
 t_vec	vector_rot_x(t_vec v, double alpha);
 t_vec	vector_rot_y(t_vec v, double alpha);
 t_vec	vector_rot_z(t_vec v, double alpha);
+t_vec	vec_mult(t_vec v, double a);
 
 //vector_operations_3.c
-double	degtorad(double deg);
+t_vec	normalise(t_vec vector);
 t_vec	mult_vec_mat(t_vec vec, double **mat);
 t_vec	make_opposite_vector(t_vec vec);
 t_vec	vec_add(t_vec a, t_vec b);
@@ -166,6 +170,8 @@ int		ray_create(t_data *data, t_ray *ray, int px, int py);
 int		intersect_p(t_ray ray, t_data *data);
 int		does_intersect_s(t_ray *ray, t_data *data, int id, int *objid);
 int		does_intersect_p(t_ray *ray, t_data *data, int id, int *objid);
+
+//intersections_cy.c
 int		does_intersect_cy(t_ray *ray, t_data *data, int id, int *objid);
 int		does_intersect_cy_shadow(t_ray *ray, t_data *data, int id, int *objid);
 
@@ -174,6 +180,7 @@ t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
 void	obj_to_world_mat(t_vec c_orient, double ***mat, t_vec *pos);
 double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_vec *pos);
 int		shadow_rays(t_ray *ray, t_data *data);
+t_vec	get_point_of_intersection(double t, t_ray ray);
 
 //coloring.c
 void	make_shadow_sp(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_operations_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:23:26 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:23:28 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 09:01:54 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,14 @@ t_vec	vector_rot_z(t_vec v, double alpha)
 	rot.y = v.x * sin(degtorad(alpha)) + v.y * cos(degtorad(alpha));
 	rot.z = v.z;
 	return (rot);
+}
+
+t_vec	vec_mult(t_vec v, double a)
+{
+	t_vec	ret;
+
+	ret.x = v.x * a;
+	ret.y = v.y * a;
+	ret.z = v.z * a;
+	return (ret);
 }

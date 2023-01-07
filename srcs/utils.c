@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:53 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:25:56 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 09:19:29 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../header/structs.h"
 #include	"../header/minirt.h"
 
+/**
+ * @brief checks if the give char ** hold the expected amount of
+ * words
+ * 
+ * @param expected integer number of words
+ * @param words char ** holding words
+ * @return int returns 1 on succes, 0 on failure
+ */
 int	expected_words(int expected, char **words)
 {
 	int	i;
@@ -26,19 +34,14 @@ int	expected_words(int expected, char **words)
 		return (0);
 }
 
-int	open_file(char **argv)
-{
-	int	fd;
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-	{
-		printf("ERROR\nFile-opening failed.");
-		return (0);
-	}
-	return (fd);
-}
-
+/**
+ * @brief check if color values input from file
+ * are smaler than 256
+ * 
+ * @param rgb parsed part of .rt fiel containing rgb value
+ * @param location destination to store rgb values in
+ * @return int return 1 on succes, 0 on failure
+ */
 int	check_colors(char *rgb, t_color *location)
 {
 	char	**colors;
@@ -94,6 +97,23 @@ int	isaldigit(char **value)
 	return (1);
 }
 
+static void	char_to_double_2(char	**splitted, double *result, double *dst)
+{
+	int	i;
+
+	i = 0;
+	while (splitted[1][i])
+		i++;
+	if (ft_atoi(splitted[0]) < 0 || splitted[0][0] == '-')
+		*result = ft_atoi(splitted[0]) + -1 * pow(0.1, i) \
+			* ft_atoi(splitted[1]);
+	else
+		*result = 1 * ft_atoi(splitted[0]) + pow(0.1, i) \
+			* ft_atoi(splitted[1]);
+	freeing_dpointer(splitted);
+	*dst = *result;
+}
+
 /**
  * @brief casts a char * to a double value, checks for wrong input
  * 
@@ -106,7 +126,6 @@ int	char_to_double(char *value, double *dst)
 {
 	double	result;
 	char	**splitted;
-	int		i;
 
 	splitted = ft_split(value, '.');
 	if (expected_words(1, splitted) && isaldigit(splitted))
@@ -118,17 +137,14 @@ int	char_to_double(char *value, double *dst)
 	}
 	else if (expected_words(2, splitted) && isaldigit(splitted))
 	{
-		i = 0;
-		while (splitted[1][i])
-			i++;
-		if (ft_atoi(splitted[0]) < 0 || splitted[0][0] == '-')
-			result = ft_atoi(splitted[0]) + -1 * pow(0.1, i) * ft_atoi(splitted[1]);
-		else
-			result = 1 * ft_atoi(splitted[0]) + pow(0.1, i) * ft_atoi(splitted[1]);
-		freeing_dpointer(splitted);
-		*dst = result;
+		char_to_double_2(splitted, &result, dst);
 		return (1);
 	}
 	freeing_dpointer(splitted);
 	return (0);
+}
+
+int	isequal(float a, float b)
+{
+	return ((a - 0.00001 <= b) && (a + 0.00001 >= b));
 }

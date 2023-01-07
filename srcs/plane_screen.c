@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_screen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:34 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:25:36 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 08:43:06 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 t_vec	get_point_of_intersection(double t, t_ray ray);
 
+/**
+ * @brief creates vectors for rays first in the camera coordiante
+ * system and transforms theem into worl coordinate system
+ * 
+ * @param px pixelnumber of screen in x direction
+ * @param py pixelnumber of screen in y direction
+ * @param data datastructure which contains scene info
+ * @param scale factor for field of view of camera
+ * @return t_ray the ray through a pixel in screen in world co-sys
+ */
 t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale)
 {
 	double	x;
@@ -33,6 +43,13 @@ t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale)
 	return (ray);
 }
 
+/**
+ * @brief creates the object to world transformation matrix
+ * 
+ * @param c_orient orientation vector of the object in world space
+ * @param mat destination for made matrix
+ * @param pos position vector of the object in world space
+ */
 void	obj_to_world_mat(t_vec c_orient, double ***mat, t_vec *pos)
 {
 	t_vec	forward;
@@ -55,6 +72,16 @@ void	obj_to_world_mat(t_vec c_orient, double ***mat, t_vec *pos)
 	return ;
 }
 
+/**
+ * @brief filling of 4by4 matrix with calculated contend from
+ * obj_to_world_mat()
+ * 
+ * @param forward forward vector of object in object_space
+ * @param up forward vector of object in object_space
+ * @param right forward vector of object in object_space
+ * @param pos position of object in world space
+ * @return double** 
+ */
 double	**make_mat44(t_vec forward, t_vec up, t_vec right, t_vec *pos)
 {
 	int		i;
@@ -103,8 +130,6 @@ int	shadow_rays(t_ray *ray, t_data *data)
 
 	i = 0;
 	tmp = 0;
-//	if (ray->cy_cap == 1)
-//		ray->cy_cap = 2;
 	shadow_ray.v_pos = get_point_of_intersection(ray->tmax, *ray);
 	shadow_ray.v_direct = vector_dev(data->elements->light->v_pos, \
 		shadow_ray.v_pos);
@@ -120,6 +145,13 @@ int	shadow_rays(t_ray *ray, t_data *data)
 	return (0);
 }
 
+/**
+ * @brief Get the point of intersection of ray with object
+ * 
+ * @param t factor for where on the ray the intersection point is
+ * @param ray ray which intersects
+ * @return t_vec point in world space of intersection
+ */
 t_vec	get_point_of_intersection(double t, t_ray ray)
 {
 	t_vec	intersection;

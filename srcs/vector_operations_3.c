@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   vector_operations_3.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:23:38 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:41:49 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 09:08:03 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../header/minirt.h"
+
+/**
+ * @brief make a vector with length 1
+ * 
+ * @param vector orininal vector
+ * @return t_vec unit vector with length 1
+ */
+t_vec	normalise(t_vec vector)
+{
+	t_vec	v;
+
+	v.x = vector.x / vector_len(vector);
+	v.y = vector.y / vector_len(vector);
+	v.z = vector.z / vector_len(vector);
+	return (v);
+}
 
 /**
  * @brief multiplies vector with 4x4matrix
@@ -34,16 +50,11 @@ t_vec	mult_vec_mat(t_vec vec, double **mat)
 }
 
 /**
- * @brief converts degrees to radian
+ * @brief negates each coordinat of vector/point
  * 
- * @param deg 
- * @return double rad
+ * @param vec original vector
+ * @return t_vec opposite vector
  */
-double	degtorad(double deg)
-{
-	return (deg * M_PI / 180);
-}
-
 t_vec	make_opposite_vector(t_vec vec)
 {
 	t_vec	opp;
@@ -54,6 +65,13 @@ t_vec	make_opposite_vector(t_vec vec)
 	return (opp);
 }
 
+/**
+ * @brief addition of two vector/point values
+ * 
+ * @param a first vector/point
+ * @param b second vector/point
+ * @return t_vec resulting vector/point
+ */
 t_vec	vec_add(t_vec a, t_vec b)
 {
 	t_vec	sum;
