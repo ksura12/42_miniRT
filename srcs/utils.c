@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:53 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 09:19:29 by ksura            ###   ########.fr       */
+/*   Updated: 2023/01/07 14:01:52 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,4 @@ int	char_to_double(char *value, double *dst)
 	}
 	freeing_dpointer(splitted);
 	return (0);
-}
-
-int	isequal(float a, float b)
-{
-	return ((a - 0.00001 <= b) && (a + 0.00001 >= b));
 }

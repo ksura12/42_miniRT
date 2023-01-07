@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 09:20:09 by ksura            ###   ########.fr       */
+/*   Updated: 2023/01/07 13:59:11 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,22 @@ int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
 }
 
 /**
+ * @brief checks if the intersection is behind the lightsource and sets
+ * ret to 0 if so
+ * 
+ * @param ray 
+ * @param data 
+ * @param ret pointer to return value
+ */
+static void	shadow_direction(t_ray *ray, t_data *data, int *ret)
+{
+	if (vector_len(vector_dev(ray->v_pos, data->elements->light->v_pos)) \
+		< vector_len(vector_dev(ray->v_pos, \
+		get_point_of_intersection(ray->tmax, *ray))))
+		*ret = 0;
+}
+
+/**
  * @brief returns 1 of it intersects with scene, 0 if not
 	// Transform ray so we can consider origin-centred sphere
 	// Calculate quadratic coefficients
@@ -67,7 +83,7 @@ int	does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	double	abc[3];
 	t_vec	pos_new;
 	double	discriminant;
-	double	t[2];
+	double	t;
 	int		ret;
 
 	pos_new = vector_dev(ray->v_pos, data->elements->objects[i]->v_pos);
@@ -78,24 +94,14 @@ int	does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	discriminant = pow(abc[1], 2) - 4 * abc[0] * abc[2];
 	if (discriminant < 0.0)
 		return (0);
-	t[0] = (-abc[1] - sqrt(discriminant)) / (2 * abc[0]);
+	t = quad_solver(abc[0], abc[1], abc[2]);
 	ret = 0;
-	if (t[0] > (float)RAY_T_MIN && t[0] < ray->tmax)
+	if (t > (float)RAY_T_MIN && t < ray->tmax)
 	{
-		ray->tmax = t[0];
+		ray->tmax = t;
 		ret = 1;
 		*objid = i;
 	}
-	t[1] = (-abc[1] + sqrt(discriminant)) / (2 * abc[0]);
-	if (t[1] > (float)RAY_T_MIN && t[1] < ray->tmax)
-	{
-		ray->tmax = t[1];
-		ret = 1;
-		*objid = i;
-	}
-	if (vector_len(vector_dev(ray->v_pos, data->elements->light->v_pos)) \
-		< vector_len(vector_dev(ray->v_pos, \
-		get_point_of_intersection(ray->tmax, *ray))))
-		ret = 0;
+	shadow_direction(ray, data, &ret);
 	return (ret);
 }
