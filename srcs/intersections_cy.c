@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 09:22:08 by ksura            ###   ########.fr       */
+/*   Updated: 2023/01/07 14:01:28 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 static void	abc_calc(t_ray *ray, t_data *data, int i, float abc[3])
 {
 	t_vec	w;
+	t_obj	*object;
 
+	object = data->elements->objects[i];
 	abc[0] = dot_prod(ray->v_direct, ray->v_direct) \
-		- powf(dot_prod(ray->v_direct, data->elements->objects[i]->v_orient), 2);
-	w = vector_dev(ray->v_pos, data->elements->objects[i]->v_pos);
+		- powf(dot_prod(ray->v_direct, object->v_orient), 2);
+	w = vector_dev(ray->v_pos, object->v_pos);
 	abc[1] = 2 * (dot_prod(ray->v_direct, w) - dot_prod(ray->v_direct, \
-		data->elements->objects[i]->v_orient) * dot_prod(w, data->elements->objects[i]->v_orient));
-	abc[2] = dot_prod(w ,w) - powf(dot_prod(w, data->elements->objects[i]->v_orient), 2) \
-		- powf(data->elements->objects[i]->dia / 2, 2);
+		object->v_orient) * dot_prod(w, object->v_orient));
+	abc[2] = dot_prod(w, w) - powf(dot_prod(w, object->v_orient), 2) \
+		- powf(object->dia / 2, 2);
 }
 
 float	does_intersect_cy_disk(t_ray *ray, t_data *data, int i, int disk, int *objid)
