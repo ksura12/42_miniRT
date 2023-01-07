@@ -6,7 +6,7 @@
 /*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 17:23:27 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 17:49:52 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	inter_found(int i, int *objid, t_ray *ray, float ret)
 {
 	*objid = i;
 	ray->tmax = ret;
-	ray->cy_cap = 0;
+	ray->cy_cap = 2;
 }
 
 float	precheck(t_ray *ray, float tmp[], t_data *data, int i)
