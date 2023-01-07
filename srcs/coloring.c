@@ -6,12 +6,16 @@
 /*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:23:57 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 15:59:45 by ksura@student.42 ###   ########.fr       */
+/*   Updated: 2023/01/07 20:21:11 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../header/minirt.h"
 #include	"../header/structs.h"
+
+
+// static void	calc_ambient(t_color *rgb, t_amb_light *ambl);
+// static int	ft_apply_light(t_obj *obj, t_color *parts);
 
 /**
  * @brief calculates from the given ray, object and data struct the incoming
@@ -99,8 +103,11 @@ int	light_object(t_data *data, t_ray *ray, int *objid, int light)
 
 	data->elements->objects[*objid]->make_shadow(data, ray, objid, &shadow);
 	amb_part = amb_color(data, objid);
+	// calc_ambient(&amb_part, data->elements->amb_light);
 	if (light == 1)
 		return (color_trgb(amb_part, 1));
+		// return(ft_apply_light(data->elements->objects[*objid], &amb_part));
+		
 	diffu_part = color_ratio(data->elements->objects[*objid]->color, \
 		(shadow.cos_theta * data->elements->light->lratio \
 		/ vector_len(vector_dev(data->elements->light->v_pos, \
@@ -153,3 +160,40 @@ t_color	specular_color(t_data *data, t_shadow *shadow)
 		(shadow->cos_theta * data->elements->light->lratio / r));
 	return (spec_part);
 }
+
+
+
+
+/**
+static int	ft_apply_light(t_obj *obj, t_color *parts)
+{
+	int	out;
+	int	temp;
+
+	temp = ((int)(255 * ((fxtod(obj->color.r) / 255.0) * \
+		fxtod(parts->r))));
+	if (temp > 255)
+		temp = 255;
+	out = temp << 16;
+	temp = ((int)(255 * ((fxtod(obj->color.g) / 255.0) * \
+		fxtod(parts->g))));
+	if (temp > 255)
+		temp = 255;
+	out = out + (temp << 8);
+	temp = ((int)(255 * ((fxtod(obj->color.b) / 255.0) * \
+		fxtod(parts->b))));
+	if (temp > 255)
+		temp = 255;
+	out = out + temp;
+	return (out);
+}
+static void	calc_ambient(t_color *rgb, t_amb_light *ambl)
+{
+	rgb->r = dtofx((fxtod(ambl->color.r)) * \
+		fxtod(ambl->lratio) / 255);
+	rgb->g = dtofx((fxtod(ambl->color.g)) * \
+		fxtod(ambl->lratio) / 255);
+	rgb->b = dtofx((fxtod(ambl->color.b)) * \
+		fxtod(ambl->lratio) / 255);
+}
+ */

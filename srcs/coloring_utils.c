@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   coloring_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:24:07 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:24:09 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 19:00:30 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ t_color	color_limits(t_color color)
  */
 t_color	color_ratio(t_color color, double lratio)
 {
-	color.t = color.t * lratio;
-	color.r = color.r * lratio;
-	color.g = color.g * lratio;
-	color.b = color.b * lratio;
+	color.t = dtofx(fxtod(color.t) * lratio);
+	color.r = dtofx(fxtod(color.r) * lratio);
+	color.g = dtofx(fxtod(color.g) * lratio);
+	color.b = dtofx(fxtod(color.b)  * lratio);
 	return (color);
 }
 
@@ -60,10 +60,10 @@ t_color	color_mult(t_color object, t_color light)
 {
 	t_color	color;
 
-	color.t = (object.t / 255 * light.t / 255) * 255;
-	color.r = (object.r / 255 * light.r / 255) * 255;
-	color.g = (object.g / 255 * light.g / 255) * 255;
-	color.b = (object.b / 255 * light.b / 255) * 255;
+	color.t = dtofx((fxtod(object.t) / 255 * fxtod(light.t) / 255) * 255);
+	color.r = dtofx((fxtod(object.r) / 255 * fxtod(light.r) / 255) * 255);
+	color.g = dtofx((fxtod(object.g) / 255 * fxtod(light.g) / 255) * 255);
+	color.b = dtofx((fxtod(object.b) / 255 * fxtod(light.b) / 255) * 255);
 	return (color);
 }
 

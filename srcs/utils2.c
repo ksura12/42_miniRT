@@ -6,7 +6,7 @@
 /*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:53 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 14:01:57 by ksura@student.42 ###   ########.fr       */
+/*   Updated: 2023/01/07 18:53:00 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,19 @@ float	find_min_value(float a, float b)
 int	isequal(float a, float b)
 {
 	return ((a - 0.00001 <= b) && (a + 0.00001 >= b));
+}
+
+double	fxtod(t_fixed in)
+{
+	return ((double)in / (1 << FT_FIXED_FRAC_BITS));
+}
+
+/**
+	@brief Converts a double to a fixed point number.
+	@param in Input value as double.
+	@return Input value as fixed-point.
+ */
+t_fixed	dtofx(double in)
+{
+	return ((t_fixed)(roundf(in * (1 << FT_FIXED_FRAC_BITS))));
 }

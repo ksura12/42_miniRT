@@ -23,6 +23,8 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
+# define FT_FIXED_FRAC_BITS 30
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4
 # endif
@@ -78,6 +80,8 @@ typedef struct s_data
 	t_elements	*elements;
 }	t_data;
 
+typedef long long		t_fixed;
+
 //free.c
 void	freeing_dpointer(char **paths);
 void	free_allocation(t_data *data);
@@ -99,6 +103,8 @@ double	degtorad(double deg);
 float	quad_solver(float a, float b, float c);
 float	find_min_value(float a, float b);
 int		isequal(float a, float b);
+t_fixed	dtofx(double in);
+double	fxtod(t_fixed in);
 
 //main.c
 
