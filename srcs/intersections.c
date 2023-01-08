@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
+/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 17:29:05 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/08 11:10:46 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int	does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	pos_new = vector_dev(ray->v_pos, data->elements->objects[i]->v_pos);
 	abc[0] = vector_lensqr(ray->v_direct);
 	abc[1] = 2 * dot_prod(ray->v_direct, pos_new);
-	abc[2] = vector_lensqr(pos_new) - pow((data->elements->objects[i]->dia
-				/ 2), 2);
+	abc[2] = vector_lensqr(pos_new) - pow((data->elements->objects[i]->dia \
+	/ 2), 2);
 	discriminant = pow(abc[1], 2) - 4 * abc[0] * abc[2];
 	if (discriminant < 0.0)
 		return (0);

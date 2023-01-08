@@ -43,7 +43,7 @@ all: $(NAME)
 $(NAME):$(OBJECTS_PREF) $(OBJDIR)
 	@make -C $(LIBFT_DIRECTORY)
 	@$(CC) $(CFLAGS) $(OBJECTS_PREF) $(LIBFT) -I$(HEADER) $(FLAGS) $(LIBS) -o $@
-	@echo "$(GREEN)$(NAME) was created"
+	@echo -e "$(GREEN)$(NAME) was created"
 
 # $(NAME):$(OBJECTS_PREF) $(OBJDIR)
 # 	@make -C $(LIBFT_DIRECTORY)
@@ -64,7 +64,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C libft/
-	@echo "$(RED)$(NAME) was deleted"
+	@echo -e "$(RED)$(NAME) was deleted"
 
 re: fclean all 
 

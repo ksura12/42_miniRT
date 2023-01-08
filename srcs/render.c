@@ -6,7 +6,7 @@
 /*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:46 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 18:25:32 by ksura@student.42 ###   ########.fr       */
+/*   Updated: 2023/01/08 14:33:49 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,20 @@ void	render(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 }
 
+int	color_background(t_data *data)
+{
+	t_color		background;
+	t_amb_light	*amb_light;
+
+	amb_light = data->elements->amb_light;
+	background.t = amb_light->color.t * amb_light->lratio;
+	background.r = amb_light->color.r * amb_light->lratio;
+	background.g = amb_light->color.g * amb_light->lratio;
+	background.b = amb_light->color.b * amb_light->lratio;
+	return (background.t << 24 | background.r << 16
+		| background.g << 8 | background.b);
+}
+
 // double	facingratio;
 // double	brightness;
 // brightness = 
@@ -70,7 +84,7 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 	int	color;
 	int	objid;
 
-	color = BLACK;
+	color = color_background(data);
 	i = 0;
 	objid = -1;
 	ray->cy_cap = 2;

@@ -6,11 +6,10 @@
 /*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:53 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 18:53:00 by ksura@student.42 ###   ########.fr       */
+/*   Updated: 2023/01/08 14:34:03 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../header/structs.h"
 #include	"../header/minirt.h"
 
 int	open_file(char **argv)

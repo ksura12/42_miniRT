@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   intersections_cy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
+/*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 17:58:52 by ksura@student.42 ###   ########.fr       */
+/*   Updated: 2023/01/08 11:09:39 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../header/minirt.h"
 
+/**
+ * @brief checks if ray intersect with a cap of cylinder
+ * 
+ * 
+ * @param ray 
+ * @param data 
+ * @param io int * with io[0] = i and io[1] = objid
+ * @param disk 0 for lower cap, 1 for upper cap
+ * @return [float] t value if intersect, -1 if not
+ */
 static void	abc_calc(t_ray *ray, t_data *data, int i, float abc[3])
 {
 	t_vec	w;
