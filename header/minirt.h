@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/07 05:24:37 by kaheinz           #+#    #+#             */
+/*   Updated: 2023/01/08 19:15:50 by ksura@student.42 ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -27,9 +39,9 @@
 #  define BUFFER_SIZE 4
 # endif
 
-# define WIDTH			1000
-# define HEIGHT			1000
-# define ASPECT_RATIO	HEIGHT / WIDTH
+# define WIDTH			1000 // if changend, change ASPECTRATIO
+# define HEIGHT			1000 // if changend, change ASPECTRATIO
+# define ASPECT_RATIO	1	// = WIDTH / HEIGHT
 # define RAY_T_MAX		1.0e30f
 # define RAY_T_MIN		0.0001f
 # define EPSILON		0.000001f
@@ -203,8 +215,11 @@ t_color	color_mult(t_color object, t_color light);
 t_color	color_add(t_color a, t_color b);
 
 //normal.c
-void	surface_normal_s(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
-void	surface_normal_p(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
-void	surface_normal_c(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+void	surface_normal_s(t_data *data, t_ray *ray, \
+int *objid, t_shadow *shadow);
+void	surface_normal_p(t_data *data, t_ray *ray, \
+int *objid, t_shadow *shadow);
+void	surface_normal_c(t_data *data, t_ray *ray, \
+int *objid, t_shadow *shadow);
 
 #endif
