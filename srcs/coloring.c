@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   coloring.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:23:57 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:23:59 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 15:59:45 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	make_shadow_pl(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 	shadow->to_light = normalise(shadow->to_light);
 	shadow->cos_theta = dot_prod(shadow->i_normal, shadow->to_light);
 	if (shadow->cos_theta < 0.0f)
-		shadow->cos_theta = -shadow->cos_theta;
+		shadow->cos_theta = 0;
 	shadow->from_light = vector_dev(shadow->intersection, \
 		data->elements->light->v_pos);
 	shadow->from_light = normalise(shadow->from_light);

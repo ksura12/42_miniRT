@@ -6,7 +6,7 @@
 /*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:24:07 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:24:09 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/08 00:25:55 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ t_color	color_mult(t_color object, t_color light)
 {
 	t_color	color;
 
-	color.t = (object.t / 255 * light.t / 255) * 255;
-	color.r = (object.r / 255 * light.r / 255) * 255;
-	color.g = (object.g / 255 * light.g / 255) * 255;
-	color.b = (object.b / 255 * light.b / 255) * 255;
+	color.t = (object.t / 255.0 * light.t / 255.0) * 255.0;
+	color.r = (object.r / 255.0 * light.r / 255.0) * 255.0;
+	color.g = (object.g / 255.0 * light.g / 255.0) * 255.0;
+	color.b = (object.b / 255.0 * light.b / 255.0) * 255.0;
 	return (color);
 }
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/08 04:23:46 by kaheinz           #+#    #+#             */
+/*   Updated: 2023/01/08 04:27:18 by kaheinz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -174,6 +186,13 @@ int		does_intersect_p(t_ray *ray, t_data *data, int id, int *objid);
 //intersections_cy.c
 int		does_intersect_cy(t_ray *ray, t_data *data, int id, int *objid);
 int		does_intersect_cy_shadow(t_ray *ray, t_data *data, int id, int *objid);
+float	intersect_cy_disk(t_ray *ray, t_data *data, int util[], int *objid);
+
+//utils_inter_cy.c
+int		check(t_ray *ray, t_data *data);
+void	inter_found(int i, int *objid, t_ray *ray, float ret);
+float	precheck(t_ray *ray, float tmp[], t_data *data, int i);
+float	disks(t_ray *ray, t_data *data, int i, int *objid);
 
 //plane_screen.c
 t_ray	ray_creation_plane_screen(int px, int py, t_data *data, double scale);
@@ -196,8 +215,11 @@ t_color	color_mult(t_color object, t_color light);
 t_color	color_add(t_color a, t_color b);
 
 //normal.c
-void	surface_normal_s(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
-void	surface_normal_p(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
-void	surface_normal_c(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+void	surface_normal_s(t_data *data, t_ray *ray, \
+		int *objid, t_shadow *shadow);
+void	surface_normal_p(t_data *data, t_ray *ray, \
+		int *objid, t_shadow *shadow);
+void	surface_normal_c(t_data *data, t_ray *ray, \
+		int *objid, t_shadow *shadow);
 
 #endif

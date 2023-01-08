@@ -18,7 +18,7 @@ SRCS = main.c free.c init.c count_input.c controls.c elements.c \
 	utils.c alloc.c parsing.c objects.c vector_operations.c render.c \
 	rays.c vector_operations_2.c vector_operations_3.c plane_screen.c \
 	coloring.c coloring_utils.c intersections.c normal.c utils2.c \
-	intersections_cy.c
+	intersections_cy.c utils_inter_cy.c
 
 OS = $(shell uname)
 ifeq ($(OS), Linux)
@@ -43,7 +43,7 @@ all: $(NAME)
 $(NAME):$(OBJECTS_PREF) $(OBJDIR)
 	@make -C $(LIBFT_DIRECTORY)
 	@$(CC) $(CFLAGS) $(OBJECTS_PREF) $(LIBFT) -I$(HEADER) $(FLAGS) $(LIBS) -o $@
-	@echo "$(GREEN)$(NAME) was created"
+	@echo -e "$(GREEN)$(NAME) was created"
 
 # $(NAME):$(OBJECTS_PREF) $(OBJDIR)
 # 	@make -C $(LIBFT_DIRECTORY)
@@ -64,7 +64,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C libft/
-	@echo "$(RED)$(NAME) was deleted"
+	@echo -e "$(RED)$(NAME) was deleted"
 
 re: fclean all 
 

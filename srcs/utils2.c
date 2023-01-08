@@ -6,11 +6,10 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:53 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 10:19:24 by ksura            ###   ########.fr       */
+/*   Updated: 2023/01/08 11:11:08 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../header/structs.h"
 #include	"../header/minirt.h"
 
 int	open_file(char **argv)
@@ -56,8 +55,8 @@ float	quad_solver(float a, float b, float c)
 		return (0);
 	if (delta < 0)
 		return (0);
-	t[0] = (-b - sqrt(delta)) / ( 2 * a);
-	t[1] = (-b + sqrt(delta)) / ( 2 * a);
+	t[0] = (-b - sqrt(delta)) / (2 * a);
+	t[1] = (-b + sqrt(delta)) / (2 * a);
 	return (find_min_value(t[0], t[1]));
 }
 
@@ -80,4 +79,9 @@ float	find_min_value(float a, float b)
 	}
 	else
 		return (-1);
+}
+
+int	isequal(float a, float b)
+{
+	return ((a - 0.00001 <= b) && (a + 0.00001 >= b));
 }

@@ -6,7 +6,7 @@
 /*   By: ksura <ksura@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 10:28:27 by ksura            ###   ########.fr       */
+/*   Updated: 2023/01/08 11:10:46 by ksura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
 	double	ndotray;
 	double	t;
 	t_vec	w;
+	double	cdotn;
 
 	plane = data->elements->objects[i];
 	ndotray = dot_prod(plane->v_orient, ray->v_direct);
@@ -37,24 +38,28 @@ int	does_intersect_p(t_ray *ray, t_data *data, int i, int *objid)
 	w = vector_dev(plane->v_pos, ray->v_pos);
 	t = dot_prod(plane->v_orient, w) / ndotray;
 	if (t <= RAY_T_MIN || t >= ray->tmax)
-	{
 		return (0);
-	}
 	*objid = i;
 	ray->tmax = t;
 	if (t > vector_len(vector_dev(data->elements->light->v_pos, ray->v_pos)))
+		return (0);
+	cdotn = dot_prod(plane->v_orient, \
+		normalise(vector_dev(get_point_of_intersection(t, *ray), \
+		data->elements->camera->v_pos)));
+	if ((ndotray < 0 && cdotn > 0) || (ndotray > 0 && cdotn < 0))
 		return (0);
 	return (1);
 }
 
 /**
- * @brief checks that the shadow is not behind light source
+ * @brief checks if the intersection is behind the lightsource and sets
+ * ret to 0 if so
  * 
- * @param data 
  * @param ray 
- * @param ret 
+ * @param data 
+ * @param ret pointer to return value
  */
-static void	shadow_direct(t_data *data, t_ray *ray, int *ret)
+static void	shadow_direction(t_ray *ray, t_data *data, int *ret)
 {
 	if (vector_len(vector_dev(ray->v_pos, data->elements->light->v_pos)) \
 		< vector_len(vector_dev(ray->v_pos, \
@@ -82,7 +87,7 @@ int	does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	double	abc[3];
 	t_vec	pos_new;
 	double	discriminant;
-	double	tt;
+	double	t;
 	int		ret;
 
 	pos_new = vector_dev(ray->v_pos, data->elements->objects[i]->v_pos);
@@ -93,14 +98,14 @@ int	does_intersect_s(t_ray *ray, t_data *data, int i, int *objid)
 	discriminant = pow(abc[1], 2) - 4 * abc[0] * abc[2];
 	if (discriminant < 0.0)
 		return (0);
-	tt = quad_solver(abc[0], abc[1], abc[2]);
+	t = quad_solver(abc[0], abc[1], abc[2]);
 	ret = 0;
-	if (tt > (float)RAY_T_MIN && tt < ray->tmax)
+	if (t > (float)RAY_T_MIN && t < ray->tmax)
 	{
-		ray->tmax = tt;
+		ray->tmax = t;
 		ret = 1;
 		*objid = i;
 	}
-	shadow_direct(data, ray, &ret);
+	shadow_direction(ray, data, &ret);
 	return (ret);
 }
