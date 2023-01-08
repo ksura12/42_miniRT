@@ -6,7 +6,7 @@
 /*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:46 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/08 04:15:11 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/08 04:22:47 by kaheinz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ int	color_background(t_data *data)
 	background.r = amb_light->color.r * amb_light->lratio;
 	background.g = amb_light->color.g * amb_light->lratio;
 	background.b = amb_light->color.b * amb_light->lratio;
-	return (background.t << 24 | background.r << 16 | background.g << 8 | background.b);
+	return (background.t << 24 | background.r << 16
+		| background.g << 8 | background.b);
 }
+
 // double	facingratio;
 // double	brightness;
 // brightness = 
