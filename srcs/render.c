@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:46 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:25:50 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 17:49:42 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	intersections(t_data *data, t_ray *ray, int pixel_x, int pixel_y)
 	color = BLACK;
 	i = 0;
 	objid = -1;
-	ray->cy_cap = 0;
+	ray->cy_cap = 2;
 	while (i < data->counter->create_count)
 	{
 		data->elements->objects[i]->intersection_fkt(ray, data, i, &objid);

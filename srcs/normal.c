@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:13 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 05:37:28 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 17:56:03 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	surface_normal_c(t_data *data, t_ray *ray, int *objid, t_shadow *shadow)
 	cylinder = data->elements->objects[*objid];
 	if (ray->cy_cap == 1)
 		shadow->i_normal = cylinder->v_orient;
+	else if (ray->cy_cap == 0)
+		shadow->i_normal = make_opposite_vector(cylinder->v_orient);
 	else
 	{
 		t = dot_prod(vector_dev(shadow->intersection, cylinder->v_pos), \

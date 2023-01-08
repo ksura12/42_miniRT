@@ -6,7 +6,7 @@
 /*   By: ksura@student.42wolfsburg.de <ksura@studen +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 05:25:01 by kaheinz           #+#    #+#             */
-/*   Updated: 2023/01/07 17:25:04 by kaheinz          ###   ########.fr       */
+/*   Updated: 2023/01/07 17:58:52 by ksura@student.42 ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ float	intersect_cy_disk(t_ray *ray, t_data *data, int util[], int *objid)
 		inters[1] = vector_dev(inters[0], vec_add(cy->v_pos, \
 			vec_mult(cy->v_orient, cy->height * util[1])));
 		if (sqrtf(dot_prod(inters[1], inters[1])) < (cy->dia / 2)
-			&& (den[1] < ray->tmax || ray->tmax < 0))
+			&& (den[1] < ray->tmax || ray->tmax < 0) && den[1] > RAY_T_MIN)
 		{
 			ray->tmax = den[1];
 			*objid = util[0];
-			ray->cy_cap = 1;
+			ray->cy_cap = util[1];
 			return (den[1]);
 		}
 	}
@@ -65,7 +65,7 @@ int	does_intersect_cy_shadow(t_ray *ray, t_data *data, int i, int *objid)
 	abc_calc(ray, data, i, abc);
 	if (islessequal(pow(abc[1], 2) - 4.0 * abc[0] * abc[2], 0) && tmp[0] < 0)
 		return (-1);
-	if (ray->cy_cap == 1)
+	if (ray->cy_cap == 0 || ray->cy_cap == 1)
 		return (check(ray, data));
 	tmp[2] = quad_solver(abc[0], abc[1], abc[2]);
 	if ((tmp[0] > 0 && tmp[0] < tmp[2]) || tmp[2] < 0)
