@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kaheinz <kaheinz@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/08 04:23:46 by kaheinz           #+#    #+#             */
+/*   Updated: 2023/01/08 04:27:18 by kaheinz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -203,8 +215,11 @@ t_color	color_mult(t_color object, t_color light);
 t_color	color_add(t_color a, t_color b);
 
 //normal.c
-void	surface_normal_s(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
-void	surface_normal_p(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
-void	surface_normal_c(t_data *data, t_ray *ray, int *objid, t_shadow *shadow);
+void	surface_normal_s(t_data *data, t_ray *ray, \
+		int *objid, t_shadow *shadow);
+void	surface_normal_p(t_data *data, t_ray *ray, \
+		int *objid, t_shadow *shadow);
+void	surface_normal_c(t_data *data, t_ray *ray, \
+		int *objid, t_shadow *shadow);
 
 #endif
