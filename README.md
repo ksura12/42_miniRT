@@ -4,23 +4,28 @@
 The goal of the program is to generate images using the Raytracing protocol. Those computer-generated images will each represent a
 scene, as seen from a specific angle and position, defined by simple geometric objects, and each with its own lighting system.
 
+### To compile miniRT:
+- `make`
+
+### Executable:
+- `./minirt [arg]`
+ > *arg: a scene in format *.rt
+ 
 ### Graphics library used:
 - miniLibx (https://github.com/42Paris/minilibx-linux)
 
 ### To compile miniLibx:
 - https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#installation
 
-### To compile miniRT:
-- `make`
-
-### Executable:
-
-- `./minirt [arg]`
- > *arg: a scene in format *.rt
-
 ### Program's OS Compatibility:
 - Linux
 - macOS
+
+---
+
+## Rendered images:
+### scenes/sandwich.rt
+![image](https://user-images.githubusercontent.com/71138634/214989745-a8ab54a3-aabb-4807-9db5-363edc508076.png)
 
 ---
 
