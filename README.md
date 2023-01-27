@@ -1,20 +1,25 @@
 # miniRT
 RayTracing project
 
-Graphics library used:
+### Graphics library used:
 - miniLibx (https://github.com/42Paris/minilibx-linux)
 
-To compile miniLibx:
+### To compile miniLibx:
 - https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#installation
 
-To compile miniRT:
-- make
+### To compile miniRT:
+- `make`
 
-Program's OS Compatibility:
+### Executable:
+
+- `./minirt [arg]`
+ > *arg: a scene in format *.rt
+
+### Program's OS Compatibility:
 - Linux
 - macOS
 
-Example of input file:
+### Example of input file:
 
 ![image](https://user-images.githubusercontent.com/71138634/214985403-1a4c82ee-61f4-4395-998e-fe3974fcbb95.png)
 
