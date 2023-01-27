@@ -19,6 +19,8 @@
 - Linux
 - macOS
 
+---
+
 ### Example of input file:
 
 ![image](https://user-images.githubusercontent.com/71138634/214985403-1a4c82ee-61f4-4395-998e-fe3974fcbb95.png)
