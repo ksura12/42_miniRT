@@ -27,6 +27,9 @@ scene, as seen from a specific angle and position, defined by simple geometric o
 ### scenes/sandwich.rt
 ![image](https://user-images.githubusercontent.com/71138634/214989745-a8ab54a3-aabb-4807-9db5-363edc508076.png)
 
+### scenes/mix_plane_sphere.rt
+![image](https://user-images.githubusercontent.com/71138634/214990384-b2abce17-d982-489d-acf5-bc9637ee44fb.png)
+
 ---
 
 ### Example of input file:
