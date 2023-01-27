@@ -45,7 +45,7 @@ Camera:
 - identifer: C
 - x,y,z coordinates of the view point: 0.0,0.0,20.6
 - 3d normalized orientation vector 0.0,0.0,1.0 In range [-1,1] for each x,y,z axis:
-- FOV : Horizontal eld of view in degrees in range [0,180]
+- FOV : Horizontal field of view in degrees in range [0,180]
 
 Light:
 - identifer: L
