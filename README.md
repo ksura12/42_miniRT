@@ -1,5 +1,5 @@
 # miniRT
-RayTracing project
+## RayTracing project
 
 ### Graphics library used:
 - miniLibx (https://github.com/42Paris/minilibx-linux)
